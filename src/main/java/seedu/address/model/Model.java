@@ -25,22 +25,22 @@ public interface Model {
     ReadOnlyUserPrefs getUserPrefs();
 
     /**
-     * Returns the user prefs' GUI settings.
+     * Returns the GUI settings of user prefs.
      */
     GuiSettings getGuiSettings();
 
     /**
-     * Sets the user prefs' GUI settings.
+     * Sets the GUI settings of user prefs.
      */
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the address book file path of user prefs.
      */
     Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the address book file path of user prefs.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 

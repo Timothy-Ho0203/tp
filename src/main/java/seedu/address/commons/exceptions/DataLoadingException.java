@@ -7,5 +7,4 @@ public class DataLoadingException extends Exception {
     public DataLoadingException(Exception cause) {
         super(cause);
     }
-
 }

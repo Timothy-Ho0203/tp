@@ -40,20 +40,20 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        checkArgument(isValidEmail(email), Email.MESSAGE_CONSTRAINTS);
+        this.value = email;
     }
 
     /**
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(Email.VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return value;
+        return this.value;
     }
 
     @Override
@@ -63,17 +63,15 @@ public class Email {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Email)) {
+        if (!(other instanceof Email otherEmail)) {
             return false;
         }
 
-        Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        return this.value.equals(otherEmail.value);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return this.value.hashCode();
     }
-
 }

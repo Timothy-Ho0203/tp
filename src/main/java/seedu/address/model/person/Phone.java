@@ -22,20 +22,20 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+        checkArgument(isValidPhone(phone), Phone.MESSAGE_CONSTRAINTS);
+        this.value = phone;
     }
 
     /**
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(Phone.VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return value;
+        return this.value;
     }
 
     @Override
@@ -45,17 +45,15 @@ public class Phone {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Phone)) {
+        if (!(other instanceof Phone otherPhone)) {
             return false;
         }
 
-        Phone otherPhone = (Phone) other;
-        return value.equals(otherPhone.value);
+        return this.value.equals(otherPhone.value);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return this.value.hashCode();
     }
-
 }

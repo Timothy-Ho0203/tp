@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * Represents a version with major, minor and patch number
  */
-public class Version implements Comparable<Version> {
+public record Version(int major, int minor, int patch, boolean isEarlyAccess) implements Comparable<Version> {
 
     public static final String VERSION_REGEX = "V(\\d+)\\.(\\d+)\\.(\\d+)(ea)?";
 
@@ -17,39 +17,15 @@ public class Version implements Comparable<Version> {
 
     private static final Pattern VERSION_PATTERN = Pattern.compile(VERSION_REGEX);
 
-    private final int major;
-    private final int minor;
-    private final int patch;
-    private final boolean isEarlyAccess;
-
     /**
      * Constructs a {@code Version} with the given version details.
      */
-    public Version(int major, int minor, int patch, boolean isEarlyAccess) {
-        this.major = major;
-        this.minor = minor;
-        this.patch = patch;
-        this.isEarlyAccess = isEarlyAccess;
-    }
-
-    public int getMajor() {
-        return major;
-    }
-
-    public int getMinor() {
-        return minor;
-    }
-
-    public int getPatch() {
-        return patch;
-    }
-
-    public boolean isEarlyAccess() {
-        return isEarlyAccess;
+    public Version {
     }
 
     /**
      * Parses a version number string in the format V1.2.3.
+     *
      * @param versionString version number string
      * @return a Version object
      */
@@ -64,7 +40,7 @@ public class Version implements Comparable<Version> {
         return new Version(Integer.parseInt(versionMatcher.group(1)),
                 Integer.parseInt(versionMatcher.group(2)),
                 Integer.parseInt(versionMatcher.group(3)),
-                versionMatcher.group(4) == null ? false : true);
+                versionMatcher.group(4) != null);
     }
 
     @JsonValue
@@ -74,19 +50,19 @@ public class Version implements Comparable<Version> {
 
     @Override
     public int compareTo(Version other) {
-        if (major != other.major) {
-            return major - other.major;
+        if (this.major != other.major) {
+            return this.major - other.major;
         }
-        if (minor != other.minor) {
-            return minor - other.minor;
+        if (this.minor != other.minor) {
+            return this.minor - other.minor;
         }
-        if (patch != other.patch) {
-            return patch - other.patch;
+        if (this.patch != other.patch) {
+            return this.patch - other.patch;
         }
-        if (isEarlyAccess == other.isEarlyAccess()) {
+        if (this.isEarlyAccess == other.isEarlyAccess()) {
             return 0;
         }
-        if (isEarlyAccess) {
+        if (this.isEarlyAccess) {
             return -1;
         }
         return 1;
@@ -99,21 +75,20 @@ public class Version implements Comparable<Version> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Version)) {
+        if (!(other instanceof Version otherVersion)) {
             return false;
         }
 
-        Version otherVersion = (Version) other;
-        return major == otherVersion.major
-                && minor == otherVersion.minor
-                && patch == otherVersion.patch
-                && isEarlyAccess == otherVersion.isEarlyAccess;
+        return this.major == otherVersion.major
+                && this.minor == otherVersion.minor
+                && this.patch == otherVersion.patch
+                && this.isEarlyAccess == otherVersion.isEarlyAccess;
     }
 
     @Override
     public int hashCode() {
-        String hash = String.format("%03d%03d%03d", major, minor, patch);
-        if (!isEarlyAccess) {
+        String hash = String.format("%03d%03d%03d", this.major, this.minor, this.patch);
+        if (!this.isEarlyAccess) {
             hash = "1" + hash;
         }
         return Integer.parseInt(hash);

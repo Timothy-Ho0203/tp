@@ -17,18 +17,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
 
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
-    {
-        persons = new UniquePersonList();
+    public AddressBook() {
+        this.persons = new UniquePersonList(); // Rid erstwhile-preexisting non-static initialization block code smell.
     }
-
-    public AddressBook() {}
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -54,7 +45,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        this.setPersons(newData.getPersonList());
     }
 
     //// person-level operations
@@ -64,7 +55,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return persons.contains(person);
+        return this.persons.contains(person);
     }
 
     /**
@@ -72,7 +63,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
-        persons.add(p);
+        this.persons.add(p);
     }
 
     /**
@@ -83,7 +74,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
 
-        persons.setPerson(target, editedPerson);
+        this.persons.setPerson(target, editedPerson);
     }
 
     /**
@@ -91,7 +82,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
-        persons.remove(key);
+        this.persons.remove(key);
     }
 
     //// util methods
@@ -99,13 +90,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("persons", this.persons)
                 .toString();
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+        return this.persons.asUnmodifiableObservableList();
     }
 
     @Override
@@ -115,16 +106,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof AddressBook otherAddressBook)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return this.persons.equals(otherAddressBook.persons);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return this.persons.hashCode();
     }
 }

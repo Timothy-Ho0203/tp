@@ -30,7 +30,7 @@ public class JsonUtil {
 
     private static final Logger logger = LogsCenter.getLogger(JsonUtil.class);
 
-    private static final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()
+    private static ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
@@ -45,7 +45,7 @@ public class JsonUtil {
 
     static <T> T deserializeObjectFromJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)
             throws IOException {
-        return JsonUtil.fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
+        return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
     }
 
     /**
@@ -63,14 +63,14 @@ public class JsonUtil {
         if (!Files.exists(filePath)) {
             return Optional.empty();
         }
-        JsonUtil.logger.info("JSON file " + filePath + " found.");
+        logger.info("JSON file " + filePath + " found.");
 
         T jsonFile;
 
         try {
             jsonFile = deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize);
         } catch (IOException e) {
-            JsonUtil.logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
+            logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
             throw new DataLoadingException(e);
         }
 
@@ -88,7 +88,7 @@ public class JsonUtil {
         requireNonNull(filePath);
         requireNonNull(jsonFile);
 
-        JsonUtil.serializeObjectToJsonFile(filePath, jsonFile);
+        serializeObjectToJsonFile(filePath, jsonFile);
     }
 
 
@@ -98,7 +98,7 @@ public class JsonUtil {
      * @return The instance of T with the specified values in the JSON string
      */
     public static <T> T fromJsonString(String json, Class<T> instanceClass) throws IOException {
-        return JsonUtil.objectMapper.readValue(json, instanceClass);
+        return objectMapper.readValue(json, instanceClass);
     }
 
     /**
@@ -108,7 +108,7 @@ public class JsonUtil {
      * @return JSON data representation of the given class instance, in string
      */
     public static <T> String toJsonString(T instance) throws JsonProcessingException {
-        return JsonUtil.objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(instance);
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(instance);
     }
 
     /**

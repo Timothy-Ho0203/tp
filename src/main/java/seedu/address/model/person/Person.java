@@ -38,19 +38,19 @@ public class Person {
     }
 
     public Name getName() {
-        return this.name;
+        return name;
     }
 
     public Phone getPhone() {
-        return this.phone;
+        return phone;
     }
 
     public Email getEmail() {
-        return this.email;
+        return email;
     }
 
     public Address getAddress() {
-        return this.address;
+        return address;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Person {
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(this.tags);
+        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -71,7 +71,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(this.getName());
+                && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -85,31 +85,33 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person otherPerson)) {
+        if (!(other instanceof Person)) {
             return false;
         }
 
-        return this.name.equals(otherPerson.name)
-                && this.phone.equals(otherPerson.phone)
-                && this.email.equals(otherPerson.email)
-                && this.address.equals(otherPerson.address)
-                && this.tags.equals(otherPerson.tags);
+        Person otherPerson = (Person) other;
+        return name.equals(otherPerson.name)
+                && phone.equals(otherPerson.phone)
+                && email.equals(otherPerson.email)
+                && address.equals(otherPerson.address)
+                && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.name, this.phone, this.email, this.address, this.tags);
+        return Objects.hash(name, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", this.name)
-                .add("phone", this.phone)
-                .add("email", this.email)
-                .add("address", this.address)
-                .add("tags", this.tags)
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("tags", tags)
                 .toString();
     }
+
 }

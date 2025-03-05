@@ -12,4 +12,5 @@ public interface ReadOnlyUserPrefs {
     GuiSettings getGuiSettings();
 
     Path getAddressBookFilePath();
+
 }

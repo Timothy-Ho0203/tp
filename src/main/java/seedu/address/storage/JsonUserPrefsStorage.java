@@ -14,7 +14,7 @@ import seedu.address.model.UserPrefs;
  */
 public class JsonUserPrefsStorage implements UserPrefsStorage {
 
-    private final Path filePath;
+    private Path filePath;
 
     public JsonUserPrefsStorage(Path filePath) {
         this.filePath = filePath;
@@ -22,12 +22,12 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
 
     @Override
     public Path getUserPrefsFilePath() {
-        return this.filePath;
+        return filePath;
     }
 
     @Override
     public Optional<UserPrefs> readUserPrefs() throws DataLoadingException {
-        return readUserPrefs(this.filePath);
+        return readUserPrefs(filePath);
     }
 
     /**
@@ -41,6 +41,7 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
 
     @Override
     public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
-        JsonUtil.saveJsonFile(userPrefs, this.filePath);
+        JsonUtil.saveJsonFile(userPrefs, filePath);
     }
+
 }

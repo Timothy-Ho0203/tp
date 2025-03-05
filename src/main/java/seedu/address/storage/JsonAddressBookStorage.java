@@ -21,19 +21,19 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
 
-    private final Path filePath;
+    private Path filePath;
 
     public JsonAddressBookStorage(Path filePath) {
         this.filePath = filePath;
     }
 
     public Path getAddressBookFilePath() {
-        return this.filePath;
+        return filePath;
     }
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(this.filePath);
+        return readAddressBook(filePath);
     }
 
     /**
@@ -47,27 +47,21 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
         Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableAddressBook.class);
-        if (jsonAddressBook.isEmpty()) {
+        if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
 
         try {
             return Optional.of(jsonAddressBook.get().toModelType());
         } catch (IllegalValueException ive) {
-            JsonAddressBookStorage.logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
+            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
         }
     }
 
-    /**
-     * Saves to {@link #filePath} instead of custom filepath in the other overloaded constructor below.
-     *
-     * @param addressBook cannot be null.
-     * @throws IOException exception if file alongside any missing parent directories cannot be created, or not savable.
-     */
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        this.saveAddressBook(addressBook, this.filePath);
+        saveAddressBook(addressBook, filePath);
     }
 
     /**
@@ -82,4 +76,5 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
     }
+
 }

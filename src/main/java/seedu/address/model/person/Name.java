@@ -16,7 +16,7 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String fullName;
 
@@ -27,21 +27,21 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), Name.MESSAGE_CONSTRAINTS);
-        this.fullName = name;
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        fullName = name;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(Name.VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
 
     @Override
     public String toString() {
-        return this.fullName;
+        return fullName;
     }
 
     @Override
@@ -51,15 +51,17 @@ public class Name {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name otherName)) {
+        if (!(other instanceof Name)) {
             return false;
         }
 
-        return this.fullName.equals(otherName.fullName);
+        Name otherName = (Name) other;
+        return fullName.equals(otherName.fullName);
     }
 
     @Override
     public int hashCode() {
-        return this.fullName.hashCode();
+        return fullName.hashCode();
     }
+
 }

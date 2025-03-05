@@ -42,7 +42,7 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : SampleDataUtil.getSamplePersons()) {
+        for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
@@ -52,6 +52,9 @@ public class SampleDataUtil {
      * Returns a tag set containing the list of strings given.
      */
     public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings).map(Tag::new).collect(Collectors.toSet());
+        return Arrays.stream(strings)
+                .map(Tag::new)
+                .collect(Collectors.toSet());
     }
+
 }

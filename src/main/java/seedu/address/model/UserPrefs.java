@@ -34,12 +34,12 @@ public class UserPrefs implements ReadOnlyUserPrefs {
      */
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
-        this.setGuiSettings(newUserPrefs.getGuiSettings());
-        this.setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setGuiSettings(newUserPrefs.getGuiSettings());
+        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
     }
 
     public GuiSettings getGuiSettings() {
-        return this.guiSettings;
+        return guiSettings;
     }
 
     public void setGuiSettings(GuiSettings guiSettings) {
@@ -63,22 +63,26 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UserPrefs otherUserPrefs)) {
+        if (!(other instanceof UserPrefs)) {
             return false;
         }
 
-        return this.guiSettings.equals(otherUserPrefs.guiSettings)
-                && this.addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+        UserPrefs otherUserPrefs = (UserPrefs) other;
+        return guiSettings.equals(otherUserPrefs.guiSettings)
+                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.guiSettings, this.addressBookFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath);
     }
 
     @Override
     public String toString() {
-        return "Gui Settings : " + this.guiSettings
-                + "\nLocal data file location : " + this.addressBookFilePath;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Gui Settings : " + guiSettings);
+        sb.append("\nLocal data file location : " + addressBookFilePath);
+        return sb.toString();
     }
+
 }

@@ -15,7 +15,7 @@ public class Address {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "\\S.*";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
@@ -26,20 +26,20 @@ public class Address {
      */
     public Address(String address) {
         requireNonNull(address);
-        checkArgument(isValidAddress(address), Address.MESSAGE_CONSTRAINTS);
-        this.value = address;
+        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        value = address;
     }
 
     /**
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(Address.VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return this.value;
+        return value;
     }
 
     @Override
@@ -49,15 +49,17 @@ public class Address {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Address otherAddress)) {
+        if (!(other instanceof Address)) {
             return false;
         }
 
-        return this.value.equals(otherAddress.value);
+        Address otherAddress = (Address) other;
+        return value.equals(otherAddress.value);
     }
 
     @Override
     public int hashCode() {
-        return this.value.hashCode();
+        return value.hashCode();
     }
+
 }

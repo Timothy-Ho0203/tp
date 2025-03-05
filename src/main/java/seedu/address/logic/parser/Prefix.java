@@ -4,11 +4,25 @@ package seedu.address.logic.parser;
  * A prefix that marks the beginning of an argument in an arguments string.
  * E.g. 't/' in 'add James t/ friend'.
  */
-public record Prefix(String prefix) {
+public class Prefix {
+    private final String prefix;
+
+    public Prefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
 
     @Override
     public String toString() {
-        return this.prefix();
+        return getPrefix();
+    }
+
+    @Override
+    public int hashCode() {
+        return prefix == null ? 0 : prefix.hashCode();
     }
 
     @Override
@@ -18,10 +32,11 @@ public record Prefix(String prefix) {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Prefix otherPrefix)) {
+        if (!(other instanceof Prefix)) {
             return false;
         }
 
-        return this.prefix.equals(otherPrefix.prefix);
+        Prefix otherPrefix = (Prefix) other;
+        return prefix.equals(otherPrefix.prefix);
     }
 }

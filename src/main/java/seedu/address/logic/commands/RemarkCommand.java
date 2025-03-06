@@ -5,7 +5,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Remark;
 
 import java.util.List;
 
@@ -21,8 +20,6 @@ public class RemarkCommand extends Command {
             + "r/ [REMARK] \n"
             + "Example: " + RemarkCommand.COMMAND_WORD + " 1 "
             + "r/ Likes to swim.";
-    // public static final String MESSAGE_NOT_FULLY_IMPLEMENTED_YET = "Remark command not implemented fully yet";
-    // public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
 

@@ -46,5 +46,4 @@ public class Remark {
     public int hashCode() {
         return this.value.hashCode();
     }
-
 }

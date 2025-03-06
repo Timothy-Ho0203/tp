@@ -17,9 +17,9 @@ public class RemarkCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing remark will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "r/ [REMARK] \n"
+            + "[REMARK] \n"
             + "Example: " + RemarkCommand.COMMAND_WORD + " 1 "
-            + "r/ Likes to swim.";
+            + "Likes to swim.";
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
 

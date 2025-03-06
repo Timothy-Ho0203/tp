@@ -274,13 +274,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of applicants
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage applicants faster and clearer than a typical mouse/GUI driven app, allowing for clearer view of an applicant's timeline in their job application
 
 
 ### User stories
@@ -289,27 +289,68 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| `* * *`  | Hiring manager   | add a new applicant          | track his/her application status easily                 |
+| `* * *`  | Hiring manager   | delete a person        | remove his/her entry once their application is rejected       |
+| `* * *`  | Hiring manager   | view all applicants as a list| view a summary of their applications                                   |
+| `* * *`  | Hiring manager   | find an applicant by details | locate details of an applicant without having to go through the entire list |
+| `* *`    | Hiring manager   | filter applicants            | simplify my search for those who are more suitable for this role       |
+| `*`      | Hiring manager   | sort applicants        | view the top most suitable applicants for the role I'm hiring                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `TalentMatch` and the **Actor** is the `HR manager (HR)`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add an applicant**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. HR requests to add an applicant
+2. TalentMatch prompts for details of the applicant
+3. HR fills in the details
+4. TalentMatch request HR to confirm the details
+5. HR confirms the details
+6. TalentMatch adds applicant to the system
+  Use case ends.
+
+**Extensions**
+
+* 4a. HR decides to change details.
+  * 4a1. HR cancels confirmation.
+  Use case resumes at step 3.
+
+* 4a. TalentMatch finds an existing applicant
+  Use case resumes at step 3. 
+
+* *a. HR loses connection.
+  * *a1. TalentMatch saves details
+  * *a2. TalentMatch prompts HR to continue where he/she left off
+  Use case resumes at step 3.
+
+**Use case: List all applicants**
+
+**MSS**
+
+1. HR requests to list all applicants
+2. TalentMatch shows a list of applicants
+
+  Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: Delete an applicant**
+
+**MSS**
+
+1.  HR requests to list applicants
+2.  TalentMatch shows a list of applicants
+3.  HR requests to delete a specific applicant in the list
+4.  TalentMatch deletes the person
 
     Use case ends.
 
@@ -321,9 +362,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TalentMatch shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Find an applicant** 
+
+**MSS**
+
+1. HR requests to find an applicant by given condition
+2. TalentMatch shows a list of applicants who fit the description
+
+  Use case ends.
+
+**Extensions**
+
+* 1a. TalentMatch prompts HR for more details (eg categories, skills).
+  * 1a1. TalentMatch prompts HR for more details.
+  * 1a2. HR provides more details.
+    Use case resumes at step 2.
+
+* 2a. TalentMatch finds no matching applicant
+  * 2a1. TalentMatch goes back to original page
+   Use case ends.
 
 *{More to be added}*
 
@@ -333,14 +394,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
+
+
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
---------------------------------------------------------------------------------------------------------------------
+* **Hiring Manager/HR**: Main user of TalentMatch, someone who manages the application timeline of applicants
+* **Applicants**: Someone who is applying for a job opening
 
 ## **Appendix: Instructions for manual testing**
 

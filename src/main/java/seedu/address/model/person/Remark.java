@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's remark in the address book.
@@ -39,12 +38,11 @@ public class Remark {
             return false;
         }
 
-        return this.value.equals(otherRemark.value);
+        return this.value.trim().equals(otherRemark.value.trim()); // Ignore leading or trailing whitespaces.
     }
 
     @Override
     public int hashCode() {
         return this.value.hashCode();
     }
-
 }

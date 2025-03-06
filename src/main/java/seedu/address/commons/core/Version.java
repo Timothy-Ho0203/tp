@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * Represents a version with major, minor and patch number. Modified into a record class to reduce boilerplate.
  */
-public record Version(int major, int minor, int patch, boolean isEarlyAccess) implements Comparable<Version> {
+public class Version implements Comparable<Version> {
 
     public static final String VERSION_REGEX = "V(\\d+)\\.(\\d+)\\.(\\d+)(ea)?";
 
@@ -17,15 +17,39 @@ public record Version(int major, int minor, int patch, boolean isEarlyAccess) im
 
     private static final Pattern VERSION_PATTERN = Pattern.compile(VERSION_REGEX);
 
+    private final int major;
+    private final int minor;
+    private final int patch;
+    private final boolean isEarlyAccess;
+
     /**
      * Constructs a {@code Version} with the given version details.
      */
-    public Version {
+    public Version(int major, int minor, int patch, boolean isEarlyAccess) {
+        this.major = major;
+        this.minor = minor;
+        this.patch = patch;
+        this.isEarlyAccess = isEarlyAccess;
+    }
+
+    public int getMajor() {
+        return major;
+    }
+
+    public int getMinor() {
+        return minor;
+    }
+
+    public int getPatch() {
+        return patch;
+    }
+
+    public boolean isEarlyAccess() {
+        return isEarlyAccess;
     }
 
     /**
      * Parses a version number string in the format V1.2.3.
-     *
      * @param versionString version number string
      * @return a Version object
      */
@@ -40,7 +64,7 @@ public record Version(int major, int minor, int patch, boolean isEarlyAccess) im
         return new Version(Integer.parseInt(versionMatcher.group(1)),
                 Integer.parseInt(versionMatcher.group(2)),
                 Integer.parseInt(versionMatcher.group(3)),
-                versionMatcher.group(4) != null);
+                versionMatcher.group(4) == null ? false : true);
     }
 
     @JsonValue
@@ -50,19 +74,19 @@ public record Version(int major, int minor, int patch, boolean isEarlyAccess) im
 
     @Override
     public int compareTo(Version other) {
-        if (this.major != other.major) {
-            return this.major - other.major;
+        if (major != other.major) {
+            return major - other.major;
         }
-        if (this.minor != other.minor) {
-            return this.minor - other.minor;
+        if (minor != other.minor) {
+            return minor - other.minor;
         }
-        if (this.patch != other.patch) {
-            return this.patch - other.patch;
+        if (patch != other.patch) {
+            return patch - other.patch;
         }
-        if (this.isEarlyAccess == other.isEarlyAccess()) {
+        if (isEarlyAccess == other.isEarlyAccess()) {
             return 0;
         }
-        if (this.isEarlyAccess) {
+        if (isEarlyAccess) {
             return -1;
         }
         return 1;
@@ -75,20 +99,21 @@ public record Version(int major, int minor, int patch, boolean isEarlyAccess) im
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Version otherVersion)) {
+        if (!(other instanceof Version)) {
             return false;
         }
 
-        return this.major == otherVersion.major
-                && this.minor == otherVersion.minor
-                && this.patch == otherVersion.patch
-                && this.isEarlyAccess == otherVersion.isEarlyAccess;
+        Version otherVersion = (Version) other;
+        return major == otherVersion.major
+                && minor == otherVersion.minor
+                && patch == otherVersion.patch
+                && isEarlyAccess == otherVersion.isEarlyAccess;
     }
 
     @Override
     public int hashCode() {
-        String hash = String.format("%03d%03d%03d", this.major, this.minor, this.patch);
-        if (!this.isEarlyAccess) {
+        String hash = String.format("%03d%03d%03d", major, minor, patch);
+        if (!isEarlyAccess) {
             hash = "1" + hash;
         }
         return Integer.parseInt(hash);

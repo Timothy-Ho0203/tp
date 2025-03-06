@@ -14,7 +14,8 @@ public class AppUtil {
      * Gets an {@code Image} from the specified path.
      */
     public static Image getImage(String imagePath) {
-        return new Image(requireNonNull(MainApp.class.getResourceAsStream(imagePath)));
+        requireNonNull(imagePath);
+        return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
 
     /**

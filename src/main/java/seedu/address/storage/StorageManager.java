@@ -17,8 +17,8 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private final AddressBookStorage addressBookStorage;
-    private final UserPrefsStorage userPrefsStorage;
+    private AddressBookStorage addressBookStorage;
+    private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
@@ -32,17 +32,17 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getUserPrefsFilePath() {
-        return this.userPrefsStorage.getUserPrefsFilePath();
+        return userPrefsStorage.getUserPrefsFilePath();
     }
 
     @Override
     public Optional<UserPrefs> readUserPrefs() throws DataLoadingException {
-        return this.userPrefsStorage.readUserPrefs();
+        return userPrefsStorage.readUserPrefs();
     }
 
     @Override
     public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
-        this.userPrefsStorage.saveUserPrefs(userPrefs);
+        userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
 
@@ -50,28 +50,29 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getAddressBookFilePath() {
-        return this.addressBookStorage.getAddressBookFilePath();
+        return addressBookStorage.getAddressBookFilePath();
     }
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return this.readAddressBook(this.addressBookStorage.getAddressBookFilePath());
+        return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
-        StorageManager.logger.fine("Attempting to read data from file: " + filePath);
-        return this.addressBookStorage.readAddressBook(filePath);
+        logger.fine("Attempting to read data from file: " + filePath);
+        return addressBookStorage.readAddressBook(filePath);
     }
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        this.saveAddressBook(addressBook, this.addressBookStorage.getAddressBookFilePath());
+        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        StorageManager.logger.fine("Attempting to write to data file: " + filePath);
-        this.addressBookStorage.saveAddressBook(addressBook, filePath);
+        logger.fine("Attempting to write to data file: " + filePath);
+        addressBookStorage.saveAddressBook(addressBook, filePath);
     }
+
 }

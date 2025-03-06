@@ -29,17 +29,13 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
-        ModelManager.logger.fine(
-                "Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
-    /**
-     * Initializes a ModelManager with default empty addressBook and userPrefs (Constructor Overloading).
-     */
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
@@ -54,29 +50,29 @@ public class ModelManager implements Model {
 
     @Override
     public ReadOnlyUserPrefs getUserPrefs() {
-        return this.userPrefs;
+        return userPrefs;
     }
 
     @Override
     public GuiSettings getGuiSettings() {
-        return this.userPrefs.getGuiSettings();
+        return userPrefs.getGuiSettings();
     }
 
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
-        this.userPrefs.setGuiSettings(guiSettings);
+        userPrefs.setGuiSettings(guiSettings);
     }
 
     @Override
     public Path getAddressBookFilePath() {
-        return this.userPrefs.getAddressBookFilePath();
+        return userPrefs.getAddressBookFilePath();
     }
 
     @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        this.userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -88,23 +84,23 @@ public class ModelManager implements Model {
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return this.addressBook;
+        return addressBook;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return this.addressBook.hasPerson(person);
+        return addressBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        this.addressBook.removePerson(target);
+        addressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        this.addressBook.addPerson(person);
+        addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -112,7 +108,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        this.addressBook.setPerson(target, editedPerson);
+        addressBook.setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -123,13 +119,13 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return this.filteredPersons;
+        return filteredPersons;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        this.filteredPersons.setPredicate(predicate);
+        filteredPersons.setPredicate(predicate);
     }
 
     @Override
@@ -139,12 +135,14 @@ public class ModelManager implements Model {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModelManager otherModelManager)) {
+        if (!(other instanceof ModelManager)) {
             return false;
         }
 
-        return this.addressBook.equals(otherModelManager.addressBook)
-                && this.userPrefs.equals(otherModelManager.userPrefs)
-                && this.filteredPersons.equals(otherModelManager.filteredPersons);
+        ModelManager otherModelManager = (ModelManager) other;
+        return addressBook.equals(otherModelManager.addressBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
 }

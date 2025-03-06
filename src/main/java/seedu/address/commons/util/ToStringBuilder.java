@@ -16,7 +16,7 @@ public class ToStringBuilder {
      * Constructs a {@code ToStringBuilder} whose formatted output will be prefixed with {@code objectName}.
      */
     public ToStringBuilder(String objectName) {
-        this.stringBuilder.append(objectName).append(ToStringBuilder.OBJECT_PREFIX);
+        stringBuilder.append(objectName).append(OBJECT_PREFIX);
     }
 
     /**
@@ -35,11 +35,11 @@ public class ToStringBuilder {
      * @return A reference to this {@code ToStringBuilder} object, allowing method calls to be chained.
      */
     public ToStringBuilder add(String fieldName, Object fieldValue) {
-        if (this.hasField) {
-            this.stringBuilder.append(ToStringBuilder.FIELD_SEPARATOR);
+        if (hasField) {
+            stringBuilder.append(FIELD_SEPARATOR);
         }
-        this.stringBuilder.append(fieldName).append(ToStringBuilder.FIELD_NAME_VALUE_SEPARATOR).append(fieldValue);
-        this.hasField = true;
+        stringBuilder.append(fieldName).append(FIELD_NAME_VALUE_SEPARATOR).append(fieldValue);
+        hasField = true;
         return this;
     }
 
@@ -48,6 +48,6 @@ public class ToStringBuilder {
      */
     @Override
     public String toString() {
-        return this.stringBuilder + ToStringBuilder.OBJECT_SUFFIX;
+        return stringBuilder.toString() + OBJECT_SUFFIX;
     }
 }

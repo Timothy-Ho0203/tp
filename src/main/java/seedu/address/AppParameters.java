@@ -36,7 +36,7 @@ public class AppParameters {
 
         String configPathParameter = namedParameters.get("config");
         if (configPathParameter != null && !FileUtil.isValidPath(configPathParameter)) {
-            AppParameters.logger.warning("Invalid config path " + configPathParameter + ". Using default config path.");
+            logger.warning("Invalid config path " + configPathParameter + ". Using default config path.");
             configPathParameter = null;
         }
         appParameters.setConfigPath(configPathParameter != null ? Paths.get(configPathParameter) : null);
@@ -51,22 +51,23 @@ public class AppParameters {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AppParameters otherAppParameters)) {
+        if (!(other instanceof AppParameters)) {
             return false;
         }
 
-        return Objects.equals(this.configPath, otherAppParameters.configPath);
+        AppParameters otherAppParameters = (AppParameters) other;
+        return Objects.equals(configPath, otherAppParameters.configPath);
     }
 
     @Override
     public int hashCode() {
-        return this.configPath.hashCode();
+        return configPath.hashCode();
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("configPath", this.configPath)
+                .add("configPath", configPath)
                 .toString();
     }
 }

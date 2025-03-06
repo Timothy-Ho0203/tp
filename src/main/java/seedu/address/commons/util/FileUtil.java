@@ -36,8 +36,8 @@ public class FileUtil {
      * @throws IOException if the file or directory cannot be created.
      */
     public static void createIfMissing(Path file) throws IOException {
-        if (!FileUtil.isFileExists(file)) {
-            FileUtil.createFile(file);
+        if (!isFileExists(file)) {
+            createFile(file);
         }
     }
 
@@ -49,7 +49,7 @@ public class FileUtil {
             return;
         }
 
-        FileUtil.createParentDirsOfFile(file);
+        createParentDirsOfFile(file);
 
         Files.createFile(file);
     }

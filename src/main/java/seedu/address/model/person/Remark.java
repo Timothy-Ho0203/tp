@@ -38,7 +38,7 @@ public class Remark {
             return false;
         }
 
-        return this.value.equals(otherRemark.value);
+        return this.value.trim().equals(otherRemark.value.trim()); // Ignore leading or trailing whitespaces.
     }
 
     @Override

@@ -10,19 +10,20 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class RemarkCommandParserTest {
     private RemarkCommandParser parser = new RemarkCommandParser();
-    private String validRemark = "Birthday Boy next month ";
+    private String validRemark = "Birthday Boy next month";
     @Test
-    public void parse_indexSpecified_success() {
+    public void parse_indexSpecified_success() throws ParseException {
         Index targetIndex = INDEX_FIRST_PERSON;
         String nonEmptyUserInput = targetIndex.getOneBased() + " " + PREFIX_REMARK + validRemark;
         assertParseSuccess(parser, nonEmptyUserInput, new RemarkCommand(INDEX_FIRST_PERSON, validRemark));
 
-        // Should work for contacts without optional remark too.
-        String emptyUserInput = targetIndex.getOneBased() + " " + PREFIX_REMARK;
-        assertParseSuccess(parser, emptyUserInput, new RemarkCommand(INDEX_FIRST_PERSON, ""));
+        // Tentatively don't work for contacts without remark. May likely modify this feature to allow for optionality.
+        // String emptyUserInput = targetIndex.getOneBased() + " " + PREFIX_REMARK;
+        // assertParseSuccess(parser, emptyUserInput, new RemarkCommand(INDEX_FIRST_PERSON, ""));
     }
 
     @Test

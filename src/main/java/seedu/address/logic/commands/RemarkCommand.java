@@ -70,4 +70,9 @@ public class RemarkCommand extends Command {
         }
         return this.targetIndex.equals(e.targetIndex) && this.targetRemark.equals(e.targetRemark);
     }
+
+    @Override
+    public String toString() {
+        return this.targetIndex.getOneBased() + " " + this.targetRemark;
+    }
 }

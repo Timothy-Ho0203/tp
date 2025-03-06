@@ -24,9 +24,9 @@ public class VersionTest {
     public void versionConstructor_correctParameter_valueAsExpected() {
         Version version = new Version(19, 10, 20, true);
 
-        assertEquals(19, version.major());
-        assertEquals(10, version.minor());
-        assertEquals(20, version.patch());
+        assertEquals(19, version.major()); // Implicit accessor for Java records
+        assertEquals(10, version.minor()); // Implicit accessor for Java records
+        assertEquals(20, version.patch()); // Implicit accessor for Java records
         assertEquals(true, version.isEarlyAccess());
     }
 

@@ -42,12 +42,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Warren Low
 
-<img src="images/desuclub.png" width="200px">
+<img src="images/desu-club.png" width="200px">
 
 [[github](http://github.com/DESU-CLUB)]
 [[portfolio](team/desuclub.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops
-
-

@@ -22,7 +22,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Advay Pakhale
 
-<img src="images/advaypakhale.jpg" width="200px">
+<img src="images/advaypakhale.png" width="200px">
 
 [[github](http://github.com/advaypakhale)]
 

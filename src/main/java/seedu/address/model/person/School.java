@@ -15,11 +15,11 @@ public class School {
     /**
      * Constructs an {@code Address}.
      *
-     * @param remark A valid address.
+     * @param school A valid address.
      */
-    public School(String remark) {
-        requireNonNull(remark);
-        this.value = remark;
+    public School(String school) {
+        requireNonNull(school);
+        this.value = school;
     }
 
     @Override

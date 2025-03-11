@@ -16,7 +16,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_REMARK = "Happy Birthday";
+    public static final String DEFAULT_SCHOOL = "NUS";
     public static final String DEFAULT_DEGREE = "Computer Science";
 
     private Name name;
@@ -35,7 +35,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        school = new School(DEFAULT_REMARK);
+        school = new School(DEFAULT_SCHOOL);
         degree = new Degree(DEFAULT_DEGREE);
         tags = new HashSet<>();
     }
@@ -79,11 +79,11 @@ public class PersonBuilder {
 
     /**
      * Sets the {@code School} of the {@code Person} that we are building.
-     * @param remark school String associated with the Person in the contact.
+     * @param school school String associated with the Person in the contact.
      * @return Person with the associated school.
      */
-    public PersonBuilder withRemark(String remark) {
-        this.school = new School(remark);
+    public PersonBuilder withSchool(String school) {
+        this.school = new School(school);
         return this;
     }
 

@@ -3,7 +3,7 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "remark" : "Test remark",
+    "school": "Test school",
     "address": "4th street"
   } ]
 }

@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case resumes at step 3.
 
 * 4a. TalentMatch finds an existing applicant
-  Use case resumes at step 3. 
+  Use case resumes at step 3.
 
 * *a. HR loses connection.
   * *a1. TalentMatch saves details
@@ -367,7 +367,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Find an applicant** 
+**Use case: Find an applicant**
 
 **MSS**
 

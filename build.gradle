@@ -69,7 +69,7 @@ dependencies {
     // TestFX Dependencies
     testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
     testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
-    
+
     // Optional: Monocle for headless testing (useful for CI environments)
     testImplementation 'org.testfx:openjfx-monocle:jdk-12.0.1+2'
 }
@@ -83,7 +83,7 @@ defaultTasks 'clean', 'test'
 // Add this if you want to enable headless testing
 test {
     useJUnitPlatform()
-    
+
     // Configure headless testing
     systemProperty 'java.awt.headless', 'true'
     systemProperty 'testfx.robot', 'glass'

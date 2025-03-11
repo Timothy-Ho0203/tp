@@ -29,7 +29,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String remark;
+    private final String school;
     private final String degree;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -42,14 +42,14 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone,
             @JsonProperty("email") String email,
             @JsonProperty("address") String address,
-            @JsonProperty("remark") String remark,
+            @JsonProperty("school") String school,
             @JsonProperty("degree") String degree,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.remark = remark;
+        this.school = school;
         this.degree = degree;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -64,7 +64,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        remark = source.getSchool().value;
+        school = source.getSchool().value;
         degree = source.getDegree().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -114,10 +114,10 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (remark == null) {
+        if (school == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, School.class.getSimpleName()));
         }
-        final School modelSchool = new School(remark);
+        final School modelSchool = new School(school);
 
         if (degree == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Degree.class.getSimpleName()));

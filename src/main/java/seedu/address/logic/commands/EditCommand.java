@@ -262,11 +262,11 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("school", school)
                     .add("degree", degree)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("school", school)
                     .add("tags", tags)
                     .toString();
         }

@@ -60,7 +60,9 @@ public class Person {
     public School getSchool() {
         return school;
     }
-    public Degree getDegree() {return degree;}
+    public Degree getDegree() {
+        return degree;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

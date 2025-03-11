@@ -9,11 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -89,6 +85,16 @@ public class ParserUtil {
         requireNonNull(remark);
         String trimmedRemark = remark.trim(); // Remark yet has format constraints.
         return new Remark(trimmedRemark);
+    }
+
+    /**
+     * @param degree Raw degree by user.
+     * @return trimmed remark without leading and trailing whitespaces for more efficient processing.
+     */
+    public static Degree parseDegree(String degree) {
+        requireNonNull(degree);
+        String trimmedDegree = degree.trim(); // Remark yet has format constraints.
+        return new Degree(trimmedDegree);
     }
 
     /**

@@ -20,6 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Degree degree;
 
     // Data fields
     private final Address address;
@@ -29,13 +30,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Degree degree, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, remark, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
+        this.degree = degree;
         this.tags.addAll(tags);
     }
 
@@ -58,6 +60,7 @@ public class Person {
     public Remark getRemark() {
         return remark;
     }
+    public Degree getDegree() {return degree;}
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -101,13 +104,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && remark.equals(otherPerson.remark)
+                && degree.equals(otherPerson.degree)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, remark);
+        return Objects.hash(name, phone, email, address, tags, remark, degree);
     }
 
     @Override
@@ -118,6 +122,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("remark", remark)
+                .add("degree", degree)
                 .add("tags", tags)
                 .toString();
     }

@@ -95,11 +95,11 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
+        School updatedSchool = editPersonDescriptor.getRemark().orElse(personToEdit.getSchool());
         Degree updatedDegree = editPersonDescriptor.getDegree().orElse(personToEdit.getDegree());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark,
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchool,
                 updatedDegree, updatedTags);
     }
 
@@ -137,7 +137,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Remark remark;
+        private School school;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -152,7 +152,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setRemark(toCopy.remark);
+            setRemark(toCopy.school);
             setTags(toCopy.tags);
         }
 
@@ -195,12 +195,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setRemark(Remark remark) {
-            this.remark = remark;
+        public void setRemark(School school) {
+            this.school = school;
         }
 
-        public Optional<Remark> getRemark() {
-            return Optional.ofNullable(remark);
+        public Optional<School> getRemark() {
+            return Optional.ofNullable(school);
         }
 
         public void setDegree(Degree degree) {
@@ -244,7 +244,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(remark, otherEditPersonDescriptor.remark)
+                    && Objects.equals(school, otherEditPersonDescriptor.school)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -256,7 +256,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("remark", remark)
+                    .add("school", school)
                     .add("tags", tags)
                     .toString();
         }

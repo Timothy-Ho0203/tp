@@ -81,10 +81,10 @@ public class ParserUtil {
      * @param remark Raw remark by user.
      * @return trimmed remark without leading and trailing whitespaces for more efficient processing.
      */
-    public static Remark parseRemark(String remark) {
+    public static School parseRemark(String remark) {
         requireNonNull(remark);
-        String trimmedRemark = remark.trim(); // Remark yet has format constraints.
-        return new Remark(trimmedRemark);
+        String trimmedRemark = remark.trim(); // School yet has format constraints.
+        return new School(trimmedRemark);
     }
 
     /**
@@ -93,7 +93,7 @@ public class ParserUtil {
      */
     public static Degree parseDegree(String degree) {
         requireNonNull(degree);
-        String trimmedDegree = degree.trim(); // Remark yet has format constraints.
+        String trimmedDegree = degree.trim(); // School yet has format constraints.
         return new Degree(trimmedDegree);
     }
 

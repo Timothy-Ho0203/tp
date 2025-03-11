@@ -13,13 +13,13 @@ public class Degree {
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code Degree}.
      *
-     * @param remark A valid address.
+     * @param degree A valid degree.
      */
-    public Degree(String remark) {
-        requireNonNull(remark);
-        this.value = remark;
+    public Degree(String degree) {
+        requireNonNull(degree);
+        this.value = degree;
     }
 
     @Override

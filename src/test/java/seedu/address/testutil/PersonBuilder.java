@@ -23,7 +23,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Remark remark;
+    private School school;
     private Degree degree;
     private Set<Tag> tags;
 
@@ -35,7 +35,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        remark = new Remark(DEFAULT_REMARK);
+        school = new School(DEFAULT_REMARK);
         degree = new Degree(DEFAULT_DEGREE);
         tags = new HashSet<>();
     }
@@ -48,7 +48,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        remark = personToCopy.getRemark();
+        school = personToCopy.getSchool();
         degree = personToCopy.getDegree();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -78,12 +78,12 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code Person} that we are building.
-     * @param remark remark String associated with the Person in the contact.
-     * @return Person with the associated remark.
+     * Sets the {@code School} of the {@code Person} that we are building.
+     * @param remark school String associated with the Person in the contact.
+     * @return Person with the associated school.
      */
     public PersonBuilder withRemark(String remark) {
-        this.remark = new Remark(remark);
+        this.school = new School(remark);
         return this;
     }
 
@@ -112,7 +112,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, remark, degree, tags);
+        return new Person(name, phone, email, address, school, degree, tags);
     }
 
 }

@@ -27,12 +27,15 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="degree" styleClass="cell_small_label" text="\$degree" />
+      <HBox alignment="CENTER_LEFT" spacing="5">
+        <Label fx:id="degree" styleClass="cell_small_label" text="\$degree" wrapText="true"/>
+        <Label styleClass="cell_small_label" text="•" />
+        <Label fx:id="school" styleClass="cell_small_label" text="\$school" wrapText="true"/>
+      </HBox>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="school" styleClass="cell_small_label" text="\$school"/>
+      <FlowPane fx:id="tags" />
     </VBox>
   </GridPane>
 </HBox>

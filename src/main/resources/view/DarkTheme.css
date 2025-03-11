@@ -350,3 +350,32 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.glyph-icon {
+    -fx-text-fill: -fx-primary-color;
+}
+
+.phone-icon {
+    -glyph-size: 16px;
+    -fx-fill: #2196F3; /* blue */
+}
+
+.address-icon {
+    -glyph-size: 16px;
+    -fx-fill: #4CAF50; /* green */
+}
+
+.email-icon {
+    -glyph-size: 16px;
+    -fx-fill: #FF9800; /* orange */
+}
+
+.remark-icon {
+    -glyph-size: 16px;
+    -fx-fill: #9C27B0; /* purple */
+}
+
+.skills-icon {
+    -glyph-size: 16px;
+    -fx-fill: #F44336; /* red */
+}

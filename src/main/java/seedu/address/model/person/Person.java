@@ -15,56 +15,58 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-
-    // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
-
-    // Data fields
     private final Address address;
+    private final Role role;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, remark, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.remark = remark;
-        this.tags.addAll(tags);
+    public Person(Name newName, Phone newPhone, Email newEmail, Address newAddress, Role newRole,
+                  Remark newRemark, Set<Tag> newTags) {
+        requireAllNonNull(newName, newPhone, newEmail, newAddress, newRole, newRemark, newTags);
+        this.name = newName;
+        this.phone = newPhone;
+        this.email = newEmail;
+        this.address = newAddress;
+        this.role = newRole;
+        this.remark = newRemark;
+        this.tags.addAll(newTags);
     }
 
     public Name getName() {
-        return name;
+        return this.name;
     }
 
     public Phone getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public Email getEmail() {
-        return email;
+        return this.email;
     }
 
     public Address getAddress() {
-        return address;
+        return this.address;
     }
 
     public Remark getRemark() {
-        return remark;
+        return this.remark;
     }
 
+    public Role getRole() {
+        return this.role;
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+        return Collections.unmodifiableSet(this.tags);
     }
 
     /**
@@ -72,12 +74,7 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(this.getName());
     }
 
     /**
@@ -86,39 +83,38 @@ public class Person {
      */
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
-
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && remark.equals(otherPerson.remark)
-                && tags.equals(otherPerson.tags);
+        return this.name.equals(otherPerson.name)
+                && this.phone.equals(otherPerson.phone)
+                && this.email.equals(otherPerson.email)
+                && this.address.equals(otherPerson.address)
+                && this.role.equals(otherPerson.role)
+                && this.remark.equals(otherPerson.remark)
+                && this.tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, remark);
+        return Objects.hash(this.name, this.phone, this.email, this.address, this.role, this.tags, this.remark);
     }
 
+    /**
+     * Order the different attributes of Person to be optimally displayed in either CLI or GUI mode.
+     * @return String representation of Person's application data.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("remark", remark)
-                .add("tags", tags)
+                .add("name", this.name)
+                .add("phone", this.phone)
+                .add("email", this.email)
+                .add("address", this.address)
+                .add("role", this.role)
+                .add("remark", this.remark)
+                .add("tags", this.tags)
                 .toString();
     }
 

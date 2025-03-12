@@ -38,6 +38,13 @@
         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       </HBox>
 
+      <HBox fx:id="emailBox" spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="2" bottom="2" />
+        </padding>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      </HBox>
+
       <HBox fx:id="addressBox" spacing="5" alignment="CENTER_LEFT">
         <padding>
           <Insets top="2" bottom="2" />
@@ -45,11 +52,11 @@
         <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       </HBox>
 
-      <HBox fx:id="emailBox" spacing="5" alignment="CENTER_LEFT">
+      <HBox fx:id="roleBox" spacing="5" alignment="CENTER_LEFT">
         <padding>
           <Insets top="2" bottom="2" />
         </padding>
-        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+        <Label fx:id="role" styleClass="cell_small_label" text="\$email" />
       </HBox>
 
       <HBox fx:id="remarkBox" spacing="5" alignment="CENTER_LEFT">

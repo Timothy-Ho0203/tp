@@ -13,13 +13,13 @@ public class Remark {
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs a {@code Remark}.
      *
-     * @param remark A valid address.
+     * @param remark A valid remark.
      */
     public Remark(String remark) {
-        requireNonNull(remark);
-        this.value = remark;
+        requireNonNull(remark.trim());
+        this.value = remark.trim();
     }
 
     @Override
@@ -29,16 +29,10 @@ public class Remark {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
         if (!(other instanceof Remark otherRemark)) {
             return false;
         }
-
-        return this.value.trim().equals(otherRemark.value.trim()); // Ignore leading or trailing whitespaces.
+        return this.value.equals(otherRemark.value); // Ignore leading or trailing whitespaces.
     }
 
     @Override

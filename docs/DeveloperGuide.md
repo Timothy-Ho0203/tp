@@ -287,7 +287,6 @@ _{Explain here how the data archiving feature will be implemented}_
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
 | `* * *`  | Hiring manager   | add a new applicant          | track his/her application status easily                 |
@@ -295,6 +294,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hiring manager   | view all applicants as a list| view a summary of their applications                                   |
 | `* * *`  | Hiring manager   | find an applicant by details | locate details of an applicant without having to go through the entire list |
 | `* *`    | Hiring manager   | filter applicants            | simplify my search for those who are more suitable for this role       |
+| `* *`    | Recruiter        | create an application to link people with roles applied | keep track of the applicants for a specific role |
+| `* *`    | HR recruiter     | create role openings  | eventually assign them to applicants and search open roles |
+| `* *`    | HR recruiter     | see the role(s) a candidate is applying for | more quickly evaluate if their qualifications align or if such roles are currently available |
+| `* *`    | Recruiter        | see an applicant's education background | ensure legitimacy of their application |
 | `*`      | Hiring manager   | sort applicants        | view the top most suitable applicants for the role I'm hiring                 |
 
 *{More to be added}*
@@ -394,6 +397,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should respond to any user command within 2 seconds.
+5.  Should be usable by a person who has never used a contact management system before with minimal training.
+6.  User data should be stored in a human-editable text file for easy backup and transfer.
+7.  The system should be able to recover from unexpected shutdowns without data loss.
+8.  The UI should be color-blind friendly and support accessibility features.
+9.  Should have a comprehensive help system that can be accessed offline.
+10. The system should maintain data privacy and security by not exposing applicant information unnecessarily.
 
 
 

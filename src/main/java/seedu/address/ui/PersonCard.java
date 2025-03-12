@@ -94,7 +94,7 @@ public class PersonCard extends UiPart<Region> {
         roleBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.USER, "white"));
         role.setText(person.getRole().roleValue);
 
-        // Degree with white icons
+        // Degree with white icons (Made with AI)
         degreeBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.GRADUATION_CAP, "white"));
         degree.setText(person.getDegree().value);
         degreeBox.getChildren().add(2, new Label("•")); // Add bullet point

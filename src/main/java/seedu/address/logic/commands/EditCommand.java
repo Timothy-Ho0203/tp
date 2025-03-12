@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEGREE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -23,12 +25,13 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Degree;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,6 +46,8 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_SCHOOL + "SCHOOL] "
+            + "[" + PREFIX_DEGREE + "DEGREE] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -103,12 +108,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        School updatedSchool = editPersonDescriptor.getSchool().orElse(personToEdit.getSchool());
+        Degree updatedDegree = editPersonDescriptor.getDegree().orElse(personToEdit.getDegree());
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
-        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(
-                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, updatedRemark, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, updatedSchool,
+                updatedDegree, updatedTags);
     }
 
     @Override
@@ -134,11 +140,12 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
+        private Degree degree;
         private Phone phone;
         private Email email;
         private Address address;
+        private School school;
         private Role role;
-        private Remark remark;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -149,11 +156,12 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
+            setDegree(toCopy.degree);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setSchool(toCopy.school);
             setRole(toCopy.role);
-            setRemark(toCopy.remark);
             setTags(toCopy.tags);
         }
 
@@ -162,7 +170,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(
-                    this.name, this.phone, this.email, this.address, this.role, this.remark, this.tags);
+                    this.name, this.phone, this.email, this.address, this.role, this.tags, this.school, this.degree);
         }
 
         public void setName(Name newName) {
@@ -205,12 +213,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(this.role);
         }
 
-        public void setRemark(Remark remark) {
-            this.remark = remark;
+        public void setSchool(School school) {
+            this.school = school;
         }
 
-        public Optional<Remark> getRemark() {
-            return Optional.ofNullable(this.remark);
+        public Optional<School> getSchool() {
+            return Optional.ofNullable(school);
+        }
+
+        public void setDegree(Degree degree) {
+            this.degree = degree;
+        }
+
+        public Optional<Degree> getDegree() {
+            return Optional.ofNullable(degree);
         }
 
         /**
@@ -240,7 +256,8 @@ public class EditCommand extends Command {
                     && Objects.equals(this.email, otherEditPersonDescriptor.email)
                     && Objects.equals(this.address, otherEditPersonDescriptor.address)
                     && Objects.equals(this.role, otherEditPersonDescriptor.role)
-                    && Objects.equals(this.remark, otherEditPersonDescriptor.remark)
+                    && Objects.equals(this.school, otherEditPersonDescriptor.school)
+                    && Objects.equals(this.degree, otherEditPersonDescriptor.degree)
                     && Objects.equals(this.tags, otherEditPersonDescriptor.tags);
         }
 
@@ -248,12 +265,13 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", this.name)
-                    .add("phone", this.phone)
+                    .add("school", this.school)
                     .add("email", this.email)
                     .add("address", this.address)
                     .add("role", this.role)
-                    .add("remark", this.remark)
                     .add("tags", this.tags)
+                    .add("degree", this.degree)
+                    .add("phone", this.phone)
                     .toString();
         }
     }

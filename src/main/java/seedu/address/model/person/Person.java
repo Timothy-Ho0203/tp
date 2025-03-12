@@ -15,27 +15,33 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+
+    // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Degree degree;
+
+    // Data fields
     private final Address address;
+    private final School school;
     private final Role role;
-    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name newName, Phone newPhone, Email newEmail, Address newAddress, Role newRole,
-                  Remark newRemark, Set<Tag> newTags) {
-        requireAllNonNull(newName, newPhone, newEmail, newAddress, newRole, newRemark, newTags);
-        this.name = newName;
-        this.phone = newPhone;
-        this.email = newEmail;
-        this.address = newAddress;
-        this.role = newRole;
-        this.remark = newRemark;
-        this.tags.addAll(newTags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Role role, School school, Degree degree, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, school, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.role = role;
+        this.school = school;
+        this.degree = degree;
+        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -54,8 +60,11 @@ public class Person {
         return this.address;
     }
 
-    public Remark getRemark() {
-        return this.remark;
+    public School getSchool() {
+        return school;
+    }
+    public Degree getDegree() {
+        return degree;
     }
 
     public Role getRole() {
@@ -91,14 +100,15 @@ public class Person {
                 && this.email.equals(otherPerson.email)
                 && this.address.equals(otherPerson.address)
                 && this.role.equals(otherPerson.role)
-                && this.remark.equals(otherPerson.remark)
+                && school.equals(otherPerson.school)
+                && degree.equals(otherPerson.degree)
                 && this.tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.name, this.phone, this.email, this.address, this.role, this.tags, this.remark);
+        return Objects.hash(name, phone, email, address, role, tags, school, degree);
     }
 
     /**
@@ -108,13 +118,14 @@ public class Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", this.name)
-                .add("phone", this.phone)
-                .add("email", this.email)
-                .add("address", this.address)
-                .add("role", this.role)
-                .add("remark", this.remark)
-                .add("tags", this.tags)
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("role", role)
+                .add("school", school)
+                .add("degree", degree)
+                .add("tags", tags)
                 .toString();
     }
 

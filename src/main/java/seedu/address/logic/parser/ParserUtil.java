@@ -10,11 +10,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Degree;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -101,10 +102,20 @@ public class ParserUtil {
      * @param remark Raw remark by user.
      * @return trimmed remark without leading and trailing whitespaces for more efficient processing.
      */
-    public static Remark parseRemark(String remark) throws ParseException {
+    public static School parseRemark(String remark) {
         requireNonNull(remark);
-        String trimmedRemark = remark.trim(); // Remark yet has format constraints.
-        return new Remark(trimmedRemark);
+        String trimmedRemark = remark.trim(); // School yet has format constraints.
+        return new School(trimmedRemark);
+    }
+
+    /**
+     * @param degree Raw degree by user.
+     * @return trimmed remark without leading and trailing whitespaces for more efficient processing.
+     */
+    public static Degree parseDegree(String degree) {
+        requireNonNull(degree);
+        String trimmedDegree = degree.trim(); // School yet has format constraints.
+        return new Degree(trimmedDegree);
     }
 
     /**

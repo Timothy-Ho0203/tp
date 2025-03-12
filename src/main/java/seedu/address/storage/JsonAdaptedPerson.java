@@ -10,12 +10,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Degree;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,24 +30,31 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String school;
+    private final String degree;
     private final String role;
-    private final String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("role") String role, @JsonProperty("remark") String remark,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(
+            @JsonProperty("name") String name,
+            @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email,
+            @JsonProperty("address") String address,
+            @JsonProperty("role") String role,
+            @JsonProperty("school") String school,
+            @JsonProperty("degree") String degree,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.role = role;
-        this.remark = remark;
+        this.school = school;
+        this.degree = degree;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -61,7 +69,8 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         role = source.getRole().roleValue;
-        remark = source.getRemark().value;
+        school = source.getSchool().value;
+        degree = source.getDegree().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .toList());
@@ -115,13 +124,19 @@ class JsonAdaptedPerson {
         }
         final Role modelRole = new Role(role);
 
-        if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        if (school == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, School.class.getSimpleName()));
         }
-        final Remark modelRemark = new Remark(remark);
+        final School modelSchool = new School(school);
+
+        if (degree == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Degree.class.getSimpleName()));
+        }
+        final Degree modelDegree = new Degree(degree);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelRemark, modelTags);
+        return new Person(
+                modelName, modelPhone, modelEmail, modelAddress, modelRole, modelSchool, modelDegree, modelTags);
     }
 
 }

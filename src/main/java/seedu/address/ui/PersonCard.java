@@ -47,7 +47,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label role;
     @FXML
-    private Label remark;
+    private Label school;
+    @FXML
+    private Label degree;
     @FXML
     private FlowPane tags;
 
@@ -61,7 +63,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox roleBox;
     @FXML
-    private HBox remarkBox;
+    private HBox schoolBox;
+    @FXML
+    private HBox degreeBox;
     @FXML
     private HBox skillsBox;
 
@@ -73,23 +77,35 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+
         // Phone with white icon
         phoneBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.PHONE, "white"));
         phone.setText(person.getPhone().value);
+
         // Email with white icon
         emailBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.ENVELOPE, "white"));
         email.setText(person.getEmail().value);
+
         // Address with white icon
         addressBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.HOME, "white"));
         address.setText(person.getAddress().value);
+
         // Role with white icon
         roleBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.USER, "white"));
         role.setText(person.getRole().roleValue);
-        // Remark with white icon
-        remarkBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.COMMENT, "white"));
-        remark.setText(person.getRemark().value);
+
+        // Degree with white icons
+        degreeBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.GRADUATION_CAP, "white"));
+        degree.setText(person.getDegree().value);
+        degreeBox.getChildren().add(2, new Label("•")); // Add bullet point
+        degreeBox.getChildren().add(3, IconUtil.createIcon(FontAwesomeIcon.UNIVERSITY, "white"));
+
+        // School with white icon
+        school.setText(person.getSchool().value);
+
         // Skills with white icon
         skillsBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.TAGS, "white"));
+
         // Add tags
         person.getTags().stream()
                 .sorted(Comparator.comparing(Tag::tagName))

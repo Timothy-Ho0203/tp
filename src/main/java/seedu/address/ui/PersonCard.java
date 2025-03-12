@@ -9,10 +9,11 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.ui.util.IconUtil;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -28,32 +29,43 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
+    // Graphic Components
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
+
+    // Attribute Labels
     @FXML
-    private Label degree;
-    @FXML
-    private HBox degreeBox;
-    @FXML
-    private HBox phoneBox;
-    @FXML
-    private HBox addressBox;
-    @FXML
-    private HBox emailBox;
-    @FXML
-    private FlowPane tags;
+    private Label name;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
     @FXML
+    private Label address;
+    @FXML
+    private Label role;
+    @FXML
     private Label school;
+    @FXML
+    private Label degree;
+    @FXML
+    private FlowPane tags;
+
+    // Attribute Containers
+    @FXML
+    private HBox phoneBox;
+    @FXML
+    private HBox emailBox;
+    @FXML
+    private HBox addressBox;
+    @FXML
+    private HBox roleBox;
+    @FXML
+    private HBox schoolBox;
+    @FXML
+    private HBox degreeBox;
     @FXML
     private HBox skillsBox;
 
@@ -66,32 +78,38 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
 
-        // Degree and School with icons (Made with AI)
-        degreeBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.GRADUATION_CAP, "white"));
-        degree.setText(person.getDegree().value);
-        degreeBox.getChildren().add(2, new Label("•")); // Add bullet point
-        degreeBox.getChildren().add(3, IconUtil.createIcon(FontAwesomeIcon.UNIVERSITY, "white"));
-        school.setText(person.getSchool().value);
-
         // Phone with white icon
         phoneBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.PHONE, "white"));
         phone.setText(person.getPhone().value);
+
+        // Email with white icon
+        emailBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.ENVELOPE, "white"));
+        email.setText(person.getEmail().value);
 
         // Address with white icon
         addressBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.HOME, "white"));
         address.setText(person.getAddress().value);
 
-        // Email with white icon
-        emailBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.ENVELOPE, "white"));
-        email.setText(person.getEmail().value);
+        // Role with white icon
+        roleBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.USER, "white"));
+        role.setText(person.getRole().roleValue);
+
+        // Degree with white icons (Made with AI)
+        degreeBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.GRADUATION_CAP, "white"));
+        degree.setText(person.getDegree().value);
+        degreeBox.getChildren().add(2, new Label("•")); // Add bullet point
+        degreeBox.getChildren().add(3, IconUtil.createIcon(FontAwesomeIcon.UNIVERSITY, "white"));
+
+        // School with white icon
+        school.setText(person.getSchool().value);
 
         // Skills with white icon
         skillsBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.TAGS, "white"));
 
         // Add tags
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(Tag::tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName())));
     }
 }
 

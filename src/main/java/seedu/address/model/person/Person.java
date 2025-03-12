@@ -25,36 +25,39 @@ public class Person {
     // Data fields
     private final Address address;
     private final School school;
+    private final Role role;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, School school, Degree degree, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, school, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Role role, School school, Degree degree, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, school, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
         this.school = school;
         this.degree = degree;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
-        return name;
+        return this.name;
     }
 
     public Phone getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public Email getEmail() {
-        return email;
+        return this.email;
     }
 
     public Address getAddress() {
-        return address;
+        return this.address;
     }
 
     public School getSchool() {
@@ -64,12 +67,15 @@ public class Person {
         return degree;
     }
 
+    public Role getRole() {
+        return this.role;
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+        return Collections.unmodifiableSet(this.tags);
     }
 
     /**
@@ -77,12 +83,7 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(this.getName());
     }
 
     /**
@@ -91,31 +92,29 @@ public class Person {
      */
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
-
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+        return this.name.equals(otherPerson.name)
+                && this.phone.equals(otherPerson.phone)
+                && this.email.equals(otherPerson.email)
+                && this.address.equals(otherPerson.address)
+                && this.role.equals(otherPerson.role)
                 && school.equals(otherPerson.school)
                 && degree.equals(otherPerson.degree)
-                && tags.equals(otherPerson.tags);
+                && this.tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, school, degree);
+        return Objects.hash(name, phone, email, address, role, tags, school, degree);
     }
 
+    /**
+     * Order the different attributes of Person to be optimally displayed in either CLI or GUI mode.
+     * @return String representation of Person's application data.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -123,6 +122,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("role", role)
                 .add("school", school)
                 .add("degree", degree)
                 .add("tags", tags)

@@ -20,22 +20,24 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Degree degree;
 
     // Data fields
     private final Address address;
-    private final Remark remark;
+    private final School school;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, remark, tags);
+    public Person(Name name, Phone phone, Email email, Address address, School school, Degree degree, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, school, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.remark = remark;
+        this.school = school;
+        this.degree = degree;
         this.tags.addAll(tags);
     }
 
@@ -55,8 +57,11 @@ public class Person {
         return address;
     }
 
-    public Remark getRemark() {
-        return remark;
+    public School getSchool() {
+        return school;
+    }
+    public Degree getDegree() {
+        return degree;
     }
 
     /**
@@ -100,14 +105,15 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && remark.equals(otherPerson.remark)
+                && school.equals(otherPerson.school)
+                && degree.equals(otherPerson.degree)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, remark);
+        return Objects.hash(name, phone, email, address, tags, school, degree);
     }
 
     @Override
@@ -117,7 +123,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("remark", remark)
+                .add("school", school)
+                .add("degree", degree)
                 .add("tags", tags)
                 .toString();
     }

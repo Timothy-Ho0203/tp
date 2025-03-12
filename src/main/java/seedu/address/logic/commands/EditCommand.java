@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEGREE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -22,11 +24,12 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Degree;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -41,6 +44,8 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_SCHOOL + "SCHOOL] "
+            + "[" + PREFIX_DEGREE + "DEGREE] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -100,10 +105,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
+        School updatedSchool = editPersonDescriptor.getSchool().orElse(personToEdit.getSchool());
+        Degree updatedDegree = editPersonDescriptor.getDegree().orElse(personToEdit.getDegree());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchool,
+                updatedDegree, updatedTags);
     }
 
     @Override
@@ -136,10 +143,11 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
+        private Degree degree;
         private Phone phone;
         private Email email;
         private Address address;
-        private Remark remark;
+        private School school;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -150,10 +158,11 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
+            setDegree(toCopy.degree);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setRemark(toCopy.remark);
+            setSchool(toCopy.school);
             setTags(toCopy.tags);
         }
 
@@ -161,7 +170,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, school, degree);
         }
 
         public void setName(Name name) {
@@ -196,12 +205,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setRemark(Remark remark) {
-            this.remark = remark;
+        public void setSchool(School school) {
+            this.school = school;
         }
 
-        public Optional<Remark> getRemark() {
-            return Optional.ofNullable(remark);
+        public Optional<School> getSchool() {
+            return Optional.ofNullable(school);
+        }
+
+        public void setDegree(Degree degree) {
+            this.degree = degree;
+        }
+
+        public Optional<Degree> getDegree() {
+            return Optional.ofNullable(degree);
         }
 
         /**
@@ -237,7 +254,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(remark, otherEditPersonDescriptor.remark)
+                    && Objects.equals(school, otherEditPersonDescriptor.school)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -245,10 +262,11 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("school", school)
+                    .add("degree", degree)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("remark", remark)
                     .add("tags", tags)
                     .toString();
         }

@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEGREE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -28,15 +30,19 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "CANDIDATE'S EMAIL "
             + PREFIX_ADDRESS + "CANDIDATE'S HOME ADDRESS "
             + PREFIX_ROLE + "CANDIDATE'S INTERESTED ROLE "
+            + PREFIX_SCHOOL + "CANDIDATE'S ALMA MATER "
+            + PREFIX_DEGREE + "CANDIDATE'S HIGHEST COMPLETED EDUCATION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "444, Jurong West Ave 1, #12-082 "
+            + PREFIX_SCHOOL + "NUS "
+            + PREFIX_DEGREE + "Computer Science "
             + PREFIX_ROLE + "janitor"
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "extra tag on owing money";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

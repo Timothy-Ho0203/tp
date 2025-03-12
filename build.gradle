@@ -56,6 +56,8 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+    implementation 'de.jensd:fontawesomefx-fontawesome:4.7.0-9.1.2'
+
 
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
@@ -63,6 +65,13 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    // TestFX Dependencies
+    testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
+    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
+
+    // Optional: Monocle for headless testing (useful for CI environments)
+    testImplementation 'org.testfx:openjfx-monocle:jdk-12.0.1+2'
 }
 
 shadowJar {
@@ -70,3 +79,16 @@ shadowJar {
 }
 
 defaultTasks 'clean', 'test'
+
+// Add this if you want to enable headless testing
+test {
+    useJUnitPlatform()
+
+    // Configure headless testing
+    systemProperty 'java.awt.headless', 'true'
+    systemProperty 'testfx.robot', 'glass'
+    systemProperty 'testfx.headless', 'true'
+    systemProperty 'prism.order', 'sw'
+    systemProperty 'prism.text', 't2k'
+    systemProperty 'testfx.setup.timeout', '2500'
+}

@@ -19,6 +19,9 @@
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
       <HBox spacing="0.5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="5" bottom="5" />
+        </padding>
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
@@ -36,6 +39,51 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <FlowPane fx:id="tags" />
+
+      <HBox fx:id="phoneBox" spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="2" bottom="2" />
+        </padding>
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      </HBox>
+
+      <HBox fx:id="addressBox" spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="2" bottom="2" />
+        </padding>
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+      </HBox>
+
+      <HBox fx:id="emailBox" spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="2" bottom="2" />
+        </padding>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      </HBox>
+
+      <HBox fx:id="remarkBox" spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="2" bottom="2" />
+        </padding>
+        <Label fx:id="remark" styleClass="cell_small_label" text="\$remark"/>
+      </HBox>
+
+      <VBox>
+        <padding>
+          <Insets top="5" />
+        </padding>
+        <HBox fx:id="skillsBox" spacing="5" alignment="CENTER_LEFT">
+          <padding>
+            <Insets top="2" bottom="2" />
+          </padding>
+          <Label text="Skills:" styleClass="cell_small_label" style="-fx-font-weight: bold;" />
+        </HBox>
+        <FlowPane fx:id="tags">
+          <padding>
+            <Insets left="25.0" top="2" />
+          </padding>
+        </FlowPane>
+      </VBox>
     </VBox>
   </GridPane>
 </HBox>

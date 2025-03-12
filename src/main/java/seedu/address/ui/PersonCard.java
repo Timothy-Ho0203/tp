@@ -66,7 +66,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
 
-        // Degree and School with icons
+        // Degree and School with icons (Made with AI)
         degreeBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.GRADUATION_CAP, "white"));
         degree.setText(person.getDegree().value);
         degreeBox.getChildren().add(2, new Label("•")); // Add bullet point

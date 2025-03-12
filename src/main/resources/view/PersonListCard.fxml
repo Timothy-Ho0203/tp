@@ -30,14 +30,14 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <HBox alignment="CENTER_LEFT" spacing="5">
+
+      <HBox fx:id="degreeBox" spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="2" bottom="2" />
+        </padding>
         <Label fx:id="degree" styleClass="cell_small_label" text="\$degree" wrapText="true"/>
-        <Label styleClass="cell_small_label" text="•" />
         <Label fx:id="school" styleClass="cell_small_label" text="\$school" wrapText="true"/>
       </HBox>
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <FlowPane fx:id="tags" />
 
       <HBox fx:id="phoneBox" spacing="5" alignment="CENTER_LEFT">
@@ -60,14 +60,6 @@
         </padding>
         <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       </HBox>
-
-      <HBox fx:id="remarkBox" spacing="5" alignment="CENTER_LEFT">
-        <padding>
-          <Insets top="2" bottom="2" />
-        </padding>
-        <Label fx:id="remark" styleClass="cell_small_label" text="\$remark"/>
-      </HBox>
-
       <VBox>
         <padding>
           <Insets top="5" />

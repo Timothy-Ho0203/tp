@@ -9,7 +9,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.scene.paint.Color;
 
-public class IconUtilTest {
+public class IconUtilTest { //Made with AI
 
     @Test
     public void createIcon_withDefaultValues_returnsCorrectIcon() {

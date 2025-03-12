@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 /**
  * Utility class for creating FontAwesome icons.
  */
-public class IconUtil {
+public class IconUtil { //Made with AI
 
     /**
      * Creates a FontAwesome icon with the specified properties.

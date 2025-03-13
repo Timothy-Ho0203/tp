@@ -3,6 +3,7 @@
 /build/
 src/main/resources/docs/
 .vscode
+/bin/
 
 # IDEA files
 /.idea/
@@ -23,3 +24,8 @@ src/test/data/sandbox/
 .DS_Store
 docs/_site/
 docs/_markbind/logs/
+
+# Eclipse files
+/.settings/
+/.project
+/.classpath

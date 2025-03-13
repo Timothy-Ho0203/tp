@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<!-- Made with AI -->
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -47,6 +48,13 @@
         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       </HBox>
 
+      <HBox fx:id="emailBox" spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="2" bottom="2" />
+        </padding>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      </HBox>
+
       <HBox fx:id="addressBox" spacing="5" alignment="CENTER_LEFT">
         <padding>
           <Insets top="2" bottom="2" />
@@ -54,11 +62,11 @@
         <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       </HBox>
 
-      <HBox fx:id="emailBox" spacing="5" alignment="CENTER_LEFT">
+      <HBox fx:id="roleBox" spacing="5" alignment="CENTER_LEFT">
         <padding>
           <Insets top="2" bottom="2" />
         </padding>
-        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+        <Label fx:id="role" styleClass="cell_small_label" text="\$email" />
       </HBox>
       <VBox>
         <padding>

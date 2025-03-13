@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String school;
     private final String degree;
+    private final String role;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -42,6 +44,7 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone,
             @JsonProperty("email") String email,
             @JsonProperty("address") String address,
+            @JsonProperty("role") String role,
             @JsonProperty("school") String school,
             @JsonProperty("degree") String degree,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
@@ -49,6 +52,7 @@ class JsonAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
         this.school = school;
         this.degree = degree;
         if (tags != null) {
@@ -64,6 +68,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        role = source.getRole().roleValue;
         school = source.getSchool().value;
         degree = source.getDegree().value;
         tags.addAll(source.getTags().stream()
@@ -114,6 +119,11 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
+        }
+        final Role modelRole = new Role(role);
+
         if (school == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, School.class.getSimpleName()));
         }
@@ -125,7 +135,8 @@ class JsonAdaptedPerson {
         final Degree modelDegree = new Degree(degree);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchool, modelDegree, modelTags);
+        return new Person(
+                modelName, modelPhone, modelEmail, modelAddress, modelRole, modelSchool, modelDegree, modelTags);
     }
 
 }

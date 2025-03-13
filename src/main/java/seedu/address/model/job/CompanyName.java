@@ -7,11 +7,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a company name in a {@Code Job}.
  */
 public class CompanyName {
-    public static final String MESSAGE_CONSTRAINTS = "Company name should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Company name should only contain alphanumeric "
+            + "characters and spaces, and it should not be blank";
 
     /**
-     * The first character of the company name must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The first character of the company name must not be a whitespace, otherwise "
+     * " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 

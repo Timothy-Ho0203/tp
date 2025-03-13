@@ -7,11 +7,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a job title in a {@Code Job}.
  */
 public class JobTitle {
-    public static final String MESSAGE_CONSTRAINTS = "Job title should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Job title should only contain alphanumeric "
+            + "characters and spaces, and it should not be blank";
 
     /**
-     * The first character of the job title must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The first character of the job title must not be a whitespace, otherwise " "
+     * (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 

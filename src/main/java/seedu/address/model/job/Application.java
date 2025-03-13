@@ -16,7 +16,7 @@ public class Application {
 
     /**
      * Constructs an Application with the specified applicant, job, and status.
-     * 
+     *
      * @param applicant The person applying for the job.
      * @param job       The job being applied for.
      * @param status    The current status of the application.
@@ -30,7 +30,7 @@ public class Application {
 
     /**
      * Returns the applicant of this application.
-     * 
+     *
      * @return The applicant.
      */
     public Person getApplicant() {
@@ -39,7 +39,7 @@ public class Application {
 
     /**
      * Returns the job of this application.
-     * 
+     *
      * @return The job.
      */
     public Job getJob() {
@@ -48,7 +48,7 @@ public class Application {
 
     /**
      * Returns the status of this application.
-     * 
+     *
      * @return The application status.
      */
     public ApplicationStatus getStatus() {
@@ -57,7 +57,7 @@ public class Application {
 
     /**
      * Returns true if this application is the same as the specified object.
-     * 
+     *
      * @param other The object to compare to.
      * @return True if the objects are equal, false otherwise.
      */
@@ -76,7 +76,7 @@ public class Application {
 
     /**
      * Returns the hash code of this application.
-     * 
+     *
      * @return The hash code.
      */
     @Override

@@ -70,6 +70,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setJobs(newData.getJobList());
     }
 
     //// person-level operations

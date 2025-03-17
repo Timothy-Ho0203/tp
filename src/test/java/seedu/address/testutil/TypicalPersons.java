@@ -20,6 +20,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.ApplicationsManager;
+import seedu.address.model.application.Application;
+import seedu.address.model.application.ApplicationStatus;
+import seedu.address.model.job.CompanyName;
+import seedu.address.model.job.Job;
+import seedu.address.model.job.JobRounds;
+import seedu.address.model.job.JobTitle;
 import seedu.address.model.person.Person;
 
 /**
@@ -71,6 +78,50 @@ public class TypicalPersons {
                         .withAddress(VALID_ADDRESS_BOB).withSchool(VALID_SCHOOL_BOB)
                         .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
+        // Typical jobs
+        public static final Job SOFTWARE_ENGINEER_GOOGLE = new Job(new JobTitle("Software Engineer"),
+                        new CompanyName("Google"), new JobRounds(5));
+
+        public static final Job DATA_SCIENTIST_MICROSOFT = new Job(new JobTitle("Data Scientist"),
+                        new CompanyName("Microsoft"), new JobRounds(4));
+
+        public static final Job PRODUCT_MANAGER_APPLE = new Job(new JobTitle("Product Manager"),
+                        new CompanyName("Apple"), new JobRounds(3));
+
+        public static final Job UX_DESIGNER_META = new Job(new JobTitle("UX Designer"), new CompanyName("Meta"),
+                        new JobRounds(3));
+
+        public static final Job DEVOPS_ENGINEER_AMAZON = new Job(new JobTitle("DevOps Engineer"),
+                        new CompanyName("Amazon"), new JobRounds(4));
+
+        public static final Job FULLSTACK_DEVELOPER_NETFLIX = new Job(new JobTitle("Full Stack Developer"),
+                        new CompanyName("Netflix"), new JobRounds(4));
+
+        // Typical applications
+        public static final Application ALICE_GOOGLE_APPLICATION = new Application(ALICE, SOFTWARE_ENGINEER_GOOGLE,
+                        new ApplicationStatus(2));
+
+        public static final Application BENSON_MICROSOFT_APPLICATION = new Application(BENSON, DATA_SCIENTIST_MICROSOFT,
+                        new ApplicationStatus(3));
+
+        public static final Application CARL_APPLE_APPLICATION = new Application(CARL, PRODUCT_MANAGER_APPLE,
+                        new ApplicationStatus(1));
+
+        public static final Application DANIEL_META_APPLICATION = new Application(DANIEL, UX_DESIGNER_META,
+                        new ApplicationStatus(2));
+
+        public static final Application ELLE_AMAZON_APPLICATION = new Application(ELLE, DEVOPS_ENGINEER_AMAZON,
+                        new ApplicationStatus(1));
+
+        public static final Application FIONA_NETFLIX_APPLICATION = new Application(FIONA, FULLSTACK_DEVELOPER_NETFLIX,
+                        new ApplicationStatus(3));
+
+        public static final Application ALICE_MICROSOFT_APPLICATION = new Application(ALICE, DATA_SCIENTIST_MICROSOFT,
+                        new ApplicationStatus(1));
+
+        public static final Application BENSON_GOOGLE_APPLICATION = new Application(BENSON, SOFTWARE_ENGINEER_GOOGLE,
+                        new ApplicationStatus(4));
+
         private TypicalPersons() {
         } // prevents instantiation
 
@@ -79,13 +130,56 @@ public class TypicalPersons {
          */
         public static AddressBook getTypicalAddressBook() {
                 AddressBook ab = new AddressBook();
+
+                // Add all typical persons
                 for (Person person : getTypicalPersons()) {
                         ab.addPerson(person);
                 }
+
+                // Add all typical jobs
+                for (Job job : getTypicalJobs()) {
+                        ab.addJob(job);
+                }
+
                 return ab;
         }
 
+        /**
+         * Returns an {@code ApplicationsManager} with all the typical applications.
+         */
+        public static ApplicationsManager getTypicalApplicationsManager() {
+                ApplicationsManager am = new ApplicationsManager();
+
+                // Add all typical applications
+                for (Application application : getTypicalApplications()) {
+                        am.addApplication(application);
+                }
+
+                return am;
+        }
+
+        /**
+         * Returns a list of typical persons.
+         */
         public static List<Person> getTypicalPersons() {
                 return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        }
+
+        /**
+         * Returns a list of typical jobs.
+         */
+        public static List<Job> getTypicalJobs() {
+                return new ArrayList<>(
+                                Arrays.asList(SOFTWARE_ENGINEER_GOOGLE, DATA_SCIENTIST_MICROSOFT, PRODUCT_MANAGER_APPLE,
+                                                UX_DESIGNER_META, DEVOPS_ENGINEER_AMAZON, FULLSTACK_DEVELOPER_NETFLIX));
+        }
+
+        /**
+         * Returns a list of typical applications.
+         */
+        public static List<Application> getTypicalApplications() {
+                return new ArrayList<>(Arrays.asList(ALICE_GOOGLE_APPLICATION, BENSON_MICROSOFT_APPLICATION,
+                                CARL_APPLE_APPLICATION, DANIEL_META_APPLICATION, ELLE_AMAZON_APPLICATION,
+                                FIONA_NETFLIX_APPLICATION, ALICE_MICROSOFT_APPLICATION, BENSON_GOOGLE_APPLICATION));
         }
 }

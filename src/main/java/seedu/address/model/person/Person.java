@@ -11,8 +11,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Person in the address book. Guarantees: details are present and
+ * not null, field values are validated, immutable.
  */
 public class Person {
 
@@ -25,20 +25,17 @@ public class Person {
     // Data fields
     private final Address address;
     private final School school;
-    private final Role role;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
-                  Role role, School school, Degree degree, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, role, school, tags);
+    public Person(Name name, Phone phone, Email email, Address address, School school, Degree degree, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, school, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.role = role;
         this.school = school;
         this.degree = degree;
         this.tags.addAll(tags);
@@ -63,70 +60,58 @@ public class Person {
     public School getSchool() {
         return school;
     }
+
     public Degree getDegree() {
         return degree;
     }
 
-    public Role getRole() {
-        return this.role;
-    }
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns an immutable tag set, which throws
+     * {@code UnsupportedOperationException} if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(this.tags);
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same name. This defines a weaker notion
+     * of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
         return otherPerson != null && otherPerson.getName().equals(this.getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both persons have the same identity and data fields. This
+     * defines a stronger notion of equality between two persons.
      */
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof Person otherPerson)) {
             return false;
         }
-        return this.name.equals(otherPerson.name)
-                && this.phone.equals(otherPerson.phone)
-                && this.email.equals(otherPerson.email)
-                && this.address.equals(otherPerson.address)
-                && this.role.equals(otherPerson.role)
-                && school.equals(otherPerson.school)
-                && degree.equals(otherPerson.degree)
+        return this.name.equals(otherPerson.name) && this.phone.equals(otherPerson.phone)
+                && this.email.equals(otherPerson.email) && this.address.equals(otherPerson.address)
+                && school.equals(otherPerson.school) && degree.equals(otherPerson.degree)
                 && this.tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, tags, school, degree);
+        return Objects.hash(name, phone, email, address, tags, school, degree);
     }
 
     /**
-     * Order the different attributes of Person to be optimally displayed in either CLI or GUI mode.
+     * Order the different attributes of Person to be optimally displayed in either
+     * CLI or GUI mode.
+     * 
      * @return String representation of Person's application data.
      */
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("role", role)
-                .add("school", school)
-                .add("degree", degree)
-                .add("tags", tags)
-                .toString();
+        return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email)
+                .add("address", address).add("school", school).add("degree", degree).add("tags", tags).toString();
     }
 
 }

@@ -6,7 +6,6 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "school": "NUS",
     "degree" : "Accounting",
-    "role": "janitor",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -14,7 +13,6 @@
     "email": "pauline@example.com",
     "address": "4th street",
     "school": "NUS",
-    "degree" : "Physics",
-    "role": "janitor"
+    "degree" : "Physics"
   } ]
 }

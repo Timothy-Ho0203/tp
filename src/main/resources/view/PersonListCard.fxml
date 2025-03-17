@@ -62,12 +62,6 @@
         <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       </HBox>
 
-      <HBox fx:id="roleBox" spacing="5" alignment="CENTER_LEFT">
-        <padding>
-          <Insets top="2" bottom="2" />
-        </padding>
-        <Label fx:id="role" styleClass="cell_small_label" text="\$email" />
-      </HBox>
       <VBox>
         <padding>
           <Insets top="5" />

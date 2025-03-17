@@ -9,7 +9,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Role;
 import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -23,7 +22,6 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_ROLE = "Janitor";
     public static final String DEFAULT_SCHOOL = "NUS";
     public static final String DEFAULT_DEGREE = "Computer Science";
 
@@ -31,7 +29,6 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Role role;
     private School school;
     private Degree degree;
     private Set<Tag> tags;
@@ -44,7 +41,6 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        role = new Role(DEFAULT_ROLE);
         school = new School(DEFAULT_SCHOOL);
         degree = new Degree(DEFAULT_DEGREE);
         tags = new HashSet<>();
@@ -58,7 +54,6 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        role = personToCopy.getRole();
         school = personToCopy.getSchool();
         degree = personToCopy.getDegree();
         tags = new HashSet<>(personToCopy.getTags());
@@ -97,17 +92,8 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Role} of the {@code Person} that we are building.
-     * @param role String associated with the Person in the contact.
-     * @return Person with the associated role.
-     */
-    public PersonBuilder withRole(String role) {
-        this.role = new Role(role);
-        return this;
-    }
-
-    /**
      * Sets the {@code School} of the {@code Person} that we are building.
+     * 
      * @param school school String associated with the Person in the contact.
      * @return Person with the associated school.
      */
@@ -125,14 +111,15 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the
+     * {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, role, school, degree, tags);
+        return new Person(name, phone, email, address, school, degree, tags);
     }
 }

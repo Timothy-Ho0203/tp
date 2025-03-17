@@ -10,17 +10,20 @@ import java.util.Objects;
 public class Job {
     private final JobTitle jobTitle;
     private final CompanyName companyName;
+    private final JobRounds jobRounds;
 
     /**
      * Constructs a Job with the specified job title and company name.
      *
      * @param jobTitle    The title of the job.
      * @param companyName The name of the company offering the job.
+     * @param jobRounds   The rounds of the job.
      */
-    public Job(JobTitle jobTitle, CompanyName companyName) {
+    public Job(JobTitle jobTitle, CompanyName companyName, JobRounds jobRounds) {
         requireAllNonNull(jobTitle, companyName);
         this.jobTitle = jobTitle;
         this.companyName = companyName;
+        this.jobRounds = jobRounds;
     }
 
     /**
@@ -42,6 +45,15 @@ public class Job {
     }
 
     /**
+     * Returns the job rounds of this job.
+     *
+     * @return The job rounds.
+     */
+    public JobRounds getJobRounds() {
+        return this.jobRounds;
+    }
+
+    /**
      * Returns true if this job is the same as the specified object.
      *
      * @param other The object to compare to.
@@ -56,7 +68,8 @@ public class Job {
             return false;
         }
         Job otherJob = (Job) other;
-        return jobTitle.equals(otherJob.jobTitle) && companyName.equals(otherJob.companyName);
+        return jobTitle.equals(otherJob.jobTitle) && companyName.equals(otherJob.companyName)
+                && jobRounds.equals(otherJob.jobRounds);
     }
 
     /**
@@ -66,6 +79,6 @@ public class Job {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(jobTitle, companyName);
+        return Objects.hash(jobTitle, companyName, jobRounds);
     }
 }

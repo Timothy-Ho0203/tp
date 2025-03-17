@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.job.CompanyName;
 import seedu.address.model.job.Job;
+import seedu.address.model.job.JobRounds;
 import seedu.address.model.job.JobTitle;
 
 /**
@@ -17,14 +18,17 @@ class JsonAdaptedJob {
 
     private final String jobTitle;
     private final String companyName;
+    private final Integer jobRounds;
 
     /**
      * Constructs a {@code JsonAdaptedJob} with the given job details.
      */
     @JsonCreator
-    public JsonAdaptedJob(@JsonProperty("jobTitle") String jobTitle, @JsonProperty("companyName") String companyName) {
+    public JsonAdaptedJob(@JsonProperty("jobTitle") String jobTitle, @JsonProperty("companyName") String companyName,
+            @JsonProperty("jobRounds") Integer jobRounds) {
         this.jobTitle = jobTitle;
         this.companyName = companyName;
+        this.jobRounds = jobRounds;
     }
 
     /**
@@ -33,6 +37,7 @@ class JsonAdaptedJob {
     public JsonAdaptedJob(Job source) {
         jobTitle = source.getJobTitle().jobTitle;
         companyName = source.getCompanyName().companyName;
+        jobRounds = source.getJobRounds().jobRounds;
     }
 
     /**
@@ -62,7 +67,16 @@ class JsonAdaptedJob {
         }
         final CompanyName modelCompanyName = new CompanyName(companyName);
 
-        return new Job(modelJobTitle, modelCompanyName);
+        if (jobRounds == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, JobRounds.class.getSimpleName()));
+        }
+        if (!JobRounds.isValidJobRounds(jobRounds)) {
+            throw new IllegalValueException(JobRounds.MESSAGE_CONSTRAINTS);
+        }
+        final JobRounds modelJobRounds = new JobRounds(jobRounds);
+
+        return new Job(modelJobTitle, modelCompanyName, modelJobRounds);
     }
 
 }

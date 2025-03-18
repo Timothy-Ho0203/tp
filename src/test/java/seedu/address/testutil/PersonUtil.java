@@ -38,9 +38,9 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName() + " ") // Implicit accessor for Java
-                                                                                         // records
-        );
+
+        // Implicit accessor for Java records
+        person.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName() + " "));
         return sb.toString();
     }
 

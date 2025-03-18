@@ -93,7 +93,7 @@ public class PersonBuilder {
 
     /**
      * Sets the {@code School} of the {@code Person} that we are building.
-     * 
+     *
      * @param school school String associated with the Person in the contact.
      * @return Person with the associated school.
      */

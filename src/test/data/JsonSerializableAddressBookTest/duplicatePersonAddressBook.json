@@ -14,5 +14,10 @@
     "address": "4th street",
     "school": "NUS",
     "degree" : "Physics"
+  } ],
+  "jobs": [ {
+    "jobTitle": "Software Engineer",
+    "companyName": "Google",
+    "jobRounds": 4
   } ]
 }

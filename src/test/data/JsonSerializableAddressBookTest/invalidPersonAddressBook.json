@@ -4,7 +4,11 @@
     "phone": "9482424",
     "email": "invalid@email!3e",
     "address": "4th street",
-    "role": "janitor",
     "school": "Test school"
+  } ],
+  "jobs": [ {
+    "jobTitle": "Software Engineer",
+    "companyName": "Google",
+    "jobRounds": 4
   } ]
 }

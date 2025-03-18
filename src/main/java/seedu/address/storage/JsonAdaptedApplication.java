@@ -7,6 +7,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationStatus;
 
+/**
+ * Jackson-friendly version of {@link Application}.
+ */
 public class JsonAdaptedApplication {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Application's %s field is missing!";
 

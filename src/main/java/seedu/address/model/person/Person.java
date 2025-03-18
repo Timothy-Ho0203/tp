@@ -105,7 +105,7 @@ public class Person {
     /**
      * Order the different attributes of Person to be optimally displayed in either
      * CLI or GUI mode.
-     * 
+     *
      * @return String representation of Person's application data.
      */
     @Override

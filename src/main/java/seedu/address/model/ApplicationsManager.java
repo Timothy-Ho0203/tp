@@ -109,7 +109,7 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
     /**
      * Updates all applications involving {@code person} after the person has been
      * modified.
-     * 
+     *
      * @param oldPerson The person before modification
      * @param newPerson The person after modification
      */
@@ -127,7 +127,7 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
     /**
      * Updates all applications involving {@code job} after the job has been
      * modified.
-     * 
+     *
      * @param oldJob The job before modification
      * @param newJob The job after modification
      */
@@ -149,7 +149,7 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
 
     /**
      * Removes all applications associated with the given person.
-     * 
+     *
      * @param person The person whose applications should be removed
      */
     public void removePersonApplications(Person person) {
@@ -162,7 +162,7 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
 
     /**
      * Removes all applications associated with the given job.
-     * 
+     *
      * @param job The job whose applications should be removed
      */
     public void removeJobApplications(Job job) {
@@ -175,7 +175,7 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
 
     /**
      * Gets all applications associated with a specific person.
-     * 
+     *
      * @param person The person whose applications to retrieve
      * @return A list of applications associated with the person
      */
@@ -188,7 +188,7 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
 
     /**
      * Gets all applications associated with a specific job.
-     * 
+     *
      * @param job The job whose applications to retrieve
      * @return A list of applications associated with the job
      */
@@ -201,7 +201,7 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
 
     /**
      * Advances an application by the specified number of rounds.
-     * 
+     *
      * @param application The application to advance
      * @param rounds      The number of rounds to advance by
      * @return The updated application

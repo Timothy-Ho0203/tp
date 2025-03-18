@@ -101,7 +101,7 @@ public interface Model {
     /**
      * Updates the filter of the filtered person list to filter by the given
      * {@code predicate}.
-     * 
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
@@ -135,7 +135,7 @@ public interface Model {
     /**
      * Updates the filter of the filtered job list to filter by the given
      * {@code predicate}.
-     * 
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredJobList(Predicate<Job> predicate);
@@ -182,7 +182,7 @@ public interface Model {
 
     /**
      * Advances the given application by the specified number of rounds.
-     * 
+     *
      * @return The updated application
      */
     Application advanceApplication(Application application, int rounds);
@@ -193,7 +193,7 @@ public interface Model {
     /**
      * Updates the filter of the filtered application list to filter by the given
      * {@code predicate}.
-     * 
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicationList(Predicate<Application> predicate);

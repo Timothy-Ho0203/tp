@@ -31,7 +31,7 @@ public interface ApplicationsManagerStorage {
 
     /**
      * Saves the given {@link ReadOnlyApplicationsManager} to the storage.
-     * 
+     *
      * @param applicationsManager cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */

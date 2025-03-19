@@ -103,10 +103,9 @@ public class Application {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof Application)) {
+        if (!(other instanceof Application otherApplication)) {
             return false;
         }
-        Application otherApplication = (Application) other;
         return applicant.equals(otherApplication.applicant) && job.equals(otherApplication.job)
                 && applicationStatus.equals(otherApplication.applicationStatus);
     }
@@ -128,7 +127,10 @@ public class Application {
      */
     @Override
     public String toString() {
-        return String.format("Application: %s at %s (Status: %d/%d)", job.getJobTitle(), job.getCompanyName(),
-                applicationStatus.applicationStatus, job.getJobRounds().jobRounds);
+        return String.format("Application: %s at %s (Status: %d/%d)",
+                job.getJobTitle(),
+                job.getCompanyName(),
+                applicationStatus.applicationStatus,
+                job.getJobRounds().jobRounds);
     }
 }

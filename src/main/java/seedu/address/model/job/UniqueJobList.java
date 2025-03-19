@@ -15,20 +15,18 @@ import seedu.address.model.job.exceptions.JobNotFoundException;
  * A list of jobs that enforces uniqueness between its elements and does not
  * allow nulls. A job is considered unique by comparing using
  * {@code Job#equals(Object)}.
- *
  * Supports a minimal set of list operations.
  */
 public class UniqueJobList implements Iterable<Job> {
 
     private final ObservableList<Job> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Job> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent job as the given argument.
      */
     public boolean contains(Job toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return this.internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
@@ -39,7 +37,7 @@ public class UniqueJobList implements Iterable<Job> {
         if (contains(toAdd)) {
             throw new DuplicateJobException();
         }
-        internalList.add(toAdd);
+        this.internalList.add(toAdd);
     }
 
     /**
@@ -50,7 +48,7 @@ public class UniqueJobList implements Iterable<Job> {
     public void setJob(Job target, Job editedJob) {
         requireAllNonNull(target, editedJob);
 
-        int index = internalList.indexOf(target);
+        int index = this.internalList.indexOf(target);
         if (index == -1) {
             throw new JobNotFoundException();
         }
@@ -59,7 +57,7 @@ public class UniqueJobList implements Iterable<Job> {
             throw new DuplicateJobException();
         }
 
-        internalList.set(index, editedJob);
+        this.internalList.set(index, editedJob);
     }
 
     /**
@@ -67,14 +65,14 @@ public class UniqueJobList implements Iterable<Job> {
      */
     public void remove(Job toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        if (!this.internalList.remove(toRemove)) {
             throw new JobNotFoundException();
         }
     }
 
     public void setJobs(UniqueJobList replacement) {
         requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+        this.internalList.setAll(replacement.internalList);
     }
 
     /**
@@ -83,23 +81,22 @@ public class UniqueJobList implements Iterable<Job> {
      */
     public void setJobs(List<Job> jobs) {
         requireAllNonNull(jobs);
-        if (!jobsAreUnique(jobs)) {
+        if (!areJobsUnique(jobs)) {
             throw new DuplicateJobException();
         }
-
-        internalList.setAll(jobs);
+        this.internalList.setAll(jobs);
     }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Job> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
+        return FXCollections.unmodifiableObservableList(this.internalList);
     }
 
     @Override
     public Iterator<Job> iterator() {
-        return internalList.iterator();
+        return this.internalList.iterator();
     }
 
     @Override
@@ -109,17 +106,15 @@ public class UniqueJobList implements Iterable<Job> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniqueJobList)) {
+        if (!(other instanceof UniqueJobList otherUniqueJobList)) {
             return false;
         }
-
-        UniqueJobList otherUniqueJobList = (UniqueJobList) other;
-        return internalList.equals(otherUniqueJobList.internalList);
+        return this.internalList.equals(otherUniqueJobList.internalList);
     }
 
     @Override
     public int hashCode() {
-        return internalList.hashCode();
+        return this.internalList.hashCode();
     }
 
     @Override
@@ -130,7 +125,7 @@ public class UniqueJobList implements Iterable<Job> {
     /**
      * Returns true if {@code jobs} contains only unique jobs.
      */
-    private boolean jobsAreUnique(List<Job> jobs) {
+    private boolean areJobsUnique(List<Job> jobs) {
         for (int i = 0; i < jobs.size() - 1; i++) {
             for (int j = i + 1; j < jobs.size(); j++) {
                 if (jobs.get(i).equals(jobs.get(j))) {

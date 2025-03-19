@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROUNDS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.job.Job;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROUNDS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 
 /**
  * Deletes a Job from the address book.

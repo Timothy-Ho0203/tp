@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROUNDS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 
 import java.util.stream.Stream;
 
@@ -27,8 +29,8 @@ public class AddJobCommandParser implements Parser<AddJobCommand> {
     public AddJobCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_JOB_TITLE, PREFIX_COMPANY_NAME,
                 PREFIX_JOB_ROUNDS);
-        if (!arePrefixesPresent(argMultimap, PREFIX_JOB_TITLE, PREFIX_COMPANY_NAME, PREFIX_JOB_ROUNDS) ||
-                !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_JOB_TITLE, PREFIX_COMPANY_NAME, PREFIX_JOB_ROUNDS)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 

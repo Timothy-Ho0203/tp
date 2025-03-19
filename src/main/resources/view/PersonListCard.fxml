@@ -39,7 +39,6 @@
         <Label fx:id="degree" styleClass="cell_small_label" text="\$degree" wrapText="true"/>
         <Label fx:id="school" styleClass="cell_small_label" text="\$school" wrapText="true"/>
       </HBox>
-      <FlowPane fx:id="tags" />
 
       <HBox fx:id="phoneBox" spacing="5" alignment="CENTER_LEFT">
         <padding>

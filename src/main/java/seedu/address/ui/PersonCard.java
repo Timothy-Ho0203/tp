@@ -2,14 +2,15 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 import java.util.List;
+
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
 import seedu.address.model.application.Application;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.util.IconUtil;
 
@@ -118,7 +119,7 @@ public class PersonCard extends UiPart<Region> {
                 String jobTitle = app.getJob().getJobTitle().jobTitle;
                 int currentRound = app.getApplicationStatus().applicationStatus;
                 int maxRound = app.getJob().getJobRounds().jobRounds;
-                String displayText = jobTitle + "\nRound: " + currentRound + "/" + maxRound ;
+                String displayText = jobTitle + "\nRound: " + currentRound + "/" + maxRound;
                 apps.getChildren().add(new Label(displayText));
             });
     }

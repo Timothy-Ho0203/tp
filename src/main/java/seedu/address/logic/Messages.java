@@ -48,7 +48,7 @@ public class Messages {
      */
     public static String format(Job job) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(job.getJobTitle()).append("; Company: ").append(job.getCompanyName())
+        builder.append(job.getJobTitle()).append("; Company: ").append(job.getJobCompany())
                 .append("; Number of rounds: ").append(job.getJobRounds());
         return builder.toString();
     }

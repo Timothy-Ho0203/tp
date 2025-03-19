@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents the company name in a {@Code Job}.
  */
-public record JobCompany(String companyName) {
+public record JobCompany(String jobCompany) {
     public static final String MESSAGE_CONSTRAINTS = "Company name should only contain alphanumeric characters and"
             + "spaces, and it should not be blank";
 
@@ -19,11 +19,11 @@ public record JobCompany(String companyName) {
     /**
      * Constructs a {@code JobCompany}.
      *
-     * @param companyName A valid company name.
+     * @param jobCompany A valid company name.
      */
     public JobCompany {
-        requireNonNull(companyName);
-        checkArgument(isValidCompanyName(companyName), MESSAGE_CONSTRAINTS);
+        requireNonNull(jobCompany);
+        checkArgument(isValidJobCompany(jobCompany), MESSAGE_CONSTRAINTS);
     }
 
     /**
@@ -32,7 +32,7 @@ public record JobCompany(String companyName) {
      * @param test The string to validate.
      * @return True if the given string is a valid company name.
      */
-    public static boolean isValidCompanyName(String test) {
+    public static boolean isValidJobCompany(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -43,7 +43,7 @@ public record JobCompany(String companyName) {
      */
     @Override
     public String toString() {
-        return this.companyName;
+        return this.jobCompany;
     }
 
     /**
@@ -60,7 +60,7 @@ public record JobCompany(String companyName) {
         if (!(other instanceof JobCompany otherJobCompany)) {
             return false;
         }
-        return this.companyName.equals(otherJobCompany.companyName);
+        return this.jobCompany.equals(otherJobCompany.jobCompany);
     }
 
 }

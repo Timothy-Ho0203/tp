@@ -21,7 +21,7 @@ class JsonAdaptedJob {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Job's %s field is missing!";
 
     private final String jobTitle;
-    private final String companyName;
+    private final String jobCompany;
     private final Integer jobRounds;
     private final ObservableList<String> jobSkills;
     private final String jobAddress;
@@ -32,13 +32,13 @@ class JsonAdaptedJob {
      */
     @JsonCreator
     public JsonAdaptedJob(@JsonProperty("jobTitle") String jobTitle,
-                          @JsonProperty("companyName") String companyName,
+                          @JsonProperty("jobCompany") String jobCompany,
                           @JsonProperty("jobRounds") Integer jobRounds,
                           @JsonProperty("jobSkills") ObservableList<String> jobSkills,
                           @JsonProperty("jobAddress") String jobAddress,
                           @JsonProperty("jobType") String jobType) {
         this.jobTitle = jobTitle;
-        this.companyName = companyName;
+        this.jobCompany = jobCompany;
         this.jobRounds = jobRounds;
         this.jobSkills = jobSkills;
         this.jobAddress = jobAddress;
@@ -50,7 +50,7 @@ class JsonAdaptedJob {
      */
     public JsonAdaptedJob(Job source) {
         this.jobTitle = source.getJobTitle().jobTitle(); // JobTitle record class has implicit accessor.
-        this.companyName = source.getCompanyName().companyName(); // JobCompany record class has implicit accessor.
+        this.jobCompany = source.getJobCompany().jobCompany(); // JobCompany record class has implicit accessor.
         this.jobRounds = source.getJobRounds().jobRounds;
         this.jobSkills = source.getJobSkills().value;
         this.jobAddress = source.getJobAddress().value;
@@ -74,14 +74,14 @@ class JsonAdaptedJob {
         }
         final JobTitle modelJobTitle = new JobTitle(this.jobTitle);
         // Check valid job company name below.
-        if (this.companyName == null) {
+        if (this.jobCompany == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, JobCompany.class.getSimpleName()));
         }
-        if (!JobCompany.isValidCompanyName(this.companyName)) {
+        if (!JobCompany.isValidJobCompany(this.jobCompany)) {
             throw new IllegalValueException(JobCompany.MESSAGE_CONSTRAINTS);
         }
-        final JobCompany modelJobCompany = new JobCompany(this.companyName);
+        final JobCompany modelJobCompany = new JobCompany(this.jobCompany);
         // Check valid max job rounds below.
         if (this.jobRounds == null) {
             throw new IllegalValueException(

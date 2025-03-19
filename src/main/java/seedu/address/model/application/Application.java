@@ -2,8 +2,6 @@ package seedu.address.model.application;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Objects;
-
 import seedu.address.model.application.exceptions.InvalidApplicationStatusException;
 import seedu.address.model.job.Job;
 import seedu.address.model.person.Person;
@@ -11,12 +9,8 @@ import seedu.address.model.person.Person;
 /**
  * Represents a job application with an applicant, job, and status.
  */
-public class Application {
+public record Application(Person applicant, Job job, ApplicationStatus applicationStatus) {
     public static final String EXCEED_ROUNDS_MESSAGE = "Application status cannot exceed the number of job rounds";
-
-    private final Person applicant;
-    private final Job job;
-    private final ApplicationStatus applicationStatus;
 
     /**
      * Constructs an Application with the specified applicant, job, and status.
@@ -26,7 +20,7 @@ public class Application {
      * @param applicationStatus The current status of the application.
      * @throws InvalidApplicationStatusException if status exceeds job rounds.
      */
-    public Application(Person applicant, Job job, ApplicationStatus applicationStatus) {
+    public Application {
         requireAllNonNull(applicant, job, applicationStatus);
 
         // Validate status against job rounds
@@ -34,9 +28,6 @@ public class Application {
             throw new InvalidApplicationStatusException();
         }
 
-        this.applicant = applicant;
-        this.job = job;
-        this.applicationStatus = applicationStatus;
     }
 
     /**
@@ -44,7 +35,8 @@ public class Application {
      *
      * @return The applicant.
      */
-    public Person getApplicant() {
+    @Override
+    public Person applicant() {
         return this.applicant;
     }
 
@@ -53,7 +45,8 @@ public class Application {
      *
      * @return The job.
      */
-    public Job getJob() {
+    @Override
+    public Job job() {
         return this.job;
     }
 
@@ -62,7 +55,8 @@ public class Application {
      *
      * @return The application status.
      */
-    public ApplicationStatus getApplicationStatus() {
+    @Override
+    public ApplicationStatus applicationStatus() {
         return this.applicationStatus;
     }
 
@@ -111,16 +105,6 @@ public class Application {
     }
 
     /**
-     * Returns the hash code of this application.
-     *
-     * @return The hash code.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(applicant, job, applicationStatus);
-    }
-
-    /**
      * Returns a string representation of the application.
      *
      * @return A string representation.
@@ -129,7 +113,7 @@ public class Application {
     public String toString() {
         return String.format("Application: %s at %s (Status: %d/%d)",
                 job.getJobTitle(),
-                job.getCompanyName(),
+                job.getJobCompany(),
                 applicationStatus.applicationStatus,
                 job.getJobRounds().jobRounds);
     }

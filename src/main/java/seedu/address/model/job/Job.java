@@ -50,7 +50,7 @@ public class Job {
      *
      * @return The company name.
      */
-    public JobCompany getCompanyName() {
+    public JobCompany getJobCompany() {
         return this.jobCompany;
     }
 

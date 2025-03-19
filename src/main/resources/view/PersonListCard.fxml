@@ -77,7 +77,6 @@
           </padding>
         </FlowPane>
       </VBox>
-      
       <VBox>
         <padding>
           <Insets top="5" />

@@ -33,8 +33,10 @@ public class MainWindow extends UiPart<Stage> {
     private Model model;
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private JobListPanel jobListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private boolean isJobView = false;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -50,6 +52,11 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane jobListPanelPlaceholder;
+
+
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -112,8 +119,17 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this.model);
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        if (isJobView) {
+            jobListPanel = new JobListPanel(logic.getFilteredJobList());
+            jobListPanelPlaceholder.getChildren().add(jobListPanel.getRoot());
+            personListPanelPlaceholder.setVisible(false);
+            jobListPanelPlaceholder.setVisible(true);
+        } else {
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this.model);
+            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            jobListPanelPlaceholder.setVisible(false);
+            personListPanelPlaceholder.setVisible(true);
+        }
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -165,8 +181,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    public void toggleJobView() {
+        this.isJobView = !this.isJobView;
+        personListPanelPlaceholder.getChildren().clear();
+        jobListPanelPlaceholder.getChildren().clear();
+        fillInnerParts();
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public JobListPanel getJobListPanel() {
+        return jobListPanel;
     }
 
     /**
@@ -186,6 +213,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.setToggleView()) {
+                toggleJobView();
             }
 
             return commandResult;

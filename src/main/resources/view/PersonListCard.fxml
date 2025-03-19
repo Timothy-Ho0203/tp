@@ -78,6 +78,23 @@
           </padding>
         </FlowPane>
       </VBox>
+      
+      <VBox>
+        <padding>
+          <Insets top="5" />
+        </padding>
+        <HBox fx:id="applicationsBox" spacing="5" alignment="CENTER_LEFT">
+          <padding>
+            <Insets top="2" bottom="2" />
+          </padding>
+          <Label text="Applications:" styleClass="cell_small_label" style="-fx-font-weight: bold;" />
+        </HBox>
+        <FlowPane fx:id="apps">
+          <padding>
+            <Insets left="25.0" top="2" />
+          </padding>
+        </FlowPane>
+      </VBox>
     </VBox>
   </GridPane>
 </HBox>

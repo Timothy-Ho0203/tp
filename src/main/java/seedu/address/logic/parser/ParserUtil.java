@@ -9,6 +9,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.job.CompanyName;
+import seedu.address.model.job.JobRounds;
+import seedu.address.model.job.JobTitle;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Degree;
 import seedu.address.model.person.Email;
@@ -23,7 +26,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String jobRounds = "Index is not a non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
@@ -35,7 +38,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(jobRounds);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -120,6 +123,50 @@ public class ParserUtil {
         requireNonNull(degree);
         String trimmedDegree = degree.trim(); // School yet has format constraints.
         return new Degree(trimmedDegree);
+    }
+
+    /**
+     * @param jobTitle Raw jobTitle by user.
+     * @return trimmed remark without leading and trailing whitespaces for more
+     *         efficient processing.
+     * @throws ParseException if the given {@code jobTitle} is invalid.
+     */
+    public static JobTitle parseJobTitle(String jobTitle) throws ParseException {
+        requireNonNull(jobTitle);
+        String trimmedTitle = jobTitle.trim();
+        if (!JobTitle.isValidJobTitle(trimmedTitle)) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+        return new JobTitle(trimmedTitle);
+    }
+
+    /**
+     * @param compName Raw CompanyName by user.
+     * @return trimmed remark without leading and trailing whitespaces for more
+     *         efficient processing.
+     * @throws ParseException if the given {@code CompanyName} is invalid.
+     */
+    public static CompanyName parseCompanyName(String compName) throws ParseException {
+        requireNonNull(compName);
+        String trimmedCompName = compName.trim();
+        if (!CompanyName.isValidCompanyName(compName)) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+        return new CompanyName(trimmedCompName);
+    }
+
+    /**
+     * @param jobRounds Raw jobRounds by user.
+     * @return trimmed remark without leading and trailing whitespaces for more
+     *         efficient processing.
+     * @throws ParseException if the given {@code jobRounds} is invalid.
+     */
+    public static JobRounds parseJobRounds(String jobRounds) throws ParseException {
+        String trimmedCompName = jobRounds.trim();
+        if (!JobRounds.isValidJobRounds(jobRounds)) {
+            throw new ParseException(JobRounds.MESSAGE_CONSTRAINTS);
+        }
+        return new JobRounds(trimmedCompName);
     }
 
     /**

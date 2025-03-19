@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents the status of a job application. The status represents which round
  * has been completed up to.
  */
-public class ApplicationStatus {
+public class ApplicationStatus implements Comparable<ApplicationStatus> {
     public static final String MESSAGE_CONSTRAINTS = "Application status should be a non-negative integer";
 
     /**
@@ -95,5 +95,10 @@ public class ApplicationStatus {
     @Override
     public int hashCode() {
         return Integer.hashCode(applicationStatus);
+    }
+
+    @Override
+    public int compareTo(ApplicationStatus other) {
+        return Integer.compare(this.applicationStatus, other.applicationStatus);
     }
 }

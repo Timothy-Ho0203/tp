@@ -65,7 +65,6 @@ jobs:
           --add-opens=javafx.graphics/com.sun.glass.utils=ALL-UNNAMED \
           --add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED \
           --add-opens=javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED"
-          
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'
         uses: codecov/codecov-action@v4

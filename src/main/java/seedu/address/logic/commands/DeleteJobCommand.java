@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_COMPANY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROUNDS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 
+import java.util.List;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,31 +17,37 @@ import seedu.address.model.job.Job;
 public class DeleteJobCommand extends Command {
     public static final String COMMAND_WORD = "deletejob";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the specified Job.\n"
-            + "Parameters: " + PREFIX_JOB_TITLE + "JOB TITLE " + PREFIX_JOB_COMPANY + "COMPANY'S NAME"
-            + PREFIX_JOB_ROUNDS + "NUMBER OF ROUNDS OF INTERVIEWS " + "Example: " + COMMAND_WORD
-            + "jt/Software Engineering cn/TikTok jr/3";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the job identified by the index number used in the displayed job list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_JOB_SUCESS = "Deleted Job: %1$s";
 
     public static final String MESSAGE_INVALID_JOB = "This Job does not exist in the address book";
+    private final Index targetIndex;
 
-    private final Job toDelete;
-
-    public DeleteJobCommand(Job toDelete) {
-        this.toDelete = toDelete;
+    public DeleteJobCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Job> lastShownList = model.getFilteredJobList();
 
-        if (!model.hasJob(toDelete)) {
+        if (this.targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
+        }
+
+        Job jobToDelete = lastShownList.get(this.targetIndex.getZeroBased());
+
+        if (!model.hasJob(jobToDelete)) {
             throw new CommandException(MESSAGE_INVALID_JOB);
         }
 
-        model.deleteJob(toDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_JOB_SUCESS, Messages.format(toDelete)));
+        model.deleteJob(jobToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_JOB_SUCESS, Messages.format(jobToDelete)));
     }
 
     @Override
@@ -49,13 +55,13 @@ public class DeleteJobCommand extends Command {
         if (!(other instanceof DeleteJobCommand otherDeleteJobCommand)) {
             return false;
         }
-        return this.toDelete.equals(otherDeleteJobCommand.toDelete);
+        return this.targetIndex.equals(otherDeleteJobCommand.targetIndex);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Job: ", this.toDelete)
+                .add("Job: ", this.targetIndex)
                 .toString();
     }
 

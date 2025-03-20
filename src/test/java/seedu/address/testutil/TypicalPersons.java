@@ -25,12 +25,6 @@ import seedu.address.model.ApplicationsManager;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationStatus;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.JobAddress;
-import seedu.address.model.job.JobCompany;
-import seedu.address.model.job.JobRounds;
-import seedu.address.model.job.JobSkills;
-import seedu.address.model.job.JobTitle;
-import seedu.address.model.job.JobType;
 import seedu.address.model.person.Person;
 
 /**
@@ -113,47 +107,53 @@ public class TypicalPersons {
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
-    public static final Job SOFTWARE_ENGINEER_GOOGLE = new Job(new JobTitle("Software Engineer"),
-            new JobCompany("Google"),
-            new JobRounds(5),
-            new JobSkills(FXCollections.observableArrayList("Java", "Spring Boot", "Microservices")),
-            new JobAddress("70 Pasir Panjang Rd, Singapore 117371"),
-            JobType.fromDisplayType("Intern"));
+    public static final Job SOFTWARE_ENGINEER_GOOGLE = new JobBuilder().withJobTitle("Software Engineer")
+            .withJobCompany("Google")
+            .withJobRounds(5)
+            .withJobSkills(FXCollections.observableArrayList("Java", "Spring Boot", "Microservices"))
+            .withJobAddress("70 Pasir Panjang Rd, Singapore 117371")
+            .withJobType("Intern")
+            .build();
 
-    public static final Job DATA_SCIENTIST_MICROSOFT = new Job(new JobTitle("Data Scientist"),
-            new JobCompany("Microsoft"),
-            new JobRounds(4),
-            new JobSkills(FXCollections.observableArrayList("Python", "ML", "TensorFlow")),
-            new JobAddress("1 Marina Boulevard, #22-01, Singapore 018989"),
-            JobType.fromDisplayType("Full Time"));
+    public static final Job DATA_SCIENTIST_MICROSOFT = new JobBuilder().withJobTitle("Data Scientist")
+            .withJobCompany("Microsoft")
+            .withJobRounds(4)
+            .withJobSkills(FXCollections.observableArrayList("Python", "ML", "TensorFlow"))
+            .withJobAddress("1 Marina Boulevard, #22-01, Singapore 018989")
+            .withJobType("Full Time")
+            .build();
 
-    public static final Job PRODUCT_MANAGER_APPLE = new Job(new JobTitle("Product Manager"),
-            new JobCompany("Apple"),
-            new JobRounds(3),
-            new JobSkills(FXCollections.observableArrayList("Agile", "Roadmap Planning")),
-            new JobAddress("7 Ang Mo Kio Street 64, Singapore 569086"),
-            JobType.fromDisplayType("Contract"));
+    public static final Job PRODUCT_MANAGER_APPLE = new JobBuilder().withJobTitle("Product Manager")
+            .withJobCompany("Apple")
+            .withJobRounds(3)
+            .withJobSkills(FXCollections.observableArrayList("Agile", "Roadmap Planning"))
+            .withJobAddress("7 Ang Mo Kio Street 64, Singapore 569086")
+            .withJobType("Contract")
+            .build();
 
-    public static final Job UX_DESIGNER_META = new Job(new JobTitle("UX Designer"),
-            new JobCompany("Meta"),
-            new JobRounds(3),
-            new JobSkills(FXCollections.observableArrayList("Figma", "User Research", "Wire Framing")),
-            new JobAddress("9 Straits View, Marina One, Singapore 018937"),
-            JobType.fromDisplayType("Freelance"));
+    public static final Job UX_DESIGNER_META = new JobBuilder().withJobTitle("UX Designer")
+            .withJobCompany("Meta")
+            .withJobRounds(3)
+            .withJobSkills(FXCollections.observableArrayList("Figma", "User Research", "Wire Framing"))
+            .withJobAddress("9 Straits View, Marina One, Singapore 018937")
+            .withJobType("Freelance")
+            .build();
 
-    public static final Job DEVOPS_ENGINEER_AMAZON = new Job(new JobTitle("DevOps Engineer"),
-            new JobCompany("Amazon"),
-            new JobRounds(4),
-            new JobSkills(FXCollections.observableArrayList("AWS", "Kubernetes", "CI/CD")),
-            new JobAddress("23 Church Street, Capital Square, Singapore 049481"),
-            JobType.fromDisplayType("Part Time"));
+    public static final Job DEVOPS_ENGINEER_AMAZON = new JobBuilder().withJobTitle("DevOps Engineer")
+            .withJobCompany("Amazon")
+            .withJobRounds(4)
+            .withJobSkills(FXCollections.observableArrayList("AWS", "Kubernetes", "CI/CD"))
+            .withJobAddress("23 Church Street, Capital Square, Singapore 049481")
+            .withJobType("Part Time")
+            .build();
 
-    public static final Job FULLSTACK_DEVELOPER_NETFLIX = new Job(new JobTitle("Full Stack Developer"),
-            new JobCompany("Netflix"),
-            new JobRounds(4),
-            new JobSkills(FXCollections.observableArrayList("React", "Node.js", "MongoDB")),
-            new JobAddress("1 Fusionopolis Place, Galaxis, Singapore 138522"),
-            JobType.fromDisplayType("Full Time"));
+    public static final Job FULLSTACK_DEVELOPER_NETFLIX = new JobBuilder().withJobTitle("Full Stack Developer")
+            .withJobCompany("Netflix")
+            .withJobRounds(4)
+            .withJobSkills(FXCollections.observableArrayList("React", "Node.js", "MongoDB"))
+            .withJobAddress("1 Fusionopolis Place, Galaxis, Singapore 138522")
+            .withJobType("Full Time")
+            .build();
 
     // Typical applications
     public static final Application ALICE_GOOGLE_APPLICATION = new Application(ALICE, // Person

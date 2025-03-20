@@ -34,7 +34,7 @@ public class AddJobCommandParser implements Parser<AddJobCommand> {
      */
     public AddJobCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_JOB_TITLE, PREFIX_JOB_COMPANY,
-                PREFIX_JOB_ROUNDS);
+                PREFIX_JOB_ROUNDS, PREFIX_JOB_SKILLS, PREFIX_JOB_ADDRESS, PREFIX_EMPLOYMENT_TYPE);
         if (!arePrefixesPresent(argMultimap, PREFIX_JOB_TITLE, PREFIX_JOB_COMPANY, PREFIX_JOB_ROUNDS)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

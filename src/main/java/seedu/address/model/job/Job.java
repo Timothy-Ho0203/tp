@@ -91,6 +91,15 @@ public class Job {
     }
 
     /**
+     * Returns true if both jobs have the same title and company. This defines a weaker notion
+     * of equality between two jobs.
+     */
+    public boolean isSameJob(Job otherJob) {
+        return otherJob != null && otherJob.getJobTitle().equals(this.jobTitle)
+                && otherJob.getJobCompany().equals(this.jobCompany);
+    }
+
+    /**
      * Returns true if this job is the same as the specified object.
      *
      * @param other The object to compare to.

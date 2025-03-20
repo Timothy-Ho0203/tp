@@ -20,9 +20,7 @@
       </padding>
       <!-- Title and ID -->
       <HBox fx:id="jobTitleBox" alignment="CENTER_LEFT" spacing="5">
-        <Label fx:id="id" styleClass="cell_big_label" text="1">
-          <!-- Removed the problematic Region structure -->
-        </Label>
+        <Label fx:id="id" styleClass="cell_big_label" text="1" />
         <Label fx:id="jobTitle" styleClass="cell_big_label" text="\$jobTitle" wrapText="true" />
       </HBox>
       <!-- Company -->
@@ -32,6 +30,14 @@
       <!-- Job Rounds -->
       <HBox fx:id="jobRoundsBox" alignment="CENTER_LEFT" spacing="5">
         <Label fx:id="jobRounds" styleClass="cell_small_label" text="\$jobRounds" />
+      </HBox>
+      <!-- Applications -->
+      <HBox fx:id="applicationsBox" alignment="CENTER_LEFT" spacing="5">
+        <Label fx:id="applications" styleClass="cell_small_label" text="\$applications" />
+      </HBox>
+      <!-- Applicants Preview - Changed to HBox -->
+      <HBox fx:id="applicantsPreview" styleClass="applicants-preview">
+        <!-- MiniPersonCards will be added here dynamically -->
       </HBox>
     </VBox>
     <padding>

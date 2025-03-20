@@ -121,7 +121,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         if (isJobView) {
             jobListPanel = new JobListPanel(logic.getFilteredJobList());
-            jobListPanelPlaceholder.getChildren().add(jobListPanel.getRoot());            
+            jobListPanelPlaceholder.getChildren().add(jobListPanel.getRoot());
             // Hide person list completely
             personListPanelPlaceholder.setVisible(false);
             personListPanelPlaceholder.setManaged(false);
@@ -189,6 +189,9 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Toggles the view between person and job.
+     */
     public void toggleJobView() {
         this.isJobView = !this.isJobView;
         personListPanelPlaceholder.getChildren().clear();

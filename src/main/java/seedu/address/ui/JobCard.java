@@ -1,15 +1,10 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-import java.util.List;
-
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.application.Application;
 import seedu.address.model.job.Job;
 import seedu.address.ui.util.IconUtil;
 

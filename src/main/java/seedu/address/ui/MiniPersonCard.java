@@ -33,4 +33,4 @@ public class MiniPersonCard extends UiPart<Region> {
                     skills.getChildren().add(skillLabel);
                 });
     }
-} 
+}

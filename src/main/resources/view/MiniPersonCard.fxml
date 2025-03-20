@@ -15,4 +15,4 @@
         <Label fx:id="school" styleClass="mini-cell-school-label" text="\$school" />
         <FlowPane fx:id="skills" styleClass="mini-skills-pane" />
     </VBox>
-</HBox> 
+</HBox>

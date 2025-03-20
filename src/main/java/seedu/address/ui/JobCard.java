@@ -71,7 +71,6 @@ public class JobCard extends UiPart<Region> {
                     .limit(3)
                     .map(application -> new MiniPersonCard(application.applicant()))
                     .forEach(miniCard -> applicantsPreview.getChildren().add(miniCard.getRoot()));
-            
             if (applications.size() > 3) {
                 Label moreLabel = new Label("+" + (applications.size() - 3) + " more");
                 moreLabel.getStyleClass().add("more-applications-label");

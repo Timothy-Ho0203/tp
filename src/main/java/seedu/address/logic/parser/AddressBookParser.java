@@ -15,6 +15,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteJobCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditJobCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -66,6 +67,7 @@ public class AddressBookParser {
         case AddJobCommand.COMMAND_WORD -> new AddJobCommandParser().parse(arguments);
         case DeleteJobCommand.COMMAND_WORD -> new DeleteJobCommandParser().parse(arguments);
         case SwitchViewCommand.COMMAND_WORD -> new SwitchViewCommand();
+        case EditJobCommand.COMMAND_WORD -> new EditJobCommandParser().parse(arguments);
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -20,10 +20,10 @@ import java.util.List;
 public class DeleteJobCommand extends Command {
     public static final String COMMAND_WORD = "deletejob";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the specified Job.\n"
-            + "Parameters: " + PREFIX_JOB_TITLE + "JOB TITLE " + PREFIX_JOB_COMPANY + "COMPANY'S NAME"
-            + PREFIX_JOB_ROUNDS + "NUMBER OF ROUNDS OF INTERVIEWS " + "Example: " + COMMAND_WORD
-            + "jt/Software Engineering cn/TikTok jr/3";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the job identified by the index number used in the displayed job list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_JOB_SUCESS = "Deleted Job: %1$s";
 

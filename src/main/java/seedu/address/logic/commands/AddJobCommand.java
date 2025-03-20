@@ -1,7 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROUNDS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_SKILLS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;

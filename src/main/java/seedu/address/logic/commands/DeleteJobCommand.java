@@ -1,9 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_COMPANY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROUNDS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -11,8 +10,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.job.Job;
-
-import java.util.List;
 
 /**
  * Deletes a Job from the address book.
@@ -28,9 +25,8 @@ public class DeleteJobCommand extends Command {
     public static final String MESSAGE_DELETE_JOB_SUCESS = "Deleted Job: %1$s";
 
     public static final String MESSAGE_INVALID_JOB = "This Job does not exist in the address book";
-    
     private final Index targetIndex;
-    
+
     public DeleteJobCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }

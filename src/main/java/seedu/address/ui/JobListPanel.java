@@ -9,7 +9,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.Logic;;
+import seedu.address.logic.Logic;
 import seedu.address.model.application.Application;
 import seedu.address.model.job.Job;
 /**
@@ -48,5 +48,9 @@ public class JobListPanel extends UiPart<Region> {
                 setGraphic(new JobCard(job, applications, getIndex() + 1).getRoot());
             }
         }
+    }
+
+    public List<Job> getJobList() {
+        return jobListView.getItems();
     }
 }

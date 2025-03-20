@@ -8,24 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.model.application.Application;
 import seedu.address.model.job.Job;
-import seedu.address.testutil.JobBuilder;
+import seedu.address.testutil.JobBuilderFX;
 
 public class JobCardTest extends ApplicationTest {
     private JobCard jobCard;
     private Job testJob;
+    private FxRobot robot;
 
     @Override
     public void start(Stage stage) {
-        testJob = new JobBuilder()
+        robot = new FxRobot();
+        testJob = new JobBuilderFX()
             .withTitle("Software Engineer")
             .withCompany("Google")
-            .withRounds("3")
+            .withRounds(3)
             .build();
         List<Application> applications = new ArrayList<>();
         jobCard = new JobCard(testJob, applications, 1);
@@ -35,12 +39,26 @@ public class JobCardTest extends ApplicationTest {
 
     @Test
     public void display() {
-        // Verify basic information display
-        assertEquals("1. ", jobCard.id.getText());
-        assertEquals(testJob.getJobTitle().jobTitle(), jobCard.jobTitle.getText());
-        assertEquals(testJob.getJobCompany().jobCompany(), jobCard.company.getText());
-        assertEquals("Rounds: " + testJob.getJobRounds().jobRounds, jobCard.jobRounds.getText());
-        assertEquals("Applications: 0", jobCard.applications.getText());
+        // Verify basic information display using TestFX
+        assertCardDisplay(jobCard, testJob, 1);
+    }
+
+    /**
+     * Asserts that {@code jobCard} displays the details of {@code expectedJob} correctly and matches
+     * {@code expectedId}.
+     */
+    private void assertCardDisplay(JobCard jobCard, Job expectedJob, int expectedId) {
+        Label idLabel = robot.lookup("#id").queryAs(Label.class);
+        Label titleLabel = robot.lookup("#jobTitle").queryAs(Label.class);
+        Label companyLabel = robot.lookup("#company").queryAs(Label.class);
+        Label roundsLabel = robot.lookup("#jobRounds").queryAs(Label.class);
+        Label applicationsLabel = robot.lookup("#applications").queryAs(Label.class);
+
+        assertEquals(expectedId + ". ", idLabel.getText());
+        assertEquals(expectedJob.getJobTitle().jobTitle(), titleLabel.getText());
+        assertEquals(expectedJob.getJobCompany().jobCompany(), companyLabel.getText());
+        assertEquals("Rounds: " + expectedJob.getJobRounds().jobRounds, roundsLabel.getText());
+        assertEquals("Applications: 0", applicationsLabel.getText());
     }
 
     @Test
@@ -56,8 +74,8 @@ public class JobCardTest extends ApplicationTest {
         assertFalse(jobCard.equals(1));
 
         // Different job, same index -> returns false
-        Job differentJob = new JobBuilder().withTitle("Different Job").build();
+        Job differentJob = new JobBuilderFX().withTitle("Different Job").build();
         JobCard differentCard = new JobCard(differentJob, new ArrayList<>(), 1);
         assertFalse(jobCard.equals(differentCard));
     }
-} 
+}

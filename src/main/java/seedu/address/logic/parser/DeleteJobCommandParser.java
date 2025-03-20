@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.DeleteJobCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -33,24 +34,31 @@ public class DeleteJobCommandParser implements Parser<DeleteJobCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteJobCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_JOB_TITLE, PREFIX_JOB_COMPANY,
-                PREFIX_JOB_ROUNDS, PREFIX_JOB_SKILLS, PREFIX_JOB_ADDRESS, PREFIX_EMPLOYMENT_TYPE);
-        if (!arePrefixesPresent(argMultimap, PREFIX_JOB_TITLE, PREFIX_JOB_COMPANY, PREFIX_JOB_ROUNDS,
-                PREFIX_JOB_SKILLS, PREFIX_JOB_ADDRESS, PREFIX_EMPLOYMENT_TYPE)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+//        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_JOB_TITLE, PREFIX_JOB_COMPANY,
+//                PREFIX_JOB_ROUNDS, PREFIX_JOB_SKILLS, PREFIX_JOB_ADDRESS, PREFIX_EMPLOYMENT_TYPE);
+//        if (!arePrefixesPresent(argMultimap, PREFIX_JOB_TITLE, PREFIX_JOB_COMPANY, PREFIX_JOB_ROUNDS,
+//                PREFIX_JOB_SKILLS, PREFIX_JOB_ADDRESS, PREFIX_EMPLOYMENT_TYPE)
+//                || !argMultimap.getPreamble().isEmpty()) {
+//            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+//        }
+//
+//        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_JOB_TITLE, PREFIX_JOB_COMPANY, PREFIX_JOB_ROUNDS);
+//        JobTitle title = ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOB_TITLE).get());
+//        JobCompany jobCompany = ParserUtil.parseJobCompany(argMultimap.getValue(PREFIX_JOB_COMPANY).get());
+//        JobRounds jobRounds = ParserUtil.parseJobRounds(argMultimap.getValue(PREFIX_JOB_ROUNDS).get());
+//        JobSkills jobSkills = ParserUtil.parseJobSkills(argMultimap.getValue(PREFIX_JOB_SKILLS).get());
+//        JobAddress jobAddress = ParserUtil.parseJobAddress(argMultimap.getValue(PREFIX_JOB_ADDRESS).get());
+//        JobType jobType = ParserUtil.parseJobType(argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).get());
+//        Job job = new Job(title, jobCompany, jobRounds, jobSkills, jobAddress, jobType);
+//
+//        return new DeleteJobCommand(job);
+        try {
+            Index index = ParserUtil.parseIndex(args);
+            return new DeleteJobCommand(index);
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteJobCommand.MESSAGE_USAGE), pe);
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_JOB_TITLE, PREFIX_JOB_COMPANY, PREFIX_JOB_ROUNDS);
-        JobTitle title = ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOB_TITLE).get());
-        JobCompany jobCompany = ParserUtil.parseJobCompany(argMultimap.getValue(PREFIX_JOB_COMPANY).get());
-        JobRounds jobRounds = ParserUtil.parseJobRounds(argMultimap.getValue(PREFIX_JOB_ROUNDS).get());
-        JobSkills jobSkills = ParserUtil.parseJobSkills(argMultimap.getValue(PREFIX_JOB_SKILLS).get());
-        JobAddress jobAddress = ParserUtil.parseJobAddress(argMultimap.getValue(PREFIX_JOB_ADDRESS).get());
-        JobType jobType = ParserUtil.parseJobType(argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).get());
-        Job job = new Job(title, jobCompany, jobRounds, jobSkills, jobAddress, jobType);
-
-        return new DeleteJobCommand(job);
     }
 
     /**

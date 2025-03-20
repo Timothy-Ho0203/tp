@@ -5,11 +5,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROUNDS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.job.Job;
+
+import java.util.List;
 
 /**
  * Deletes a Job from the address book.
@@ -25,23 +28,30 @@ public class DeleteJobCommand extends Command {
     public static final String MESSAGE_DELETE_JOB_SUCESS = "Deleted Job: %1$s";
 
     public static final String MESSAGE_INVALID_JOB = "This Job does not exist in the address book";
-
-    private final Job toDelete;
-
-    public DeleteJobCommand(Job toDelete) {
-        this.toDelete = toDelete;
+    
+    private final Index targetIndex;
+    
+    public DeleteJobCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Job> lastShownList = model.getFilteredJobList();
 
-        if (!model.hasJob(toDelete)) {
+        if (this.targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
+        }
+
+        Job jobToDelete = lastShownList.get(this.targetIndex.getZeroBased());
+
+        if (!model.hasJob(jobToDelete)) {
             throw new CommandException(MESSAGE_INVALID_JOB);
         }
 
-        model.deleteJob(toDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_JOB_SUCESS, Messages.format(toDelete)));
+        model.deleteJob(jobToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_JOB_SUCESS, Messages.format(jobToDelete)));
     }
 
     @Override
@@ -49,13 +59,13 @@ public class DeleteJobCommand extends Command {
         if (!(other instanceof DeleteJobCommand otherDeleteJobCommand)) {
             return false;
         }
-        return this.toDelete.equals(otherDeleteJobCommand.toDelete);
+        return this.targetIndex.equals(otherDeleteJobCommand.targetIndex);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Job: ", this.toDelete)
+                .add("Job: ", this.targetIndex)
                 .toString();
     }
 

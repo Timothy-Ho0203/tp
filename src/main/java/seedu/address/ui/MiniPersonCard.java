@@ -22,6 +22,9 @@ public class MiniPersonCard extends UiPart<Region> {
     @FXML
     private FlowPane skills;
 
+    /**
+     * Creates a {@code MiniPersonCard} with the given {@code Person}.
+     */
     public MiniPersonCard(Person person) {
         super(FXML);
         name.setText(person.getName().toString());

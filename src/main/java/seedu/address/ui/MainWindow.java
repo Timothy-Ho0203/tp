@@ -120,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         if (isJobView) {
-            jobListPanel = new JobListPanel(logic.getFilteredJobList());
+            jobListPanel = new JobListPanel(logic.getFilteredJobList(), this.model);
             jobListPanelPlaceholder.getChildren().add(jobListPanel.getRoot());
             // Hide person list completely
             personListPanelPlaceholder.setVisible(false);

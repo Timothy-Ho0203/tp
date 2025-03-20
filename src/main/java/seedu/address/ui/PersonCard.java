@@ -119,7 +119,8 @@ public class PersonCard extends UiPart<Region> {
                 String jobTitle = app.getJob().getJobTitle().jobTitle;
                 int currentRound = app.getApplicationStatus().applicationStatus;
                 int maxRound = app.getJob().getJobRounds().jobRounds;
-                String displayText = jobTitle + "\nRound: " + currentRound + "/" + maxRound;
+                String companyTitle = app.getJob().getCompanyName().companyName;
+                String displayText = jobTitle + "\n" + companyTitle + "\nRound: " + currentRound + "/" + maxRound;
                 apps.getChildren().add(new Label(displayText));
             });
     }

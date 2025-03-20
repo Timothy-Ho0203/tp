@@ -61,7 +61,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic, Model model) {
+    public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -120,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         if (isJobView) {
-            jobListPanel = new JobListPanel(logic.getFilteredJobList(), this.model);
+            jobListPanel = new JobListPanel(logic.getFilteredJobList(), logic);
             jobListPanelPlaceholder.getChildren().add(jobListPanel.getRoot());
             // Hide person list completely
             personListPanelPlaceholder.setVisible(false);
@@ -129,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
             jobListPanelPlaceholder.setVisible(true);
             jobListPanelPlaceholder.setManaged(true);
         } else {
-            personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this.model);
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic);
             personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
             // Hide job list completely
             jobListPanelPlaceholder.setVisible(false);

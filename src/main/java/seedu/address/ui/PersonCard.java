@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.List;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.application.Application;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.util.IconUtil;
@@ -29,6 +31,7 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
+    public final List<Application> applications; //This should be applications from person
 
     // Graphic Components
     @FXML
@@ -51,6 +54,8 @@ public class PersonCard extends UiPart<Region> {
     private Label degree;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane apps;
 
     // Attribute Containers
     @FXML
@@ -65,14 +70,17 @@ public class PersonCard extends UiPart<Region> {
     private HBox degreeBox;
     @FXML
     private HBox skillsBox;
+    @FXML
+    private HBox applicationsBox;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to
      * display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person, List<Application> applications, int displayedIndex) {
         super(FXML);
         this.person = person;
+        this.applications = applications;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
 
@@ -103,5 +111,17 @@ public class PersonCard extends UiPart<Region> {
         // Add tags
         person.getTags().stream().sorted(Comparator.comparing(Tag::tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName())));
+
+        // Add applications
+        applicationsBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.BRIEFCASE, "white"));
+        applications.stream().sorted(Comparator.comparing(Application::applicationStatus))
+            .forEach(app -> {
+                String jobTitle = app.job().getJobTitle().toString();
+                int currentRound = app.applicationStatus().applicationStatus;
+                int maxRound = app.job().getJobRounds().jobRounds;
+                String companyTitle = app.job().getJobCompany().jobCompany();
+                String displayText = jobTitle + "\n" + companyTitle + "\nRound: " + currentRound + "/" + maxRound;
+                apps.getChildren().add(new Label(displayText));
+            });
     }
 }

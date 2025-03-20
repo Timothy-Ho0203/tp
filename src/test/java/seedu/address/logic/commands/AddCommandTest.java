@@ -202,6 +202,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Application> getApplicationsByJob(Job job) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Application> getApplicationsByPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredJobList(Predicate<Job> predicate) {
             throw new AssertionError("This method should not be called.");
         }

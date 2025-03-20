@@ -48,11 +48,11 @@ public class JobCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
 
         jobTitleBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.TASKS, "white"));
-        jobTitle.setText(job.getJobTitle().jobTitle);
+        jobTitle.setText(job.getJobTitle().jobTitle());
 
         // Company with icon
         companyBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.BUILDING, "white"));
-        company.setText(job.getCompanyName().companyName);
+        company.setText(job.getJobCompany().jobCompany());
 
         // Job rounds with icon
         jobRoundsBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.TASKS, "white"));

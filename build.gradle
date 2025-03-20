@@ -91,7 +91,6 @@ test {
     systemProperty 'prism.order', 'sw'
     systemProperty 'prism.text', 't2k'
     systemProperty 'testfx.setup.timeout', '2500'
-    
     // Add module access for TestFX
     jvmArgs(
         '--add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',

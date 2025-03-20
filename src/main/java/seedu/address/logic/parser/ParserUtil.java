@@ -6,12 +6,16 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.job.CompanyName;
+import seedu.address.model.job.JobAddress;
+import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobRounds;
+import seedu.address.model.job.JobSkills;
 import seedu.address.model.job.JobTitle;
+import seedu.address.model.job.JobType;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Degree;
 import seedu.address.model.person.Email;
@@ -21,8 +25,7 @@ import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser
- * classes.
+ * Contains utility methods used for parsing strings in the various Parser classes.
  */
 public class ParserUtil {
 
@@ -133,27 +136,21 @@ public class ParserUtil {
      * @throws ParseException if the given {@code jobTitle} is invalid.
      */
     public static JobTitle parseJobTitle(String jobTitle) throws ParseException {
+        jobTitle = jobTitle.trim();
         requireNonNull(jobTitle);
-        String trimmedTitle = jobTitle.trim();
-        if (!JobTitle.isValidJobTitle(trimmedTitle)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new JobTitle(trimmedTitle);
+        return new JobTitle(jobTitle);
     }
 
     /**
-     * @param compName Raw CompanyName by user.
+     * @param jobCompany Raw JobCompany by user.
      * @return trimmed remark without leading and trailing whitespaces for more
      *         efficient processing.
-     * @throws ParseException if the given {@code CompanyName} is invalid.
+     * @throws ParseException if the given {@code JobCompany} is invalid.
      */
-    public static CompanyName parseCompanyName(String compName) throws ParseException {
-        requireNonNull(compName);
-        String trimmedCompName = compName.trim();
-        if (!CompanyName.isValidCompanyName(compName)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new CompanyName(trimmedCompName);
+    public static JobCompany parseJobCompany(String jobCompany) throws ParseException {
+        String trimmedJobCompany = jobCompany.trim();
+        requireNonNull(jobCompany);
+        return new JobCompany(trimmedJobCompany);
     }
 
     /**
@@ -163,11 +160,44 @@ public class ParserUtil {
      * @throws ParseException if the given {@code jobRounds} is invalid.
      */
     public static JobRounds parseJobRounds(String jobRounds) throws ParseException {
-        String trimmedCompName = jobRounds.trim();
-        if (!JobRounds.isValidJobRounds(jobRounds)) {
-            throw new ParseException(JobRounds.MESSAGE_CONSTRAINTS);
-        }
-        return new JobRounds(trimmedCompName);
+        jobRounds = jobRounds.trim();
+        requireNonNull(jobRounds);
+        int jobRoundsCount = Integer.parseInt(jobRounds);
+        return new JobRounds(jobRoundsCount);
+    }
+
+    /**
+     * @param jobSkills Raw jobSkills in the form of a single String input delimited by whitespace by user.
+     * @return {@code FXCollections.observableArrayList} collection of jobSkill Strings.
+     * @throws ParseException if any given {@code jobSkill} is invalid.
+     */
+    public static JobSkills parseJobSkills(String jobSkills) throws ParseException {
+        jobSkills = jobSkills.trim();
+        requireNonNull(jobSkills);
+        String[] jobSkillsArray = jobSkills.split("\\s+");
+        return new JobSkills(FXCollections.observableArrayList(jobSkillsArray));
+    }
+
+    /**
+     * @param jobAddress Raw jobAddress by user.
+     * @return trimmed jobAddress.
+     * @throws ParseException if the given {@code jobAddress} is invalid.
+     */
+    public static JobAddress parseJobAddress(String jobAddress) throws ParseException {
+        jobAddress = jobAddress.trim();
+        requireNonNull(jobAddress);
+        return new JobAddress(jobAddress);
+    }
+
+    /**
+     * @param jobType Raw jobType value by user.
+     * @return trimmed jobType key.
+     * @throws ParseException if the given {@code jobValue} is invalid.
+     */
+    public static JobType parseJobType(String jobType) throws ParseException {
+        jobType = jobType.trim();
+        requireNonNull(jobType);
+        return JobType.fromDisplayType(jobType);
     }
 
     /**

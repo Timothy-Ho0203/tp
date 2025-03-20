@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROUNDS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 
@@ -19,7 +19,7 @@ public class AddJobCommand extends Command {
     public static final String COMMAND_WORD = "addjob";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job to the model manager. " + "Parameters: "
-            + PREFIX_JOB_TITLE + "JOB TITLE " + PREFIX_COMPANY_NAME + "COMPANY'S NAME" + PREFIX_JOB_ROUNDS
+            + PREFIX_JOB_TITLE + "JOB TITLE " + PREFIX_JOB_COMPANY + "COMPANY'S NAME" + PREFIX_JOB_ROUNDS
             + "NUMBER OF ROUNDS OF INTERVIEWS ";
 
     public static final String MESSAGE_SUCCESS = "New Job added: %1$s";

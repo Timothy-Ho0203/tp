@@ -47,7 +47,6 @@ public class JobCard extends UiPart<Region> {
         this.job = job;
         id.setText(displayedIndex + ". ");
 
-        jobTitleBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.TASKS, "white"));
         jobTitle.setText(job.getJobTitle().jobTitle());
 
         // Company with icon

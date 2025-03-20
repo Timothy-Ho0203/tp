@@ -6,27 +6,24 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a job title in a {@Code Job}.
  */
-public class JobTitle {
-    public static final String MESSAGE_CONSTRAINTS = "Job title should only contain alphanumeric "
-            + "characters and spaces, and it should not be blank";
+public record JobTitle(String jobTitle) {
+    public static final String MESSAGE_CONSTRAINTS = "Job title should only contain alphanumeric characters and spaces,"
+            + "and it should not be blank";
 
     /**
      * The first character of the job title must not be a whitespace, otherwise " "
      * (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
-    public final String jobTitle;
+    public static final String VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} ]*";
 
     /**
      * Constructs a {@code JobTitle}.
      *
      * @param jobTitle A valid job title.
      */
-    public JobTitle(String jobTitle) {
+    public JobTitle {
         requireNonNull(jobTitle);
         checkArgument(isValidJobTitle(jobTitle), MESSAGE_CONSTRAINTS);
-        this.jobTitle = jobTitle;
     }
 
     /**
@@ -46,7 +43,7 @@ public class JobTitle {
      */
     @Override
     public String toString() {
-        return jobTitle;
+        return this.jobTitle;
     }
 
     /**
@@ -60,20 +57,10 @@ public class JobTitle {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof JobTitle)) {
+        if (!(other instanceof JobTitle otherJobTitle)) {
             return false;
         }
-        JobTitle otherJobTitle = (JobTitle) other;
-        return jobTitle.equals(otherJobTitle.jobTitle);
+        return this.jobTitle.equals(otherJobTitle.jobTitle);
     }
 
-    /**
-     * Returns the hash code of this job title.
-     *
-     * @return The hash code.
-     */
-    @Override
-    public int hashCode() {
-        return jobTitle.hashCode();
-    }
 }

@@ -15,14 +15,11 @@ import seedu.address.model.application.exceptions.DuplicateApplicationException;
  * A list of applications that enforces uniqueness between its elements and does
  * not allow nulls. An application is considered unique by comparing using
  * {@code Application#equals(Object)}.
- *
  * Supports a minimal set of list operations.
  */
 public class UniqueApplicationList implements Iterable<Application> {
 
     private final ObservableList<Application> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Application> internalUnmodifiableList = FXCollections
-            .unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent application as the given
@@ -88,23 +85,22 @@ public class UniqueApplicationList implements Iterable<Application> {
      */
     public void setApplications(List<Application> applications) {
         requireAllNonNull(applications);
-        if (!applicationsAreUnique(applications)) {
+        if (!areApplicationsUnique(applications)) {
             throw new DuplicateApplicationException();
         }
-
-        internalList.setAll(applications);
+        this.internalList.setAll(applications);
     }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Application> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
+        return FXCollections.unmodifiableObservableList(this.internalList);
     }
 
     @Override
     public Iterator<Application> iterator() {
-        return internalList.iterator();
+        return this.internalList.iterator();
     }
 
     @Override
@@ -114,28 +110,26 @@ public class UniqueApplicationList implements Iterable<Application> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniqueApplicationList)) {
+        if (!(other instanceof UniqueApplicationList otherUniqueApplicationList)) {
             return false;
         }
-
-        UniqueApplicationList otherUniqueApplicationList = (UniqueApplicationList) other;
-        return internalList.equals(otherUniqueApplicationList.internalList);
+        return this.internalList.equals(otherUniqueApplicationList.internalList);
     }
 
     @Override
     public int hashCode() {
-        return internalList.hashCode();
+        return this.internalList.hashCode();
     }
 
     @Override
     public String toString() {
-        return internalList.toString();
+        return this.internalList.toString();
     }
 
     /**
      * Returns true if {@code applications} contains only unique applications.
      */
-    private boolean applicationsAreUnique(List<Application> applications) {
+    private boolean areApplicationsUnique(List<Application> applications) {
         for (int i = 0; i < applications.size() - 1; i++) {
             for (int j = i + 1; j < applications.size(); j++) {
                 if (applications.get(i).equals(applications.get(j))) {

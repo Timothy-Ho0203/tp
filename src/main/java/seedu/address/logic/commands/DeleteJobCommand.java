@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROUNDS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 
@@ -18,7 +18,7 @@ public class DeleteJobCommand extends Command {
     public static final String COMMAND_WORD = "deletejob";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the specified Job.\n"
-            + "Parameters: " + PREFIX_JOB_TITLE + "JOB TITLE " + PREFIX_COMPANY_NAME + "COMPANY'S NAME"
+            + "Parameters: " + PREFIX_JOB_TITLE + "JOB TITLE " + PREFIX_JOB_COMPANY + "COMPANY'S NAME"
             + PREFIX_JOB_ROUNDS + "NUMBER OF ROUNDS OF INTERVIEWS " + "Example: " + COMMAND_WORD
             + "jt/Software Engineering cn/TikTok jr/3";
 

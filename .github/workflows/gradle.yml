@@ -55,15 +55,15 @@ jobs:
 
       - name: Build and check with Gradle (Non-Linux)
         if: runner.os != 'Linux'
-        run: |
-          ./gradlew check coverage \
-          --no-daemon \
-          -Porg.gradle.jvmargs="--add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED \
-          --add-opens=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED \
-          --add-opens=javafx.graphics/com.sun.glass.ui.delegate=ALL-UNNAMED \
-          --add-opens=javafx.graphics/com.sun.glass.ui.monocle=ALL-UNNAMED \
-          --add-opens=javafx.graphics/com.sun.glass.utils=ALL-UNNAMED \
-          --add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED \
+        run: >
+          ./gradlew check coverage
+          --no-daemon
+          "-Porg.gradle.jvmargs=--add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+          --add-opens=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
+          --add-opens=javafx.graphics/com.sun.glass.ui.delegate=ALL-UNNAMED
+          --add-opens=javafx.graphics/com.sun.glass.ui.monocle=ALL-UNNAMED
+          --add-opens=javafx.graphics/com.sun.glass.utils=ALL-UNNAMED
+          --add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
           --add-opens=javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED"
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'

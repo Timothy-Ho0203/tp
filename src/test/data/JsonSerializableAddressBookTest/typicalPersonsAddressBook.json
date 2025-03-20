@@ -42,7 +42,7 @@
       "phone": "9482224",
       "email": "werner@example.com",
       "address": "michegan ave",
-      "school": " SIT",
+      "school": "SIT",
       "degree": "Accounting",
       "tags": []
     },
@@ -68,33 +68,51 @@
   "jobs": [
     {
       "jobTitle": "Software Engineer",
-      "companyName": "Google",
-      "jobRounds": 5
+      "jobCompany": "Google",
+      "jobRounds": 5,
+      "jobSkills": ["Java", "Spring Boot", "Microservices"],
+      "jobAddress": "70 Pasir Panjang Rd, Singapore 117371",
+      "jobType": "Intern"
     },
     {
       "jobTitle": "Data Scientist",
-      "companyName": "Microsoft",
-      "jobRounds": 4
+      "jobCompany": "Microsoft",
+      "jobRounds": 4,
+      "jobSkills": ["Python", "ML", "TensorFlow"],
+      "jobAddress": "1 Marina Boulevard, #22-01, Singapore 018989",
+      "jobType": "Full Time"
     },
     {
       "jobTitle": "Product Manager",
-      "companyName": "Apple",
-      "jobRounds": 3
+      "jobCompany": "Apple",
+      "jobRounds": 3,
+      "jobSkills": ["Agile", "Roadmap Planning"],
+      "jobAddress": "7 Ang Mo Kio Street 64, Singapore 569086",
+      "jobType": "Contract"
     },
     {
       "jobTitle": "UX Designer",
-      "companyName": "Meta",
-      "jobRounds": 3
+      "jobCompany": "Meta",
+      "jobRounds": 3,
+      "jobSkills": ["Figma", "User Research", "Wire Framing"],
+      "jobAddress": "9 Straits View, Marina One, Singapore 018937",
+      "jobType": "Freelance"
     },
     {
       "jobTitle": "DevOps Engineer",
-      "companyName": "Amazon",
-      "jobRounds": 4
+      "jobCompany": "Amazon",
+      "jobRounds": 4,
+      "jobSkills": ["AWS", "Kubernetes", "CI/CD"],
+      "jobAddress": "23 Church Street, Capital Square, Singapore 049481",
+      "jobType": "Part Time"
     },
     {
       "jobTitle": "Full Stack Developer",
-      "companyName": "Netflix",
-      "jobRounds": 4
+      "jobCompany": "Netflix",
+      "jobRounds": 4,
+      "jobSkills": ["React", "Node.js", "MongoDB"],
+      "jobAddress": "1 Fusionopolis Place, Galaxis, Singapore 138522",
+      "jobType": "Full Time"
     }
   ]
 }

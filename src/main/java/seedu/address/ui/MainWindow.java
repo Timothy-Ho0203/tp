@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -29,11 +30,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
-
+    private Model model;
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private JobListPanel jobListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private boolean isJobView = false;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +52,11 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane jobListPanelPlaceholder;
+
+
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -110,8 +118,25 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        if (isJobView) {
+            jobListPanel = new JobListPanel(logic.getFilteredJobList(), logic);
+            jobListPanelPlaceholder.getChildren().add(jobListPanel.getRoot());
+            // Hide person list completely
+            personListPanelPlaceholder.setVisible(false);
+            personListPanelPlaceholder.setManaged(false);
+            // Show job list
+            jobListPanelPlaceholder.setVisible(true);
+            jobListPanelPlaceholder.setManaged(true);
+        } else {
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic);
+            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            // Hide job list completely
+            jobListPanelPlaceholder.setVisible(false);
+            jobListPanelPlaceholder.setManaged(false);
+            // Show person list
+            personListPanelPlaceholder.setVisible(true);
+            personListPanelPlaceholder.setManaged(true);
+        }
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -163,8 +188,22 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Toggles the view between person and job.
+     */
+    public void toggleJobView() {
+        this.isJobView = !this.isJobView;
+        personListPanelPlaceholder.getChildren().clear();
+        jobListPanelPlaceholder.getChildren().clear();
+        fillInnerParts();
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public JobListPanel getJobListPanel() {
+        return jobListPanel;
     }
 
     /**
@@ -184,6 +223,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.setToggleView()) {
+                toggleJobView();
             }
 
             return commandResult;

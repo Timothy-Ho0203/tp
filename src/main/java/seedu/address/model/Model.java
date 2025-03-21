@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -186,6 +187,18 @@ public interface Model {
      * @return The updated application
      */
     Application advanceApplication(Application application, int rounds);
+
+    /**
+     * Returns a list of applications associated with a specific person.
+     * @return A list of applications associated with the person
+     */
+    List<Application> getApplicationsByPerson(Person person);
+
+    /**
+     * Returns a list of applications associated with a specific job.
+     * @return A list of applications associated with the job
+     */
+    List<Application> getApplicationsByJob(Job job);
 
     /** Returns an unmodifiable view of the filtered application list */
     ObservableList<Application> getFilteredApplicationList();

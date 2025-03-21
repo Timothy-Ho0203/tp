@@ -1,19 +1,14 @@
 package seedu.address.model.job;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents the number of interview rounds in a {@Code Job}.
+ * Represents the max number of interview rounds in a {@Code Job}, serving as an upper limit for {@Code Application}.
+ * Guarantees: immutable, is natural number (>0) always.
  */
 public class JobRounds {
     public static final String MESSAGE_CONSTRAINTS = "Job rounds should be a positive integer";
-
-    /**
-     * The number of rounds must be a positive integer.
-     */
-    public static final String VALIDATION_REGEX = "^[1-9]\\d*$";
-    public final int jobRounds;
+    public final int jobRounds; // Primitive int eliminates necessity of this being a normal class.
 
     /**
      * Constructs a {@code JobRounds}.
@@ -21,20 +16,8 @@ public class JobRounds {
      * @param rounds A valid number of job rounds.
      */
     public JobRounds(int rounds) {
-        requireNonNull(rounds);
         checkArgument(isValidJobRounds(rounds), MESSAGE_CONSTRAINTS);
         this.jobRounds = rounds;
-    }
-
-    /**
-     * Constructs a {@code JobRounds} from a string.
-     *
-     * @param rounds A valid number of job rounds as a string.
-     */
-    public JobRounds(String rounds) {
-        requireNonNull(rounds);
-        checkArgument(isValidJobRounds(rounds), MESSAGE_CONSTRAINTS);
-        this.jobRounds = Integer.parseInt(rounds);
     }
 
     /**
@@ -45,16 +28,6 @@ public class JobRounds {
      */
     public static boolean isValidJobRounds(int test) {
         return test > 0;
-    }
-
-    /**
-     * Returns true if a given string is a valid number of job rounds.
-     *
-     * @param test The string to validate.
-     * @return True if the given string is a valid number of job rounds.
-     */
-    public static boolean isValidJobRounds(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -78,11 +51,10 @@ public class JobRounds {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof JobRounds)) {
+        if (!(other instanceof JobRounds otherJobRounds)) {
             return false;
         }
-        JobRounds otherJobRounds = (JobRounds) other;
-        return jobRounds == otherJobRounds.jobRounds;
+        return this.jobRounds == otherJobRounds.jobRounds;
     }
 
     /**

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -255,6 +256,18 @@ public class ModelManager implements Model {
     public Application advanceApplication(Application application, int rounds) {
         requireNonNull(application);
         return applicationsManager.advanceApplication(application, rounds);
+    }
+
+    @Override
+    public List<Application> getApplicationsByPerson(Person person) {
+        requireNonNull(person);
+        return applicationsManager.getApplicationsByPerson(person);
+    }
+
+    @Override
+    public List<Application> getApplicationsByJob(Job job) {
+        requireNonNull(job);
+        return applicationsManager.getApplicationsByJob(job);
     }
 
     @Override

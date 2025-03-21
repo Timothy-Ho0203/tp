@@ -9,15 +9,18 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddJobCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteJobCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditJobCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.JobSearchCommand;
+import seedu.address.logic.commands.SwitchViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -61,7 +64,10 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD -> new ListCommand();
         case ExitCommand.COMMAND_WORD -> new ExitCommand();
         case HelpCommand.COMMAND_WORD -> new HelpCommand();
-        case JobSearchCommand.COMMAND_WORD -> new JobSearchCommandParser().parse(arguments);
+        case AddJobCommand.COMMAND_WORD -> new AddJobCommandParser().parse(arguments);
+        case DeleteJobCommand.COMMAND_WORD -> new DeleteJobCommandParser().parse(arguments);
+        case SwitchViewCommand.COMMAND_WORD -> new SwitchViewCommand();
+        case EditJobCommand.COMMAND_WORD -> new EditJobCommandParser().parse(arguments);
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -25,7 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final ApplicationsManager applicationsManager;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final StackableFilteredList<Person> filteredPersons;
     private final FilteredList<Job> filteredJobs;
     private final FilteredList<Application> filteredApplications;
 
@@ -43,7 +43,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.applicationsManager = new ApplicationsManager(applicationsManager);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new StackableFilteredList<>(this.addressBook.getPersonList());
         filteredJobs = new FilteredList<>(this.addressBook.getJobList());
         filteredApplications = new FilteredList<>(this.applicationsManager.getApplicationList());
     }
@@ -189,13 +189,18 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return filteredPersons.getFilteredList();
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredPersons.addPredicate(predicate);
+    }
+
+    public void resetFilteredPersonList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.clearFilters();
     }
 
     // =========== Filtered Job List Accessors

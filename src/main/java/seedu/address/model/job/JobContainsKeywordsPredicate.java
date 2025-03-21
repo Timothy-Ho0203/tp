@@ -1,7 +1,8 @@
-package seedu.address.model.application;
+package seedu.address.model.job;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.application.Application;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -9,7 +10,7 @@ import java.util.function.Predicate;
 /**
  * Tests that am {@code Application}'s {@code Job} matches any of the keywords given.
  */
-public class JobContainsKeywordsPredicate implements Predicate<Application> {
+public class JobContainsKeywordsPredicate implements Predicate<Job> {
     private final List<String> keywords;
 
     public JobContainsKeywordsPredicate(List<String> keywords) {
@@ -17,9 +18,9 @@ public class JobContainsKeywordsPredicate implements Predicate<Application> {
     }
 
     @Override
-    public boolean test(Application app) {
+    public boolean test(Job job) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(app.getJob().getJobTitle().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(job.getJobTitle().toString(), keyword));
     }
 
     @Override

@@ -107,6 +107,8 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    void resetFilteredPersonList(Predicate<Person> predicate);
+
     /**
      * Returns true if a job with the same identity as {@code job} exists in the
      * address book.

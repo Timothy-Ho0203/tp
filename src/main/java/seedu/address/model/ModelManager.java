@@ -26,7 +26,7 @@ public class ModelManager implements Model {
     private final ApplicationsManager applicationsManager;
     private final UserPrefs userPrefs;
     private final StackableFilteredList<Person> filteredPersons;
-    private final FilteredList<Job> filteredJobs;
+    private final StackableFilteredList<Job> filteredJobs;
     private final FilteredList<Application> filteredApplications;
 
     /**
@@ -44,7 +44,7 @@ public class ModelManager implements Model {
         this.applicationsManager = new ApplicationsManager(applicationsManager);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new StackableFilteredList<>(this.addressBook.getPersonList());
-        filteredJobs = new FilteredList<>(this.addressBook.getJobList());
+        filteredJobs = new StackableFilteredList<>(this.addressBook.getJobList());
         filteredApplications = new FilteredList<>(this.applicationsManager.getApplicationList());
     }
 
@@ -198,8 +198,7 @@ public class ModelManager implements Model {
         filteredPersons.addPredicate(predicate);
     }
 
-    public void resetFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
+    public void resetFilteredPersonList() {
         filteredPersons.clearFilters();
     }
 
@@ -212,13 +211,17 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Job> getFilteredJobList() {
-        return filteredJobs;
+        return filteredJobs.getFilteredList();
     }
 
     @Override
     public void updateFilteredJobList(Predicate<Job> predicate) {
         requireNonNull(predicate);
-        filteredJobs.setPredicate(predicate);
+        filteredJobs.addPredicate(predicate);
+    }
+
+    public void resetFilteredJobList() {
+        filteredJobs.clearFilters();
     }
 
     // =========== ApplicationsManager Methods

@@ -107,7 +107,10 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    void resetFilteredPersonList(Predicate<Person> predicate);
+    /**
+     * Resets the filter of the filtered person list to show all people
+     */
+    void resetFilteredPersonList();
 
     /**
      * Returns true if a job with the same identity as {@code job} exists in the
@@ -142,6 +145,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredJobList(Predicate<Job> predicate);
+
+    /**
+     * Resets the filter of the filtered job list to show all jobs
+     */
+    void resetFilteredJobList();
 
     // =========== ApplicationsManager Methods
     // =============================================================

@@ -1,11 +1,10 @@
 package seedu.address.model.job;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.application.Application;
-
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Tests that am {@code Application}'s {@code Job} matches any of the keywords given.

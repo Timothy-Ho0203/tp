@@ -38,9 +38,9 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName()).append("; Phone: ").append(person.getPhone()).append("; Email: ")
-                .append(person.getEmail()).append("; Address: ").append(person.getAddress()).append("; School: ")
-                .append(person.getSchool()).append("; Tags: ");
+        builder.append(person.getName()).append(" ; Phone: ").append(person.getPhone()).append(" ; Email: ")
+                .append(person.getEmail()).append(" ; Address: ").append(person.getAddress()).append(" ; School: ")
+                .append(person.getSchool()).append(" ; Degree: ").append(person.getDegree()).append(" ; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
@@ -50,8 +50,11 @@ public class Messages {
      */
     public static String format(Job job) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(job.getJobTitle()).append("; Company: ").append(job.getJobCompany())
-                .append("; Number of rounds: ").append(job.getJobRounds());
+        builder.append(job.getJobTitle()).append(" ; Company: ").append(job.getJobCompany())
+                .append(" ; Number of rounds: ").append(job.getJobRounds()).append(" ; Address: ")
+                .append(job.getJobAddress()).append(" ; Job Type: ").append(job.getJobType())
+                .append(" ; Skills: ");
+        job.getJobSkills().value.forEach(builder::append);
         return builder.toString();
     }
 

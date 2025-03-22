@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 
 /**
  * Tests that am {@code Application}'s {@code Job} matches any of the keywords given.
@@ -19,7 +20,7 @@ public class JobContainsKeywordsPredicate implements Predicate<Job> {
     @Override
     public boolean test(Job job) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(job.getJobTitle().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(Messages.format(job), keyword));
     }
 
     @Override

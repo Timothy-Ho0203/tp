@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -51,5 +52,30 @@ public class StackableFilteredList<E> {
 
     public FilteredList<E> getFilteredList() {
         return filteredList;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof StackableFilteredList<?>)) {
+            return false;
+        }
+
+        StackableFilteredList<?> otherStackableFilteredList = (StackableFilteredList<?>) other;
+
+        // Point to note: Equality between 2 StackableFilteredList only considers FilteredList elements.
+        // Predicate tests equality using reference equality, so we cannot use Predicate as part of
+        // equality checking. Easiest fix would be to create a wrapper class and implement equals()
+        // and hashCode(), unless we can prove that for any 2 FilteredList, if their elements are identical
+        // then their combinedPredicate are the same.
+        return filteredList.equals(otherStackableFilteredList.filteredList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filteredList, combinedPredicate);
     }
 }

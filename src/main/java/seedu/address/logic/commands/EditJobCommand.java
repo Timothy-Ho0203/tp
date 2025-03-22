@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROUNDS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_SKILLS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_JOBS;
 
 import java.util.List;
 import java.util.Objects;

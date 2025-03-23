@@ -70,8 +70,7 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
     //// application-level operations
 
     /**
-     * Returns true if an application identical to {@code application} exists in the
-     * applications manager.
+     * Returns true if an application identical to {@code application} exists in the applications manager.
      */
     public boolean hasApplication(Application application) {
         requireNonNull(application);
@@ -138,7 +137,7 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
         // Find all applications involving this job and update them
         getApplicationsByJob(oldJob).forEach(app -> {
             // Check if application status is still valid with new job
-            if (app.applicationStatus().applicationStatus > newJob.getJobRounds().jobRounds) {
+            if (app.applicationStatus().applicationStatus > newJob.jobRounds().jobRounds) {
                 throw new InvalidApplicationStatusException();
             }
 
@@ -188,13 +187,11 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
 
     /**
      * Gets all applications associated with a specific job.
-     *
      * @param job The job whose applications to retrieve
      * @return A list of applications associated with the job
      */
     public List<Application> getApplicationsByJob(Job job) {
         requireNonNull(job);
-
         return applications.asUnmodifiableObservableList().stream().filter(app -> app.job().equals(job))
                 .collect(Collectors.toList());
     }
@@ -238,13 +235,11 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
         if (other == this) {
             return true;
         }
-
-        if (!(other instanceof ApplicationsManager)) {
+        // instanceof handles nulls.
+        if (!(other instanceof ApplicationsManager otherApplicationsManager)) {
             return false;
         }
-
-        ApplicationsManager otherApplicationsManager = (ApplicationsManager) other;
-        return applications.equals(otherApplicationsManager.applications);
+        return this.applications.equals(otherApplicationsManager.applications);
     }
 
     @Override

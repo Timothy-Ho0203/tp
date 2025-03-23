@@ -15,6 +15,8 @@ public enum JobType {
     CONTRACT("Contract");
     public static final String MESSAGE_CONSTRAINTS = "Job type should be one of the valid job types: "
             + Arrays.stream(JobType.values()).map(JobType::getDisplayType).collect(Collectors.joining(", "));
+    /** Initialises dummy job in {@code AddApplicationCommandParser} below. */
+    public static final JobType DEFAULT_JOBTYPE = JobType.fromDisplayType("Intern");
     private final String displayType;
 
     JobType(String newDisplayType) { // Implicitly private JobType enum constructor.

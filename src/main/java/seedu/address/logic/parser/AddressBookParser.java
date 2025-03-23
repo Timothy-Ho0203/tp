@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddApplicationCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddJobCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -56,18 +57,24 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         return switch (commandWord) {
+        // Person-specific Commands below.
         case AddCommand.COMMAND_WORD -> new AddCommandParser().parse(arguments);
         case EditCommand.COMMAND_WORD -> new EditCommandParser().parse(arguments);
         case DeleteCommand.COMMAND_WORD -> new DeleteCommandParser().parse(arguments);
         case ClearCommand.COMMAND_WORD -> new ClearCommand();
         case FindCommand.COMMAND_WORD -> new FindCommandParser().parse(arguments);
         case ListCommand.COMMAND_WORD -> new ListCommand();
-        case ExitCommand.COMMAND_WORD -> new ExitCommand();
-        case HelpCommand.COMMAND_WORD -> new HelpCommand();
+        // Job-specific Commands below.
         case AddJobCommand.COMMAND_WORD -> new AddJobCommandParser().parse(arguments);
         case DeleteJobCommand.COMMAND_WORD -> new DeleteJobCommandParser().parse(arguments);
-        case SwitchViewCommand.COMMAND_WORD -> new SwitchViewCommand();
         case EditJobCommand.COMMAND_WORD -> new EditJobCommandParser().parse(arguments);
+        // Application-specific Commands below.
+        case AddApplicationCommand.COMMAND_WORD -> new AddApplicationCommandParser().parse(arguments);
+        // View-specific Commands below.
+        case SwitchViewCommand.COMMAND_WORD -> new SwitchViewCommand();
+        // Miscellaneous Commands for general GUI below.
+        case ExitCommand.COMMAND_WORD -> new ExitCommand();
+        case HelpCommand.COMMAND_WORD -> new HelpCommand();
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

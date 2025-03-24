@@ -54,7 +54,7 @@ class JsonAdaptedJob {
         this.jobRounds = source.jobRounds().jobRounds;
         this.jobSkills = source.jobSkills().value;
         this.jobAddress = source.jobAddress().value;
-        this.jobType = source.jobType().getDisplayType();
+        this.jobType = source.jobType().toString();
     }
 
     /**

@@ -173,7 +173,7 @@ public class AddCommandTest {
         public boolean hasJob(Job job) {
             throw new AssertionError("This method should not be called.");
         }
-      
+
         @Override
         public void deleteJob(Job job) {
             throw new AssertionError("This method should not be called.");
@@ -183,7 +183,7 @@ public class AddCommandTest {
         public void addJob(Job job) {
             throw new AssertionError("This method should not be called.");
         }
-      
+
         @Override
         public void setJob(Job target, Job editedJob) {
             throw new AssertionError("This method should not be called.");
@@ -239,7 +239,7 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-      
+
         public void resetFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -248,7 +248,7 @@ public class AddCommandTest {
         public ObservableList<Person> getPersonsByPhone(Phone phone) {
             throw new AssertionError("This method should not be called.");
         }
-            
+
         // =========== Filtered Job List Accessors
         // =============================================================
 
@@ -261,7 +261,7 @@ public class AddCommandTest {
         public void updateFilteredJobList(Predicate<Job> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-  
+
         public void resetFilteredJobList() {
             throw new AssertionError("This method should not be called.");
         }

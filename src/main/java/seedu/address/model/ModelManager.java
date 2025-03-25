@@ -247,7 +247,7 @@ public class ModelManager implements Model {
 
     // =========== Filtered Person List Accessors
     // =============================================================
-    
+
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the
      * internal list of {@code versionedAddressBook}
@@ -275,7 +275,7 @@ public class ModelManager implements Model {
 
     // =========== Filtered Job List Accessors
     // ================================================================
-    
+
     /**
      * Returns an unmodifiable view of the list of {@code Job} backed by the
      * internal list of {@code versionedAddressBook}
@@ -295,7 +295,7 @@ public class ModelManager implements Model {
     public void resetFilteredJobList() {
         filteredJobs.clearFilters();
     }
-  
+
     @Override
     public List<Job> getJobsByTitle(JobTitle jobTitle) {
         return this.addressBook.getJobsByTitle(jobTitle);

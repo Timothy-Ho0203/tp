@@ -96,14 +96,13 @@ public interface Model {
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book. The person identity of
-     * {@code editedPerson} must not be the same as another existing person in the
-     * address book.
+     * {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
 
     // =========== Job Operations
     // =============================================================
-  
+
     /**
      * Returns true if a job with the same identity as {@code job} exists in the
      * address book.
@@ -142,8 +141,7 @@ public interface Model {
     void setApplicationsManager(ReadOnlyApplicationsManager applicationsManager);
 
     /**
-     * Returns true if an application with the same identity as {@code application}
-     * exists in the applications manager.
+     * Returns true if an application with the same identity as {@code application} exists in the applications manager.
      */
     boolean hasApplication(Application application);
 
@@ -153,8 +151,7 @@ public interface Model {
     void deleteApplication(Application target);
 
     /**
-     * Adds the given application. {@code application} must not already exist in the
-     * applications manager.
+     * Adds the given application. {@code application} must not already exist in the applications manager.
      */
     void addApplication(Application application);
 
@@ -186,7 +183,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-  
+
     /**
      * Resets the filter of the filtered person list to show all people
      */
@@ -201,13 +198,12 @@ public interface Model {
 
     // =========== Filtered Job List Accessors
     // =============================================================
-     
+
     /** Returns an unmodifiable view of the filtered job list */
     ObservableList<Job> getFilteredJobList();
-  
+
     /**
-     * Updates the filter of the filtered job list to filter by the given
-     * {@code predicate}.
+     * Updates the filter of the filtered job list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredJobList(Predicate<Job> predicate);

@@ -103,7 +103,7 @@ public interface Model {
 
     // =========== Job Operations
     // =============================================================
-
+  
     /**
      * Returns true if a job with the same identity as {@code job} exists in the
      * address book.
@@ -186,6 +186,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+  
+    /**
+     * Resets the filter of the filtered person list to show all people
+     */
+    void resetFilteredPersonList();
 
     /**
      * Gets all persons associated with a specific phone number.
@@ -196,16 +201,21 @@ public interface Model {
 
     // =========== Filtered Job List Accessors
     // =============================================================
-
+     
     /** Returns an unmodifiable view of the filtered job list */
     ObservableList<Job> getFilteredJobList();
-
+  
     /**
      * Updates the filter of the filtered job list to filter by the given
      * {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredJobList(Predicate<Job> predicate);
+
+    /**
+     * Resets the filter of the filtered job list to show all jobs
+     */
+    void resetFilteredJobList();
 
     /**
      * Returns a list of jobs associated with a specific title and company name.

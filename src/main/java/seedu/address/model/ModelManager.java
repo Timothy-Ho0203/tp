@@ -28,8 +28,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final ApplicationsManager applicationsManager;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Job> filteredJobs;
+    private final StackableFilteredList<Person> filteredPersons;
+    private final StackableFilteredList<Job> filteredJobs;
     private final FilteredList<Application> filteredApplications;
 
     /**
@@ -46,8 +46,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.applicationsManager = new ApplicationsManager(applicationsManager);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.filteredJobs = new FilteredList<>(this.addressBook.getJobList());
+        this.filteredPersons = new StackableFilteredList<>(this.addressBook.getPersonList());
+        this.filteredJobs = new StackableFilteredList<>(this.addressBook.getJobList());
         this.filteredApplications = new FilteredList<>(this.applicationsManager.getApplicationList());
     }
 
@@ -247,7 +247,7 @@ public class ModelManager implements Model {
 
     // =========== Filtered Person List Accessors
     // =============================================================
-
+    
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the
      * internal list of {@code versionedAddressBook}
@@ -255,13 +255,17 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return this.filteredPersons;
+        return this.filteredPersons.getFilteredList();
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        this.filteredPersons.setPredicate(predicate);
+        this.filteredPersons.addPredicate(predicate);
+    }
+
+    public void resetFilteredPersonList() {
+        this.filteredPersons.clearFilters();
     }
 
     @Override
@@ -271,23 +275,27 @@ public class ModelManager implements Model {
 
     // =========== Filtered Job List Accessors
     // ================================================================
-
+    
     /**
      * Returns an unmodifiable view of the list of {@code Job} backed by the
-     * internal list of {@code versionedAddressBook}.
+     * internal list of {@code versionedAddressBook}
      * @return Unmodifiable view of jobs' list via {@code UniqueJobList::asUnmodifiableJobList}.
      */
     @Override
     public ObservableList<Job> getFilteredJobList() {
-        return this.filteredJobs;
+        return this.filteredJobs.getFilteredList();
     }
 
     @Override
     public void updateFilteredJobList(Predicate<Job> predicate) {
         requireNonNull(predicate);
-        this.filteredJobs.setPredicate(predicate);
+        this.filteredJobs.addPredicate(predicate);
     }
 
+    public void resetFilteredJobList() {
+        filteredJobs.clearFilters();
+    }
+  
     @Override
     public List<Job> getJobsByTitle(JobTitle jobTitle) {
         return this.addressBook.getJobsByTitle(jobTitle);

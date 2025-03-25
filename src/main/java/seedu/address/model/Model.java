@@ -148,8 +148,7 @@ public interface Model {
     boolean hasApplication(Application application);
 
     /**
-     * Deletes the given application. The application must exist in the applications
-     * manager.
+     * Deletes the given application. The application must exist in the applications manager.
      */
     void deleteApplication(Application target);
 
@@ -240,4 +239,10 @@ public interface Model {
      * @return A list of applications associated with the job
      */
     List<Application> getApplicationsByJob(Job job);
+
+    /**
+     * Returns the unique application, or lack thereof, associated with a specific person and job.
+     * @return The unique application, or lack thereof, associated with the person and job.
+     */
+    List<Application> getApplicationsByPersonAndJob(Person person, Job job);
 }

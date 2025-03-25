@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -321,6 +322,15 @@ public class ModelManager implements Model {
     public List<Application> getApplicationsByJob(Job job) {
         requireNonNull(job);
         return applicationsManager.getApplicationsByJob(job);
+    }
+
+    @Override
+    public List<Application> getApplicationsByPersonAndJob(Person person, Job job) {
+        requireAllNonNull(person, job);
+        return this.getApplicationsByPerson(person).stream()
+                .filter(application ->
+                        application.applicant().isSamePerson(person) && application.job().isSameJob(job))
+                .collect(Collectors.toList());
     }
 
     @Override

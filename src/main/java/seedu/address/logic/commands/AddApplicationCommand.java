@@ -48,9 +48,10 @@ public class AddApplicationCommand extends Command {
     private final boolean parseByIndex;
 
     /**
-     * Creates an AddApplicationCommand to add the specified {@code Application}.
-     * @param personIndex index of person in {@code UniquePersonList} from {@code AddApplicationCommandParser::parse}.
-     * @param jobIndex index of job in {@code UniqueJobList} from {@code AddApplicationCommand::parse}.
+     * Creates an {@code AddApplicationCommand} to add the specified {@code Application}.
+     * @param personIndex index of person in last {@code FilteredPersonList} via
+     *                    {@code AddApplicationCommandParser::parse}.
+     * @param jobIndex index of job in last {@code FilteredJobList} via {@code AddApplicationCommand::parse}.
      * @param applicationStatus optional application status to manually set round index of new application if present.
      */
     public AddApplicationCommand(Index personIndex, Index jobIndex, ApplicationStatus applicationStatus) {
@@ -62,8 +63,8 @@ public class AddApplicationCommand extends Command {
     }
 
     /**
-     * Creates an AddApplicationCommand to add the specified {@code Application}.
-     * @param application Intermediate application from {@code AddApplicationCommand::parse}.
+     * Creates an {@code AddApplicationCommand} to add the specified {@code Application}.
+     * @param application Intermediate application from {@code AddApplicationCommandParser::parse}.
      */
     public AddApplicationCommand(Application application) {
         requireNonNull(application);
@@ -73,9 +74,9 @@ public class AddApplicationCommand extends Command {
 
     /**
      * Executes {@code AddApplicationCommand} and returns the resulting success or failure message.
-     * @param model {@code Model} which the command should operate on, BEWARE dependencies on {@code UniquePersonList},
-     *                           {@code uniqueJobList}, and {@code uniqueApplicationList} exists here only for checks
-     *                           while {@code AddApplicationCommandParser} lacks {@code Model}'s subclass's import.
+     * @param model {@code Model} which the command must operate on, BEWARE dependencies on {@code FilteredPersonList},
+     *                           {@code FilteredJobList}, and {@code FilteredApplicationList} exists here only to check
+     *                           given {@code AddApplicationCommandParser} lacks {@code Model}'s subclass's import.
      * @return feedback message of the operation result for display.
      * @throws CommandException If an error occurs during command execution.
      */
@@ -85,12 +86,12 @@ public class AddApplicationCommand extends Command {
         if (this.parseByIndex) {
             ObservableList<Person> matchingPersons = model.getFilteredPersonList();
             ObservableList<Job> matchingJobs = model.getFilteredJobList();
-            // 1st guard condition below: Invalid person index. Index bypasses AddApplicationCommandParser's dummyPerson
+            // 1st guard condition below: Invalid person index. Index bypasses AddApplicationCommandParser's dummy.
             if (this.personIndex.getZeroBased() >= matchingPersons.size() || this.personIndex.getZeroBased() < 0) {
                 throw new CommandException(MESSAGE_INVALID_PERSON);
             }
             Person matchingPerson = matchingPersons.get(this.personIndex.getZeroBased());
-            // 2nd guard condition below: Invalid job index. Index bypasses AddApplicationCommandParser's dummyJob
+            // 2nd guard condition below: Invalid job index. Index bypasses AddApplicationCommandParser's dummy.
             if (this.jobIndex.getZeroBased() >= matchingJobs.size() || this.jobIndex.getZeroBased() < 0) {
                 throw new CommandException(MESSAGE_INVALID_JOB);
             }
@@ -127,7 +128,7 @@ public class AddApplicationCommand extends Command {
         if (other == this) {
             return true;
         }
-        // instanceof handles nulls
+        // instanceof handles nulls.
         if (!(other instanceof AddApplicationCommand otherAddApplicationCommand)) {
             return false;
         }

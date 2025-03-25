@@ -98,6 +98,9 @@ public class Application {
 
     /**
      * Returns true if this application is the same as the specified object.
+     * Given {@code Application} is an association class between {@code Person} and {@code Job}, and at most 1 unique
+     * instance per person and job exists in {@code UniqueApplicationList} exists to hold latest candidate's evaluation,
+     * this should NOT check for equality of any contained {@code Application}'s fields.
      * @param other The object to compare to.
      * @return True if the objects are equal, false otherwise.
      */
@@ -110,8 +113,7 @@ public class Application {
             return false;
         }
         return this.applicant.equals(otherApplication.applicant)
-                && this.job.equals(otherApplication.job)
-                && this.applicationStatus.equals(otherApplication.applicationStatus);
+                && this.job.equals(otherApplication.job);
     }
 
     /**

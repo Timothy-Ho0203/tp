@@ -29,7 +29,7 @@ public enum JobType {
      */
     public static JobType fromDisplayType(String displayType) {
         return Arrays.stream(JobType.values())
-                .filter(jobType -> jobType.toString().equals(displayType.trim().toLowerCase()))
+                .filter(jobType -> jobType.toString().equalsIgnoreCase(displayType.trim()))
                 .findFirst().orElseThrow(() -> new IllegalArgumentException(MESSAGE_CONSTRAINTS));
     }
 

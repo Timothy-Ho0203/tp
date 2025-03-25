@@ -104,7 +104,6 @@ public record Job(JobTitle jobTitle, JobCompany jobCompany, JobRounds jobRounds,
         if (!(other instanceof Job otherJob)) {
             return false;
         }
-        return this.jobTitle.equals(otherJob.jobTitle)
-                && this.jobCompany.equals(otherJob.jobCompany);
+        return this.jobTitle.equals(otherJob.jobTitle);
     }
 }

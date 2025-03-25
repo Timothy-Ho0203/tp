@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobTitle;
 import seedu.address.model.job.UniqueJobList;
 import seedu.address.model.person.Person;
@@ -168,15 +167,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Gets all jobs associated with a specific title and company name.
      * @param jobTitle The title whose jobs to retrieve.
-     * @param jobCompany The company name whose jobs to retrieve.
      * @return A list of jobs associated with the title and company name.
      */
-    public List<Job> getJobsByTitleAndCompany(JobTitle jobTitle, JobCompany jobCompany) {
+    public List<Job> getJobsByTitle(JobTitle jobTitle) {
         requireNonNull(jobTitle);
-        requireNonNull(jobCompany);
         return this.jobs.asUnmodifiableObservableList().stream()
                 .filter(job -> job.jobTitle().equals(jobTitle))
-                .filter(job -> job.jobCompany().equals(jobCompany))
                 .collect(Collectors.toList());
     }
 

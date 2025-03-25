@@ -22,4 +22,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMPLOYMENT_TYPE = new Prefix("em/"); // Correspond to job type.
     // Application-specific Prefix below, all being double-character and starting with 'a'.
     public static final Prefix PREFIX_APPLICATION_STATUS = new Prefix("as/");
+    // Index-based Prefix below from corresponding lists, all being double-character and starting with 'i'.
+    public static final Prefix PREFIX_PERSON_INDEX = new Prefix("ip/");
+    public static final Prefix PREFIX_JOB_INDEX = new Prefix("ij/");
 }

@@ -14,7 +14,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.application.Application;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobTitle;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -255,7 +254,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return this.filteredPersons;
     }
 
     @Override
@@ -279,18 +278,18 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Job> getFilteredJobList() {
-        return filteredJobs;
+        return this.filteredJobs;
     }
 
     @Override
     public void updateFilteredJobList(Predicate<Job> predicate) {
         requireNonNull(predicate);
-        filteredJobs.setPredicate(predicate);
+        this.filteredJobs.setPredicate(predicate);
     }
 
     @Override
-    public List<Job> getJobsByTitleAndCompany(JobTitle jobTitle, JobCompany jobCompany) {
-        return this.addressBook.getJobsByTitleAndCompany(jobTitle, jobCompany);
+    public List<Job> getJobsByTitle(JobTitle jobTitle) {
+        return this.addressBook.getJobsByTitle(jobTitle);
     }
 
     // =========== Filtered Application List Accessors

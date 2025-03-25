@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.application.Application;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobTitle;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -212,10 +211,9 @@ public interface Model {
     /**
      * Returns a list of jobs associated with a specific title and company name.
      * @param jobTitle The title whose jobs to retrieve.
-     * @param jobCompany The company name whose jobs to retrieve.
      * @return A list of jobs associated with the title and company name.
      */
-    List<Job> getJobsByTitleAndCompany(JobTitle jobTitle, JobCompany jobCompany);
+    List<Job> getJobsByTitle(JobTitle jobTitle);
 
     // =========== Filtered Application List Accessors
     // ================================================================

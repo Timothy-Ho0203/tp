@@ -25,7 +25,6 @@ import seedu.address.model.ReadOnlyApplicationsManager;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.application.Application;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobTitle;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -260,7 +259,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Job> getJobsByTitleAndCompany(JobTitle jobTitle, JobCompany jobCompany) {
+        public ObservableList<Job> getJobsByTitle(JobTitle jobTitle) {
             throw new AssertionError("This method should not be called.");
         }
 

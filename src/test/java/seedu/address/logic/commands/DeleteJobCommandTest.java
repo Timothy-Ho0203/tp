@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -21,7 +21,8 @@ import seedu.address.model.job.Job;
 
 
 public class DeleteJobCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalApplicationsManager(), new UserPrefs());
+    private final Model model = new ModelManager(
+            getTypicalAddressBook(), getTypicalApplicationsManager(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -52,19 +53,19 @@ public class DeleteJobCommandTest {
         DeleteJobCommand deleteJobSecondCommand = new DeleteJobCommand(INDEX_SECOND_PERSON);
 
         // same object -> returns true
-        assertTrue(deleteJobFirstCommand.equals(deleteJobFirstCommand));
+        assertEquals(deleteJobFirstCommand, deleteJobFirstCommand);
 
         // same values -> returns true
         DeleteJobCommand deleteJobFirstCommandCopy = new DeleteJobCommand(INDEX_FIRST_PERSON);
-        assertTrue(deleteJobFirstCommand.equals(deleteJobFirstCommandCopy));
+        assertEquals(deleteJobFirstCommand, deleteJobFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(deleteJobFirstCommand.equals(1));
+        assertNotEquals(1, deleteJobFirstCommand);
 
         // null -> returns false
-        assertFalse(deleteJobFirstCommand.equals(null));
+        assertNotEquals(null, deleteJobFirstCommand);
 
         // different person -> returns false
-        assertFalse(deleteJobFirstCommand.equals(deleteJobSecondCommand));
+        assertNotEquals(deleteJobFirstCommand, deleteJobSecondCommand);
     }
 }

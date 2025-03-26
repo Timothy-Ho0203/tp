@@ -33,7 +33,7 @@ public class AddApplicationCommand extends Command {
             + " parameters: " + PREFIX_PERSON_INDEX + "CANDIDATE'S LAST SEEN INDEX IN GUI "
             + PREFIX_JOB_INDEX + "JOB'S LAST SEEN INDEX IN GUI "
             + PREFIX_APPLICATION_STATUS + "OPTIONAL APPLICATION STATUS DEFAULTING TO 0.";
-    public static final String MESSAGE_SUCCESS = "New application added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New application added as follows:\n" + "Application added: {%1$s}";
     public static final String MESSAGE_DUPLICATE_APPLICATION =
             "This application already exists in the address book. Try using the AdvanceApplicationCommand instead!";
     public static final String MESSAGE_INVALID_PERSON = "This application's person does not exist in the address book";
@@ -51,14 +51,14 @@ public class AddApplicationCommand extends Command {
      * Creates an {@code AddApplicationCommand} to add the specified {@code Application}.
      * @param personIndex index of person in last {@code FilteredPersonList} via
      *                    {@code AddApplicationCommandParser::parse}.
-     * @param jobIndex index of job in last {@code FilteredJobList} via {@code AddApplicationCommand::parse}.
+     * @param jobIndex index of job in last {@code FilteredJobList} via {@code AddApplicationCommandParser::parse}.
      * @param applicationStatus optional application status to manually set round index of new application if present.
      */
     public AddApplicationCommand(Index personIndex, Index jobIndex, ApplicationStatus applicationStatus) {
         requireAllNonNull(personIndex, jobIndex, applicationStatus);
         this.personIndex = personIndex;
         this.jobIndex = jobIndex;
-        this.applicationStatus = applicationStatus;
+        this.applicationStatus = applicationStatus; // Logic completed in AddApplicationCommandParser.
         this.parseByIndex = true;
     }
 
@@ -147,6 +147,6 @@ public class AddApplicationCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("application", this.application).toString();
+        return new ToStringBuilder(this).add("Application added", this.application).toString();
     }
 }

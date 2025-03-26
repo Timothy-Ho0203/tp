@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddApplicationCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddJobCommand;
+import seedu.address.logic.commands.AdvanceApplicationCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteApplicationCommand;
@@ -75,6 +76,7 @@ public class AddressBookParser {
         case ListJobCommand.COMMAND_WORD -> new ListJobCommand();
         // Application-specific Commands below.
         case AddApplicationCommand.COMMAND_WORD -> new AddApplicationCommandParser().parse(arguments);
+        case AdvanceApplicationCommand.COMMAND_WORD -> new AdvanceApplicationCommandParser().parse(arguments);
         case DeleteApplicationCommand.COMMAND_WORD -> new DeleteApplicationCommandParser().parse(arguments);
         // View-specific Commands below.
         case SwitchViewCommand.COMMAND_WORD -> new SwitchViewCommand();

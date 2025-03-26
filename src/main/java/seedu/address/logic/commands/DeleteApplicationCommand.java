@@ -30,7 +30,7 @@ public class DeleteApplicationCommand extends Command {
             + PREFIX_JOB_TITLE + "JOB TITLE.\nThe second way comprises these parameters: "
             + PREFIX_PERSON_INDEX + "CANDIDATE'S LAST SEEN INDEX IN GUI "
             + PREFIX_JOB_INDEX + "JOB'S LAST SEEN INDEX IN GUI.";
-    public static final String MESSAGE_SUCCESS = "Deleted application: %1$s";
+    public static final String MESSAGE_SUCCESS = "Deleted application as follows:\n" + "Application deleted: {%1$s}";
     public static final String MESSAGE_INVALID_APPLICATION = "This application does not exist in the address book. "
             + "Try using the AddApplicationCommand to add an application first!";
     public static final String MESSAGE_INVALID_PERSON = "This application's person does not exist in the address book";
@@ -108,14 +108,14 @@ public class DeleteApplicationCommand extends Command {
             assert matchingJobs.size() == 1 : MESSAGE_NONUNIQUE_JOB;
             this.application.setJob(matchingJobs.get(0)); // Update dummy job to valid job in-place.
         }
+        // 3rd guard condition below: No existing application to delete.
+        if (!model.hasApplication(this.application)) { // Code ultimately traces to {Application::equals}.
+            throw new CommandException(MESSAGE_INVALID_APPLICATION);
+        }
         List<Application> matchingApplications = model.getApplicationsByPersonAndJob(
                 this.application.applicant(), this.application.job());
         assert matchingApplications.size() == 1 : MESSAGE_NONUNIQUE_APPLICATION;
         this.application = matchingApplications.get(0);
-        // 3rd guard condition below: Exists application to delete.
-        if (!model.hasApplication(this.application)) {
-            throw new CommandException(MESSAGE_INVALID_APPLICATION);
-        }
         // Finally apply main logic of deleting valid application from model.
         model.deleteApplication(this.application);
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.application));
@@ -144,6 +144,6 @@ public class DeleteApplicationCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("application", this.application).toString();
+        return new ToStringBuilder(this).add("Application deleted", this.application).toString();
     }
 }

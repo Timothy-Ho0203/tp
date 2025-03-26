@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ApplicationStatus implements Comparable<ApplicationStatus> {
     public static final String MESSAGE_CONSTRAINTS = "Application status should be a non-negative integer";
     /** Initialises dummy application in {@code AddApplicationCommandParser} below. */
-    public static final ApplicationStatus DEFAULT_APPLICATIONSTATUS = new ApplicationStatus(0);
+    public static final ApplicationStatus DEFAULT_ADDAPPLICATIONSTATUS = new ApplicationStatus(0);
+    public static final ApplicationStatus DEFAULT_ADVANCEAPPLICATIONSTATUS = new ApplicationStatus(1);
 
     /**
      * The status must be a non-negative integer. 0 means applied but no rounds

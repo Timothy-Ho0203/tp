@@ -165,7 +165,6 @@ public interface Model {
 
     /**
      * Advances the given application by the specified number of rounds.
-     *
      * @return The updated application
      */
     Application advanceApplication(Application application, int rounds);

@@ -44,7 +44,7 @@ public class DeleteApplicationCommandParser implements Parser<DeleteApplicationC
     public DeleteApplicationCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSON_INDEX, PREFIX_JOB_INDEX,
                 PREFIX_PHONE, PREFIX_JOB_TITLE);
-        // Require min 1 pair of (person index, job index) or (phone, job title) to be present, prioritising latter.
+        // Require min 1 pair of (person index, job index) or (phone, job title) to be present, PRIORITISING the latter.
         if (!(arePrefixesPresent(argMultimap, PREFIX_PERSON_INDEX, PREFIX_JOB_INDEX)
                 || (arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_JOB_TITLE)))
                 || !argMultimap.getPreamble().isEmpty()) {

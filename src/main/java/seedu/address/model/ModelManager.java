@@ -14,6 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.application.Application;
+import seedu.address.model.application.exceptions.InvalidApplicationStatusException;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobTitle;
 import seedu.address.model.person.Person;
@@ -239,10 +240,17 @@ public class ModelManager implements Model {
         applicationsManager.setApplication(target, editedApplication);
     }
 
+    /**
+     * Advances the given application in-place by modifying contained {@code ApplicationStatus} out-of-place with rounds
+     * where code ultimately traces to {@code Application::advance(int)}.
+     * @param application Preexisting application to advance its {@code ApplicationStatus}.
+     * @param round Specified integer number of rounds to check advancing for {@code Application}.
+     * @return Same {@code Application} object albeit with distinct new contained {@code ApplicationStatus}.
+     */
     @Override
-    public Application advanceApplication(Application application, int rounds) {
+    public Application advanceApplication(Application application, int round) throws InvalidApplicationStatusException {
         requireNonNull(application);
-        return applicationsManager.advanceApplication(application, rounds);
+        return applicationsManager.advanceApplication(application, round);
     }
 
     // =========== Filtered Person List Accessors

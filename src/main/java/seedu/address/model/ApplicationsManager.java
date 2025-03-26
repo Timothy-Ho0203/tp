@@ -106,6 +106,28 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
     }
 
     /**
+     * Advances an application by the specified number of rounds.
+     * @param application The application to advance
+     * @param round      The number of rounds to advance by
+     * @return The updated application
+     * @throws ApplicationNotFoundException      If the application does not exist.
+     * @throws InvalidApplicationStatusException If advancing would exceed job rounds.
+     */
+    public Application advanceApplication(Application application, int round) throws InvalidApplicationStatusException {
+        requireNonNull(application);
+        if (!hasApplication(application)) {
+            throw new ApplicationNotFoundException();
+        }
+        try {
+            Application advancedApplication = application.advance(round); // CRUX
+            this.setApplication(application, advancedApplication);
+            return advancedApplication;
+        } catch (InvalidApplicationStatusException ie) {
+            throw new InvalidApplicationStatusException();
+        }
+    }
+
+    /**
      * Updates all applications involving {@code person} after the person has been
      * modified.
      *
@@ -194,28 +216,6 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
         requireNonNull(job);
         return applications.asUnmodifiableObservableList().stream().filter(app -> app.job().equals(job))
                 .collect(Collectors.toList());
-    }
-
-    /**
-     * Advances an application by the specified number of rounds.
-     *
-     * @param application The application to advance
-     * @param rounds      The number of rounds to advance by
-     * @return The updated application
-     * @throws ApplicationNotFoundException      if the application does not exist
-     * @throws InvalidApplicationStatusException if advancing would exceed job
-     *                                           rounds
-     */
-    public Application advanceApplication(Application application, int rounds) {
-        requireNonNull(application);
-
-        if (!hasApplication(application)) {
-            throw new ApplicationNotFoundException();
-        }
-
-        Application advancedApplication = application.advance(rounds);
-        setApplication(application, advancedApplication);
-        return advancedApplication;
     }
 
     //// util methods

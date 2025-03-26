@@ -81,11 +81,6 @@ public interface Model {
     String getNextCommand();
 
     /**
-     * Gets size of DDL
-     */
-    int getSize();
-
-    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);

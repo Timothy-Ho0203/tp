@@ -12,9 +12,9 @@ public class DoublyLinkedList {
      * Node serves as inner class to store the user inputs as individual objects
      */
     class Node {
-        String data;
-        Node prev;
-        Node next;
+        private String data;
+        private Node prev;
+        private Node next;
 
         public Node(String data) {
             requireNonNull(data);
@@ -50,9 +50,13 @@ public class DoublyLinkedList {
     private Node curr; // Pseudo pointer to current position in the DLL
     private int size;
 
+    /**
+     * Creates a DDL with a dummy tail node.
+     */
     public DoublyLinkedList() {
         this.head = null;
-        this.tail = null;
+        // Dummy tail node
+        this.tail = new Node("");
         this.curr = null;
         this.size = 0;
     }
@@ -64,17 +68,22 @@ public class DoublyLinkedList {
      */
     public void add(String command) {
         Node temp = new Node(command);
-        // If empty DDL, set head, tail, curr as new node
-        if (this.head == null) {
-            this.head = temp;
-            this.tail = temp;
-            this.curr = temp;
-            this.size = 1;
+        // If empty DDL, set head as new node
+        if (head == null) {
+            head = temp;
+            head.next = tail;
+            tail.prev = head;
+            curr = tail;
+            size = 1;
         } else {
-            this.tail.next = temp;
-            temp.prev = this.tail;
-            this.tail = temp;
-            this.size += 1;
+            Node dummy = tail.prev;
+            // Set link between temp and tail
+            tail.prev = temp;
+            temp.next = tail;
+            // Set link between temp and tail.prev
+            temp.prev = dummy;
+            dummy.next = temp;
+            size += 1;
         }
     }
 
@@ -82,7 +91,7 @@ public class DoublyLinkedList {
      * Resets the current pointer to point to the tail of the DDL
      */
     public void reset() {
-        this.curr = this.tail;
+        curr = tail;
     }
 
     /**
@@ -90,8 +99,8 @@ public class DoublyLinkedList {
      */
     public void moveBack() {
         // Decrement only if current pointer is not at the head
-        if (this.curr.prev != null) {
-            this.curr = this.curr.prev;
+        if (curr.prev != null) {
+            curr = curr.prev;
         }
     }
 
@@ -100,18 +109,15 @@ public class DoublyLinkedList {
      */
     public void moveForward() {
         // Increment only if current pointer is not at the tail
-        if (this.curr.next != null) {
-            this.curr = this.curr.next;
+        if (curr.next != null) {
+            curr = curr.next;
         }
     }
 
     public String getCommand() {
-        return this.curr.data;
+        return curr.data;
     }
 
-    public int getSize() {
-        return size;
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -133,7 +139,7 @@ public class DoublyLinkedList {
         Node tempB = otherDoublyLinkedList.head;
 
         // Check each node to ensure equality in data and order
-        while (tempA != null){
+        while (tempA != null) {
             if (!tempA.equals(tempB)) {
                 return false;
             }

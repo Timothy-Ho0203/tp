@@ -112,9 +112,8 @@ public class ModelManager implements Model {
 
     @Override
     public String getPrevCommand() {
-        String res = commandHistory.getCommand();
         commandHistory.moveBack();
-        return res;
+        return commandHistory.getCommand();
     }
 
     @Override
@@ -123,9 +122,6 @@ public class ModelManager implements Model {
         return commandHistory.getCommand();
     }
 
-    public int getSize() {
-        return commandHistory.getSize();
-    }
     // =========== AddressBook
     // ================================================================================
 

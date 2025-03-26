@@ -93,7 +93,6 @@ public class DoublyLinkedList {
         if (this.curr.prev != null) {
             this.curr = this.curr.prev;
         }
-
     }
 
     /**
@@ -104,11 +103,14 @@ public class DoublyLinkedList {
         if (this.curr.next != null) {
             this.curr = this.curr.next;
         }
-
     }
 
     public String getCommand() {
         return this.curr.data;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     @Override

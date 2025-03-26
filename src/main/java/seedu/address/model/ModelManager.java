@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final StackableFilteredList<Person> filteredPersons;
     private final StackableFilteredList<Job> filteredJobs;
     private final FilteredList<Application> filteredApplications;
+    private final DoublyLinkedList commandHistory;
 
     /**
      * Initializes a ModelManager with the given addressBook, applicationsManager,
@@ -46,6 +47,7 @@ public class ModelManager implements Model {
         filteredPersons = new StackableFilteredList<>(this.addressBook.getPersonList());
         filteredJobs = new StackableFilteredList<>(this.addressBook.getJobList());
         filteredApplications = new FilteredList<>(this.applicationsManager.getApplicationList());
+        commandHistory = new DoublyLinkedList();
     }
 
     public ModelManager() {
@@ -99,6 +101,31 @@ public class ModelManager implements Model {
         userPrefs.setApplicationsManagerFilePath(applicationsManagerFilePath);
     }
 
+    // =========== Command History
+    // ================================================================================
+
+    @Override
+    public void addCommand(String command) {
+        commandHistory.add(command);
+        commandHistory.reset();
+    }
+
+    @Override
+    public String getPrevCommand() {
+        String res = commandHistory.getCommand();
+        commandHistory.moveBack();
+        return res;
+    }
+
+    @Override
+    public String getNextCommand() {
+        commandHistory.moveForward();
+        return commandHistory.getCommand();
+    }
+
+    public int getSize() {
+        return commandHistory.getSize();
+    }
     // =========== AddressBook
     // ================================================================================
 

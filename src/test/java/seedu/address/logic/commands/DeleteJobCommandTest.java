@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.model.AddressBook;
 import seedu.address.model.ApplicationsManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -26,15 +27,15 @@ public class DeleteJobCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Job jobtoDelete = model.getFilteredJobList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Job jobToDelete = model.getFilteredJobList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteJobCommand deleteJobCommand = new DeleteJobCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteJobCommand.MESSAGE_DELETE_JOB_SUCCESS,
-                Messages.format(jobtoDelete));
+                Messages.format(jobToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(),
+        ModelManager expectedModel = new ModelManager(new AddressBook(this.model.getAddressBook()),
                 new ApplicationsManager(model.getApplicationsManager()), new UserPrefs());
-        expectedModel.deleteJob(jobtoDelete);
+        expectedModel.deleteJob(jobToDelete);
 
         assertCommandSuccess(deleteJobCommand, model, expectedMessage, expectedModel);
     }
@@ -60,7 +61,7 @@ public class DeleteJobCommandTest {
         assertEquals(deleteJobFirstCommand, deleteJobFirstCommandCopy);
 
         // different types -> returns false
-        assertNotEquals(1, deleteJobFirstCommand);
+        assertNotEquals(new Object(), deleteJobFirstCommand);
 
         // null -> returns false
         assertNotEquals(null, deleteJobFirstCommand);

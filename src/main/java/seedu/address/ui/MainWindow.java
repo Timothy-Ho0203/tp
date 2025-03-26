@@ -146,6 +146,7 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        commandBox.getCommandTextField().requestFocus();
         // Inject event listener to CommandBox to handle Arrow Key pressed events.
         commandBox.getCommandTextField().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {

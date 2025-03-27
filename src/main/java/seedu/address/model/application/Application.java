@@ -2,6 +2,8 @@ package seedu.address.model.application;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
 import seedu.address.model.application.exceptions.InvalidApplicationStatusException;
 import seedu.address.model.job.Job;
 import seedu.address.model.person.Person;
@@ -116,5 +118,15 @@ public record Application(Person applicant, Job job, ApplicationStatus applicati
                 job.getJobCompany(),
                 applicationStatus.applicationStatus,
                 job.getJobRounds().jobRounds);
+    }
+
+    /**
+     * Returns a hash code for this application.
+     *
+     * @return A hash code value for this application.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(applicant, job, applicationStatus);
     }
 }

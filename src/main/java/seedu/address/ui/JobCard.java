@@ -57,7 +57,6 @@ public class JobCard extends UiPart<Region> {
         jobTitle.setText(job.getJobTitle().jobTitle());
         // Company with icon
         companyBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.BUILDING, "white"));
-        company.setText(job.getJobCompany().jobCompany());
         // Job rounds with icon
         jobRoundsBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.TASKS, "white"));
         jobRounds.setText("Rounds: " + job.getJobRounds().jobRounds);
@@ -67,9 +66,7 @@ public class JobCard extends UiPart<Region> {
 
         // Add mini person cards for first 3 applicants
         if (!applications.isEmpty()) {
-            applications.stream()
-                    .limit(3)
-                    .map(application -> new MiniPersonCard(application.applicant()))
+            applications.stream().limit(3).map(application -> new MiniPersonCard(application.getApplicant()))
                     .forEach(miniCard -> applicantsPreview.getChildren().add(miniCard.getRoot()));
             if (applications.size() > 3) {
                 Label moreLabel = new Label("+" + (applications.size() - 3) + " more");
@@ -97,7 +94,6 @@ public class JobCard extends UiPart<Region> {
 
         // state check
         JobCard card = (JobCard) other;
-        return id.getText().equals(card.id.getText())
-                && job.equals(card.job);
+        return id.getText().equals(card.id.getText()) && job.equals(card.job);
     }
 }

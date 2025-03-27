@@ -112,16 +112,6 @@ public class Application {
     }
 
     /**
-     * Returns the hash code of this application.
-     *
-     * @return The hash code.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(applicant, job, applicationStatus);
-    }
-
-    /**
      * Returns a string representation of the application.
      *
      * @return A string representation.

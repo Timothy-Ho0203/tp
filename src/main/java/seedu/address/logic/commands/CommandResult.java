@@ -21,14 +21,14 @@ public class CommandResult {
 
     /** Whether the job view should be shown. */
     private final boolean toggleJobView;
-    
+
     /** Whether applications have been updated and need to be refreshed. */
     private final boolean refreshApplications;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean toggleJobView, 
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean toggleJobView,
             boolean refreshApplications) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
@@ -36,7 +36,7 @@ public class CommandResult {
         this.toggleJobView = toggleJobView;
         this.refreshApplications = refreshApplications;
     }
-    
+
     /**
      * Constructs a {@code CommandResult} with the specified fields, without refreshing applications.
      */
@@ -51,7 +51,7 @@ public class CommandResult {
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false, false, false);
     }
-    
+
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * with refreshApplications set to true, and other fields set to their default value.
@@ -75,7 +75,7 @@ public class CommandResult {
     public boolean setToggleView() {
         return toggleJobView;
     }
-    
+
     public boolean isRefreshApplications() {
         return refreshApplications;
     }

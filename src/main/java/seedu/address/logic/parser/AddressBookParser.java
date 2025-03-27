@@ -8,14 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddApplicationCommand;
-import seedu.address.logic.commands.AdvanceApplicationCommand;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddJobCommand;
+import seedu.address.logic.commands.AdvanceApplicationCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteApplicationCommand;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteJobCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditJobCommand;

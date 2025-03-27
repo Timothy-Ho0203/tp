@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROUNDS;
 
 import java.util.List;
 
-import seedu.address.logic.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -36,7 +35,8 @@ public class AdvanceApplicationCommand extends Command {
             + PREFIX_JOB_INDEX + "2 "
             + PREFIX_ROUNDS + "1";
 
-    public static final String MESSAGE_ADVANCE_APPLICATION_SUCCESS = "Advanced application: %1$s at %2$s (Status: %3$d/%4$d)";
+    public static final String MESSAGE_ADVANCE_APPLICATION_SUCCESS = "Advanced application: "
+        + "%1$s at %2$s (Status: %3$d/%4$d)";
     public static final String MESSAGE_APPLICATION_NOT_FOUND = "Application not found";
     public static final String MESSAGE_PERSON_INVALID_INDEX = "Person index is invalid";
     public static final String MESSAGE_JOB_INVALID_INDEX = "Job index is invalid";
@@ -86,7 +86,7 @@ public class AdvanceApplicationCommand extends Command {
         Application targetApplication = null;
 
         for (Application app : personApplications) {
-            if (app.job().equals(job)) {
+            if (app.getJob().equals(job)) {
                 targetApplication = app;
                 break;
             }
@@ -98,12 +98,12 @@ public class AdvanceApplicationCommand extends Command {
 
         try {
             Application advancedApplication = model.advanceApplication(targetApplication, rounds);
-            
-            String successMessage = String.format(MESSAGE_ADVANCE_APPLICATION_SUCCESS, 
-                    person.getName(), job.getJobTitle(), 
-                    advancedApplication.applicationStatus().applicationStatus,
+
+            String successMessage = String.format(MESSAGE_ADVANCE_APPLICATION_SUCCESS,
+                    person.getName(), job.getJobTitle(),
+                    advancedApplication.getApplicationStatus().applicationStatus,
                     job.getJobRounds().jobRounds);
-                    
+
             // Return a CommandResult that signals applications need to be refreshed
             return new CommandResult(successMessage, true);
         } catch (InvalidApplicationStatusException e) {
@@ -137,4 +137,4 @@ public class AdvanceApplicationCommand extends Command {
                 .add("rounds", rounds)
                 .toString();
     }
-} 
+}

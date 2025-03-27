@@ -23,7 +23,8 @@ public class AddApplicationCommand extends Command {
     public static final String COMMAND_WORD = "addapp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Creates an application for the person at the specified index to apply for the job at the specified index.\n"
+            + ": Creates an application for the person at the "
+            + "specified index to apply for the job at the specified index.\n"
             + "Parameters: "
             + PREFIX_PERSON_INDEX + "PERSON_INDEX "
             + PREFIX_JOB_INDEX + "JOB_INDEX\n"
@@ -71,7 +72,7 @@ public class AddApplicationCommand extends Command {
         // Check if an application with the same person and job already exists (regardless of status)
         List<Application> existingPersonApplications = model.getApplicationsByPerson(personToApply);
         for (Application existingApp : existingPersonApplications) {
-            if (existingApp.job().equals(jobToApplyFor)) {
+            if (existingApp.getJob().equals(jobToApplyFor)) {
                 throw new CommandException(MESSAGE_DUPLICATE_APPLICATION);
             }
         }
@@ -84,10 +85,10 @@ public class AddApplicationCommand extends Command {
         }
 
         model.addApplication(application);
-        
-        String successMessage = String.format(MESSAGE_SUCCESS, 
+
+        String successMessage = String.format(MESSAGE_SUCCESS,
                 personToApply.getName(), jobToApplyFor.getJobTitle());
-        
+
         // Return a CommandResult that signals applications need to be refreshed
         return new CommandResult(successMessage, true);
     }
@@ -114,4 +115,4 @@ public class AddApplicationCommand extends Command {
                 .add("jobIndex", jobIndex)
                 .toString();
     }
-} 
+}

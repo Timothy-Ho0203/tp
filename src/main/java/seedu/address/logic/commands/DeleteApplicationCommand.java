@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
 
 import java.util.List;
 
-import seedu.address.logic.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -72,7 +71,7 @@ public class DeleteApplicationCommand extends Command {
         Application targetApplication = null;
 
         for (Application app : personApplications) {
-            if (app.job().equals(job)) {
+            if (app.getJob().equals(job)) {
                 targetApplication = app;
                 break;
             }
@@ -83,10 +82,10 @@ public class DeleteApplicationCommand extends Command {
         }
 
         model.deleteApplication(targetApplication);
-        
-        String successMessage = String.format(MESSAGE_DELETE_APPLICATION_SUCCESS, 
+
+        String successMessage = String.format(MESSAGE_DELETE_APPLICATION_SUCCESS,
                 person.getName(), job.getJobTitle());
-                
+
         // Return a CommandResult that signals applications need to be refreshed
         return new CommandResult(successMessage, true);
     }
@@ -113,4 +112,4 @@ public class DeleteApplicationCommand extends Command {
                 .add("jobIndex", jobIndex)
                 .toString();
     }
-} 
+}

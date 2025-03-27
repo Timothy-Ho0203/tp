@@ -155,7 +155,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        resetFilteredPersonList();
     }
 
     @Override
@@ -189,7 +189,7 @@ public class ModelManager implements Model {
     @Override
     public void addJob(Job job) {
         addressBook.addJob(job);
-        updateFilteredJobList(PREDICATE_SHOW_ALL_JOBS);
+        resetFilteredJobList();
     }
 
     @Override

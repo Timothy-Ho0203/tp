@@ -54,13 +54,13 @@ public class JobCard extends UiPart<Region> {
         super(FXML);
         this.job = job;
         id.setText(displayedIndex + ". ");
-        jobTitle.setText(job.jobTitle().jobTitle());
+        jobTitle.setText(job.getJobTitle().jobTitle());
         // Company with icon
         companyBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.BUILDING, "white"));
-        company.setText(job.jobCompany().jobCompany());
+        company.setText(job.getJobCompany().jobCompany());
         // Job rounds with icon
         jobRoundsBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.TASKS, "white"));
-        jobRounds.setText("Rounds: " + job.jobRounds().jobRounds);
+        jobRounds.setText("Rounds: " + job.getJobRounds().jobRounds);
         // Applications preview with icon
         applicationsBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.USERS, "white"));
         this.applications.setText("Applications: " + applications.size());

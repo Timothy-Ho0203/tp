@@ -44,6 +44,8 @@ public class AdvanceApplicationCommand extends Command {
             + "Try using the AddApplicationCommand to add an application first!";
     public static final String MESSAGE_INVALID_PERSON = "This application's person does not exist in the address book.";
     public static final String MESSAGE_INVALID_JOB = "This application's job does not exist in the address book.";
+    public static final String MESSAGE_INVALID_APPLICATION_STATUS_ADVANCED =
+            "Advancing this application by 0 rounds has no effect.";
     public static final String MESSAGE_NONUNIQUE_PERSON = "This application's person is non-unique in the address book";
     public static final String MESSAGE_NONUNIQUE_JOB = "This application's job is non-unique in the address book";
     public static final String MESSAGE_NONUNIQUE_APPLICATION = "This application is non-unique in the address book";
@@ -74,11 +76,12 @@ public class AdvanceApplicationCommand extends Command {
      * Creates an {@code AdvanceApplicationCommand} to advance the specified {@code Application},
      * {@code applicationStatusAdvanced} contained within for easier parsing in {@code AdvanceApplicationCommandParser}.
      * @param application Intermediate application from {@code AdvanceApplicationCommandParser::parse}.
+     * @param applicationStatusAdvanced optional increase in application status if present.
      */
-    public AdvanceApplicationCommand(Application application) {
+    public AdvanceApplicationCommand(Application application, ApplicationStatus applicationStatusAdvanced) {
         requireNonNull(application);
         this.application = application;
-        this.applicationStatusAdvanced = this.application.applicationStatus();
+        this.applicationStatusAdvanced = applicationStatusAdvanced;
         this.parseByIndex = false;
     }
 
@@ -93,6 +96,10 @@ public class AdvanceApplicationCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        // 0th guard condition: Invalid application status advanced being 0. Ensure advancement is meaningful.
+        if (this.applicationStatusAdvanced.equals(ApplicationStatus.DEFAULT_ADDAPPLICATIONSTATUS)) {
+            throw new CommandException(MESSAGE_INVALID_APPLICATION_STATUS_ADVANCED);
+        }
         if (this.parseByIndex) {
             ObservableList<Person> matchingPersons = model.getFilteredPersonList();
             ObservableList<Job> matchingJobs = model.getFilteredJobList();
@@ -106,7 +113,12 @@ public class AdvanceApplicationCommand extends Command {
                 throw new CommandException(MESSAGE_INVALID_JOB);
             }
             Job matchingJob = matchingJobs.get(this.jobIndex.getZeroBased());
-            this.application = new Application(matchingPerson, matchingJob, this.applicationStatusAdvanced);
+            // 4th guard condition applies too: Existing application can't be advanced by round without exceeding limit.
+            try {
+                this.application = new Application(matchingPerson, matchingJob, this.applicationStatusAdvanced);
+            } catch (InvalidApplicationStatusException e) {
+                throw new CommandException(MESSAGE_FULL_APPLICATION);
+            }
         } else {
             // 1st guard condition below: Invalid person by person's identifier i.e. Phone.
             if (!model.hasPerson(this.application.applicant())) {

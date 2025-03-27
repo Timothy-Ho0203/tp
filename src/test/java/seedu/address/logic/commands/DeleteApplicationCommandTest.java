@@ -20,7 +20,10 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.application.Application;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteApplicationCommand}.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteApplicationCommand}, noting
+ * that accessing 1st application of {@code UniqueApplicationList} implicitly sets the person index of that
+ * application's applicant to {@code INDEX_FIRST_PERSON} and job index of that application's job to
+ * {@code INDEX_FIRST_PERSON}. This doesn't necessarily hold from 2nd application onwards.
  */
 public class DeleteApplicationCommandTest {
     private final Model model = new ModelManager(
@@ -43,9 +46,7 @@ public class DeleteApplicationCommandTest {
 
     /**
      * Tests constructing via valid person index and job index parsed as such in {@code DeleteApplicationCommandParser}
-     * in multiple dispatch, noting that accessing 1st application of {@code UniqueApplicationList} implicitly sets the
-     * person index of that application's applicant to {@code INDEX_FIRST_PERSON} and job index of that application's
-     * job to {@code INDEX_FIRST_PERSON}. This doesn't necessarily hold from 2nd application onwards.
+     * in multiple dispatch.
      */
     @Test
     public void execute_validIndicesUnfilteredList_success() {
@@ -76,6 +77,9 @@ public class DeleteApplicationCommandTest {
         assertCommandFailure(deleteApplicationCommand, this.model, DeleteApplicationCommand.MESSAGE_INVALID_JOB);
     }
 
+    /**
+     * Both applications need not exist as it tests only for equality. Equality in multiple dispatch is tested above.
+     */
     @Test
     public void equals() {
         DeleteApplicationCommand deleteFirstApplicationCommand = new DeleteApplicationCommand(

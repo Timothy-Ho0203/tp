@@ -75,7 +75,7 @@ public class AdvanceApplicationCommandParser implements Parser<AdvanceApplicatio
             Job dummyJob = new Job(jobTitle, JobCompany.DEFAULT_JOBCOMPANY, JobRounds.DEFAULT_JOBROUNDS,
                     JobSkills.DEFAULT_JOBSKILLS, JobAddress.DEFAULT_JOBADDRESS, JobType.DEFAULT_JOBTYPE);
             Application application = new Application(dummyPerson, dummyJob, applicationStatusAdvanced);
-            return new AdvanceApplicationCommand(application);
+            return new AdvanceApplicationCommand(application, applicationStatusAdvanced);
         } else {
             Index personIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_PERSON_INDEX).get());
             Index jobIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_JOB_INDEX).get());

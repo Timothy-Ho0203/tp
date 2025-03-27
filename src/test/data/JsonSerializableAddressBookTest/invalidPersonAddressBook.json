@@ -1,17 +1,19 @@
 {
-  "persons": [ {
-    "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e",
-    "address": "4th street",
-    "school": "Test school"
-  } ],
-  "jobs": [ {
-    "jobTitle": "Software Engineer",
-    "jobCompany": "Google",
-    "jobRounds": 4,
-    "jobSkills": ["Java", "Spring Boot", "Microservices"],
-    "jobAddress": "70 Pasir Panjang Rd, Singapore 117371",
-    "jobType": "Intern"
-  } ]
+  "persons": [
+    {
+      "name": "Hans Muster",
+      "phone": "9482424",
+      "email": "invalid@email!3e",
+      "address": "4th street",
+      "school": "Test school"
+    }
+  ],
+  "jobs": [
+    {
+      "jobTitle": "Software Engineer",
+      "jobRounds": 4,
+      "jobSkills": ["Java", "Spring Boot", "Microservices"],
+      "jobType": "Intern"
+    }
+  ]
 }

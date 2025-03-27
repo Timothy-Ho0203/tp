@@ -7,10 +7,8 @@
   } ],
   "jobs": [ {
     "jobTitle": "Software Engineer",
-    "jobCompany": "Google",
     "jobRounds": 4,
     "jobSkills": ["Java", "Spring Boot", "Microservices"],
-    "jobAddress": "70 Pasir Panjang Rd, Singapore 117371",
     "jobType": "Intern"
   } ]
 }

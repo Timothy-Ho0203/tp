@@ -29,8 +29,6 @@ public class JobCard extends UiPart<Region> {
     @FXML
     private Label jobTitle;
     @FXML
-    private Label company;
-    @FXML
     private Label jobRounds;
     @FXML
     private Label applications;
@@ -38,8 +36,6 @@ public class JobCard extends UiPart<Region> {
     // Attribute Containers
     @FXML
     private HBox jobTitleBox;
-    @FXML
-    private HBox companyBox;
     @FXML
     private HBox jobRoundsBox;
     @FXML
@@ -55,9 +51,6 @@ public class JobCard extends UiPart<Region> {
         this.job = job;
         id.setText(displayedIndex + ". ");
         jobTitle.setText(job.jobTitle().jobTitle());
-        // Company with icon
-        companyBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.BUILDING, "white"));
-        company.setText(job.jobCompany().jobCompany());
         // Job rounds with icon
         jobRoundsBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.TASKS, "white"));
         jobRounds.setText("Rounds: " + job.jobRounds().jobRounds);

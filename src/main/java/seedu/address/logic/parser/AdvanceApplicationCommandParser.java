@@ -15,8 +15,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationStatus;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.JobAddress;
-import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobRounds;
 import seedu.address.model.job.JobSkills;
 import seedu.address.model.job.JobTitle;
@@ -72,8 +70,8 @@ public class AdvanceApplicationCommandParser implements Parser<AdvanceApplicatio
             JobTitle jobTitle = ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOB_TITLE).get());
             Person dummyPerson = new Person(Name.DEFAULT_NAME, phone, Email.DEFAULT_EMAIL, Address.DEFAULT_ADDRESS,
                     School.DEFAULT_SCHOOL, Degree.DEFAULT_DEGREE, Person.DEFAULT_TAGS);
-            Job dummyJob = new Job(jobTitle, JobCompany.DEFAULT_JOBCOMPANY, JobRounds.DEFAULT_JOBROUNDS,
-                    JobSkills.DEFAULT_JOBSKILLS, JobAddress.DEFAULT_JOBADDRESS, JobType.DEFAULT_JOBTYPE);
+            Job dummyJob = new Job(jobTitle, JobRounds.DEFAULT_JOBROUNDS,
+                    JobSkills.DEFAULT_JOBSKILLS, JobType.DEFAULT_JOBTYPE);
             Application application = new Application(dummyPerson, dummyJob, applicationStatusAdvanced);
             return new AdvanceApplicationCommand(application, applicationStatusAdvanced);
         } else {

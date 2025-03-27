@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROUNDS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_SKILLS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
@@ -19,8 +17,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.JobAddress;
-import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobRounds;
 import seedu.address.model.job.JobSkills;
 import seedu.address.model.job.JobTitle;
@@ -36,10 +32,10 @@ public class EditJobCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the job identified "
             + "by the index number used in the displayed job list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_JOB_TITLE + "JOB TITLE] "
-            + "[" + PREFIX_JOB_COMPANY + "COMPANY NAME] " + "[" + PREFIX_JOB_ROUNDS + "NUMBER OF ROUNDS] "
-            + "[" + PREFIX_JOB_SKILLS + "SKILLS] " + "[" + PREFIX_JOB_ADDRESS + "COMPANY ADDRESS] "
-            + "[" + PREFIX_EMPLOYMENT_TYPE + "WORK TYPE]";
+            + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_JOB_TITLE + "JOB_TITLE] "
+            + "[" + PREFIX_JOB_ROUNDS + "NUMBER_OF_ROUNDS] "
+            + "[" + PREFIX_JOB_SKILLS + "SKILLS] "
+            + "[" + PREFIX_EMPLOYMENT_TYPE + "WORK_TYPE]";
 
     public static final String MESSAGE_EDIT_JOB_SUCCESS = "Edited Job: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -89,14 +85,11 @@ public class EditJobCommand extends Command {
         assert jobToEdit != null;
 
         JobTitle updatedJobTitle = editJobDescriptor.getJobTitle().orElse(jobToEdit.jobTitle());
-        JobCompany updatedJobCompany = editJobDescriptor.getJobCompany().orElse(jobToEdit.jobCompany());
         JobRounds updatedJobRounds = editJobDescriptor.getJobRounds().orElse(jobToEdit.jobRounds());
         JobSkills updatedJobSkills = editJobDescriptor.getJobSkills().orElse(jobToEdit.jobSkills());
-        JobAddress updatedJobAddress = editJobDescriptor.getJobAddress().orElse(jobToEdit.jobAddress());
         JobType updatedJobType = editJobDescriptor.getJobType().orElse(jobToEdit.jobType());
 
-        return new Job(updatedJobTitle, updatedJobCompany, updatedJobRounds, updatedJobSkills,
-                updatedJobAddress, updatedJobType);
+        return new Job(updatedJobTitle, updatedJobRounds, updatedJobSkills, updatedJobType);
     }
 
     @Override
@@ -120,10 +113,8 @@ public class EditJobCommand extends Command {
      */
     public static class EditJobDescriptor {
         private JobTitle jobTitle;
-        private JobCompany jobCompany;
         private JobRounds jobRounds;
         private JobSkills jobSkills;
-        private JobAddress jobAddress;
         private JobType jobType;
 
         public EditJobDescriptor() {
@@ -134,10 +125,8 @@ public class EditJobCommand extends Command {
          */
         public EditJobDescriptor(EditJobDescriptor toCopy) {
             setJobTitle(toCopy.jobTitle);
-            setJobCompany(toCopy.jobCompany);
             setJobRounds(toCopy.jobRounds);
             setJobSkills(toCopy.jobSkills);
-            setJobAddress(toCopy.jobAddress);
             setJobType(toCopy.jobType);
         }
 
@@ -145,8 +134,7 @@ public class EditJobCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(this.jobTitle, this.jobCompany, this.jobRounds, this.jobSkills,
-                    this.jobAddress, this.jobType);
+            return CollectionUtil.isAnyNonNull(this.jobTitle, this.jobRounds, this.jobSkills, this.jobType);
         }
 
         public void setJobTitle(JobTitle jobTitle) {
@@ -155,14 +143,6 @@ public class EditJobCommand extends Command {
 
         public Optional<JobTitle> getJobTitle() {
             return Optional.ofNullable(this.jobTitle);
-        }
-
-        public void setJobCompany(JobCompany jobCompany) {
-            this.jobCompany = jobCompany;
-        }
-
-        public Optional<JobCompany> getJobCompany() {
-            return Optional.ofNullable(this.jobCompany);
         }
 
         public void setJobRounds(JobRounds jobRounds) {
@@ -179,14 +159,6 @@ public class EditJobCommand extends Command {
 
         public Optional<JobSkills> getJobSkills() {
             return Optional.ofNullable(this.jobSkills);
-        }
-
-        public void setJobAddress(JobAddress jobAddress) {
-            this.jobAddress = jobAddress;
-        }
-
-        public Optional<JobAddress> getJobAddress() {
-            return Optional.ofNullable(jobAddress);
         }
 
         public void setJobType(JobType jobType) {
@@ -208,18 +180,16 @@ public class EditJobCommand extends Command {
                 return false;
             }
             return Objects.equals(this.jobTitle, otherEditJobDescriptor.jobTitle)
-                    && Objects.equals(this.jobCompany, otherEditJobDescriptor.jobCompany)
                     && Objects.equals(this.jobRounds, otherEditJobDescriptor.jobRounds)
                     && Objects.equals(this.jobSkills, otherEditJobDescriptor.jobSkills)
-                    && Objects.equals(this.jobAddress, otherEditJobDescriptor.jobAddress)
                     && Objects.equals(this.jobType, otherEditJobDescriptor.jobType);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this).add("job title", this.jobTitle)
-                    .add("company name", this.jobCompany).add("job rounds", this.jobRounds)
-                    .add("job skills", this.jobSkills).add("company address", this.jobAddress)
+                    .add("job rounds", this.jobRounds)
+                    .add("job skills", this.jobSkills)
                     .add("job type", this.jobType).toString();
         }
     }

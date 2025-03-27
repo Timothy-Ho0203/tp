@@ -23,10 +23,6 @@
         <Label fx:id="id" styleClass="cell_big_label" text="1" />
         <Label fx:id="jobTitle" styleClass="cell_big_label" text="\$jobTitle" wrapText="true" />
       </HBox>
-      <!-- Company -->
-      <HBox fx:id="companyBox" alignment="CENTER_LEFT" spacing="5">
-        <Label fx:id="company" styleClass="cell_small_label" text="\$company" />
-      </HBox>
       <!-- Job Rounds -->
       <HBox fx:id="jobRoundsBox" alignment="CENTER_LEFT" spacing="5">
         <Label fx:id="jobRounds" styleClass="cell_small_label" text="\$jobRounds" />

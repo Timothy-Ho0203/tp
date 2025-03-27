@@ -5,20 +5,18 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 /**
  * Represents a job with a job title and company name.
  */
-public record Job(JobTitle jobTitle, JobCompany jobCompany, JobRounds jobRounds, JobSkills jobSkills,
-                  JobAddress jobAddress, JobType jobType) {
+public record Job(JobTitle jobTitle, JobRounds jobRounds, JobSkills jobSkills,
+                  JobType jobType) {
     /**
      * Constructs a Job with the specified job title and company name.
      *
      * @param jobTitle   The title of the job.
-     * @param jobCompany The name of the company offering the job.
      * @param jobRounds  The rounds of the job.
      * @param jobSkills  The requisite skills for the job.
-     * @param jobAddress The address of the job.
      * @param jobType    The employment type of the job.
      */
     public Job {
-        requireAllNonNull(jobTitle, jobCompany, jobRounds, jobSkills, jobAddress, jobType);
+        requireAllNonNull(jobTitle, jobRounds, jobSkills, jobType);
     }
 
     /**
@@ -29,16 +27,6 @@ public record Job(JobTitle jobTitle, JobCompany jobCompany, JobRounds jobRounds,
     @Override
     public JobTitle jobTitle() {
         return this.jobTitle;
-    }
-
-    /**
-     * Returns the company name of this job.
-     *
-     * @return The company name.
-     */
-    @Override
-    public JobCompany jobCompany() {
-        return this.jobCompany;
     }
 
     /**
@@ -62,16 +50,6 @@ public record Job(JobTitle jobTitle, JobCompany jobCompany, JobRounds jobRounds,
     }
 
     /**
-     * Returns the job address of this job.
-     *
-     * @return The job address.
-     */
-    @Override
-    public JobAddress jobAddress() {
-        return this.jobAddress;
-    }
-
-    /**
      * Returns the employment type of this job, be it intern, part-time or full-time.
      *
      * @return The employment type of the job.
@@ -86,8 +64,7 @@ public record Job(JobTitle jobTitle, JobCompany jobCompany, JobRounds jobRounds,
      * of equality between two jobs.
      */
     public boolean isSameJob(Job otherJob) {
-        return otherJob != null && otherJob.jobTitle().equals(this.jobTitle)
-                && otherJob.jobCompany().equals(this.jobCompany);
+        return otherJob != null && otherJob.jobTitle().equals(this.jobTitle);
     }
 
     /**

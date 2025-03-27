@@ -1,7 +1,5 @@
 package seedu.address.model.company;
 
-import java.util.Objects;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -19,13 +17,13 @@ public record CompanyName(String name) {
     public static final String VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} ]*";
 
     /**
-     * Constructs a {@code JobCompany}.
+     * Constructs a {@code CompanyName}.
      *
      * @param name A valid company name.
      */
     public CompanyName {
         requireNonNull(name);
-        checkArgument(isValidJobCompany(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidCompanyName(name), MESSAGE_CONSTRAINTS);
     }
 
     /**
@@ -34,7 +32,7 @@ public record CompanyName(String name) {
      * @param test The string to validate.
      * @return True if the given string is a valid company name.
      */
-    public static boolean isValidJobCompany(String test) {
+    public static boolean isValidCompanyName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

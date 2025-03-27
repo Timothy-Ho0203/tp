@@ -11,8 +11,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.ApplicationStatus;
-import seedu.address.model.job.JobAddress;
-import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobRounds;
 import seedu.address.model.job.JobSkills;
 import seedu.address.model.job.JobTitle;
@@ -137,18 +135,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String jobCompany} into a {@code JobCompany}. Leading and trailing whitespaces will be trimmed.
-     * @param jobCompany Raw JobCompany String by user.
-     * @return trimmed remark without leading and trailing whitespaces for more efficient processing.
-     * @throws ParseException if the given {@code JobCompany} is invalid.
-     */
-    public static JobCompany parseJobCompany(String jobCompany) throws ParseException {
-        String trimmedJobCompany = jobCompany.trim();
-        requireNonNull(jobCompany);
-        return new JobCompany(trimmedJobCompany);
-    }
-
-    /**
      * Parses a {@code String jobRounds} into a {@code JobRounds}. Leading and trailing whitespaces will be trimmed.
      * @param jobRounds Raw jobRounds String by user.
      * @return trimmed remark without leading and trailing whitespaces for more efficient processing.
@@ -172,18 +158,6 @@ public class ParserUtil {
         requireNonNull(jobSkills);
         String[] jobSkillsArray = jobSkills.split("\\s+");
         return new JobSkills(FXCollections.observableArrayList(jobSkillsArray));
-    }
-
-    /**
-     * Parses a {@code String jobAddress} into a {@code JobAddress}. Leading and trailing whitespaces will be trimmed.
-     * @param jobAddress Raw jobAddress String by user.
-     * @return trimmed jobAddress.
-     * @throws ParseException if the given {@code jobAddress} is invalid.
-     */
-    public static JobAddress parseJobAddress(String jobAddress) throws ParseException {
-        jobAddress = jobAddress.trim();
-        requireNonNull(jobAddress);
-        return new JobAddress(jobAddress);
     }
 
     /**

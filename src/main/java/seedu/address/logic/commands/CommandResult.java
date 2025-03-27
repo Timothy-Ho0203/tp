@@ -22,17 +22,14 @@ public class CommandResult {
     /** Whether the job view should be shown. */
     private final boolean toggleJobView;
 
-    private final boolean isSetCompany;
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean toggleJobView, boolean isSetCompany) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean toggleJobView) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.toggleJobView = toggleJobView;
-        this.isSetCompany = isSetCompany;
     }
 
     /**
@@ -40,7 +37,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false);
+        this(feedbackToUser, false, false, false);
     }
 
     public String getFeedbackToUser() {

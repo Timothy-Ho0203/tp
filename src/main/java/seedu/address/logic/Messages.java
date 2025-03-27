@@ -50,9 +50,9 @@ public class Messages {
      */
     public static String format(Job job) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(job.jobTitle()).append(" ; Company: ").append(job.jobCompany())
-                .append(" ; Number of rounds: ").append(job.jobRounds()).append(" ; Address: ")
-                .append(job.jobAddress()).append(" ; Job Type: ").append(job.jobType())
+        builder.append(job.jobTitle())
+                .append(" ; Number of rounds: ").append(job.jobRounds())
+                .append(" ; Job Type: ").append(job.jobType())
                 .append(" ; Skills: ");
         job.jobSkills().value.forEach(builder::append);
         return builder.toString();

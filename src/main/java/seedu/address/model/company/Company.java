@@ -1,8 +1,8 @@
 package seedu.address.model.company;
 
-import java.util.Objects;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import static java.util.Objects.requireNonNull;
+import java.util.Objects;
 
 /**
  * Represents a Company with a name
@@ -10,13 +10,26 @@ import static java.util.Objects.requireNonNull;
 public class Company {
     private final CompanyName name;
 
-    public Company(CompanyName name) {
-        requireNonNull(name);
+    private final CompanyAddress address;
+
+    /**
+     * Constructs a Company with the specified job title and company name.
+     *
+     * @param name   The name of the company.
+     * @param address  The address of the company.
+     */
+    public Company(CompanyName name, CompanyAddress address) {
+        requireAllNonNull(name, address);
         this.name = name;
+        this.address = address;
     }
 
     public CompanyName getName() {
         return this.name;
+    }
+
+    public CompanyAddress getAddress() {
+        return this.address;
     }
 
     /**

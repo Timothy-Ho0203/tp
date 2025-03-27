@@ -123,9 +123,8 @@ public class Application {
      */
     @Override
     public String toString() {
-        return String.format("Application: %s at %s (Status: %d/%d)",
+        return String.format("Application: %s (Status: %d/%d)",
                 this.job.jobTitle(),
-                this.job.jobCompany(),
                 this.applicationStatus.applicationStatus,
                 this.job.jobRounds().jobRounds);
     }

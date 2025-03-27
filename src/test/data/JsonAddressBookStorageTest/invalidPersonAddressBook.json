@@ -1,16 +1,18 @@
 {
-  "persons": [ {
-    "name": "Person with invalid name field: Ha!ns Mu@ster",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
-  } ],
-  "jobs": [ {
-    "jobTitle": "Software Engineer",
-    "jobCompany": "Google",
-    "jobRounds": 4,
-    "jobSkills": ["Java", "Spring Boot", "Microservices"],
-    "jobAddress": "70 Pasir Panjang Rd, Singapore 117371",
-    "jobType": "Intern"
-  } ]
+  "persons": [
+    {
+      "name": "Person with invalid name field: Ha!ns Mu@ster",
+      "phone": "9482424",
+      "email": "hans@example.com",
+      "address": "4th street"
+    }
+  ],
+  "jobs": [
+    {
+      "jobTitle": "Software Engineer",
+      "jobRounds": 4,
+      "jobSkills": ["Java", "Spring Boot", "Microservices"],
+      "jobType": "Intern"
+    }
+  ]
 }

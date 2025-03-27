@@ -31,7 +31,7 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-    public final List<Application> applications; //This should be applications from person
+    public final List<Application> applications; // This should be applications from person
 
     // Graphic Components
     @FXML
@@ -114,14 +114,12 @@ public class PersonCard extends UiPart<Region> {
 
         // Add applications
         applicationsBox.getChildren().add(0, IconUtil.createIcon(FontAwesomeIcon.BRIEFCASE, "white"));
-        applications.stream().sorted(Comparator.comparing(Application::applicationStatus))
-            .forEach(app -> {
-                String jobTitle = app.job().getJobTitle().toString();
-                int currentRound = app.applicationStatus().applicationStatus;
-                int maxRound = app.job().getJobRounds().jobRounds;
-                String companyTitle = app.job().getJobCompany().jobCompany();
-                String displayText = jobTitle + "\n" + companyTitle + "\nRound: " + currentRound + "/" + maxRound;
-                apps.getChildren().add(new Label(displayText));
-            });
+        applications.stream().sorted(Comparator.comparing(Application::getApplicationStatus)).forEach(app -> {
+            String jobTitle = app.getJob().getJobTitle().toString();
+            int currentRound = app.getApplicationStatus().applicationStatus;
+            int maxRound = app.getJob().getJobRounds().jobRounds;
+            String displayText = jobTitle + "\nRound: " + currentRound + "/" + maxRound;
+            apps.getChildren().add(new Label(displayText));
+        });
     }
 }

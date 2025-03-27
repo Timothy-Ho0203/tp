@@ -15,18 +15,17 @@ import seedu.address.model.tag.Tag;
  * not null, field values are validated, immutable.
  */
 public class Person {
-    public static final Set<Tag> DEFAULT_TAGS = new HashSet<>();
+
+    // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
     private final Degree degree;
+
+    // Data fields
     private final Address address;
     private final School school;
     private final Set<Tag> tags = new HashSet<>();
-
-    static {
-        DEFAULT_TAGS.add(Tag.DEFAULT_TAG);
-    }
 
     /**
      * Every field must be present and not null.
@@ -59,11 +58,11 @@ public class Person {
     }
 
     public School getSchool() {
-        return this.school;
+        return school;
     }
 
     public Degree getDegree() {
-        return this.degree;
+        return degree;
     }
 
     /**
@@ -79,7 +78,7 @@ public class Person {
      * of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        return otherPerson != null && otherPerson.getPhone().equals(this.getPhone());
+        return otherPerson != null && otherPerson.getName().equals(this.getName());
     }
 
     /**
@@ -93,14 +92,14 @@ public class Person {
         }
         return this.name.equals(otherPerson.name) && this.phone.equals(otherPerson.phone)
                 && this.email.equals(otherPerson.email) && this.address.equals(otherPerson.address)
-                && this.school.equals(otherPerson.school) && this.degree.equals(otherPerson.degree)
+                && school.equals(otherPerson.school) && degree.equals(otherPerson.degree)
                 && this.tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.name, this.phone, this.email, this.address, this.school, this.degree, this.tags);
+        return Objects.hash(name, phone, email, address, tags, school, degree);
     }
 
     /**
@@ -111,12 +110,8 @@ public class Person {
      */
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("name", this.name)
-                .add("phone", this.phone)
-                .add("email", this.email)
-                .add("address", this.address)
-                .add("school", this.school)
-                .add("degree", this.degree)
-                .add("tags", this.tags).toString();
+        return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email)
+                .add("address", address).add("school", school).add("degree", degree).add("tags", tags).toString();
     }
+
 }

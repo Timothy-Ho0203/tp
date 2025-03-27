@@ -112,16 +112,6 @@ public class Application {
     }
 
     /**
-     * Returns the hash code of this application.
-     *
-     * @return The hash code.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(applicant, job, applicationStatus);
-    }
-
-    /**
      * Returns a string representation of the application.
      *
      * @return A string representation.
@@ -130,5 +120,15 @@ public class Application {
     public String toString() {
         return String.format("Application: %s (Status: %d/%d)", job.getJobTitle(), applicationStatus.applicationStatus,
                 job.getJobRounds().jobRounds);
+    }
+
+    /**
+     * Returns a hash code for this application.
+     *
+     * @return A hash code value for this application.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(applicant, job, applicationStatus);
     }
 }

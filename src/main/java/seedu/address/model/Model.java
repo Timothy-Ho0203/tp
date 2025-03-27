@@ -8,9 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.application.Application;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.JobTitle;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 
 /**
  * The API of the Model component.
@@ -26,14 +24,14 @@ public interface Model {
     Predicate<Application> PREDICATE_SHOW_ALL_APPLICATIONS = unused -> true;
 
     /**
-     * Returns the user prefs.
-     */
-    ReadOnlyUserPrefs getUserPrefs();
-
-    /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+
+    /**
+     * Returns the user prefs.
+     */
+    ReadOnlyUserPrefs getUserPrefs();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -90,9 +88,6 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
-    // =========== Person Operations
-    // =============================================================
-
     /**
      * Returns true if a person with the same identity as {@code person} exists in
      * the address book.
@@ -113,12 +108,26 @@ public interface Model {
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book. The person identity of
-     * {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code editedPerson} must not be the same as another existing person in the
+     * address book.
      */
     void setPerson(Person target, Person editedPerson);
 
-    // =========== Job Operations
-    // =============================================================
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given
+     * {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Resets the filter of the filtered person list to show all people
+     */
+    void resetFilteredPersonList();
 
     /**
      * Returns true if a job with the same identity as {@code job} exists in the
@@ -143,8 +152,24 @@ public interface Model {
      */
     void setJob(Job target, Job editedJob);
 
-    // =========== Application Operations via ApplicationsManager's method invocations
-    // =================================================================
+    /** Returns an unmodifiable view of the filtered job list */
+    ObservableList<Job> getFilteredJobList();
+
+    /**
+     * Updates the filter of the filtered job list to filter by the given
+     * {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredJobList(Predicate<Job> predicate);
+
+    /**
+     * Resets the filter of the filtered job list to show all jobs
+     */
+    void resetFilteredJobList();
+
+    // =========== ApplicationsManager Methods
+    // =============================================================
 
     /**
      * Returns the ApplicationsManager.
@@ -158,17 +183,20 @@ public interface Model {
     void setApplicationsManager(ReadOnlyApplicationsManager applicationsManager);
 
     /**
-     * Returns true if an application with the same identity as {@code application} exists in the applications manager.
+     * Returns true if an application with the same identity as {@code application}
+     * exists in the applications manager.
      */
     boolean hasApplication(Application application);
 
     /**
-     * Deletes the given application. The application must exist in the applications manager.
+     * Deletes the given application. The application must exist in the applications
+     * manager.
      */
     void deleteApplication(Application target);
 
     /**
-     * Adds the given application. {@code application} must not already exist in the applications manager.
+     * Adds the given application. {@code application} must not already exist in the
+     * applications manager.
      */
     void addApplication(Application application);
 
@@ -182,73 +210,10 @@ public interface Model {
 
     /**
      * Advances the given application by the specified number of rounds.
+     *
      * @return The updated application
      */
     Application advanceApplication(Application application, int rounds);
-
-    // =========== Filtered Person List Accessors
-    // =============================================================
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given
-     * {@code predicate}.
-     *
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
-
-    /**
-     * Resets the filter of the filtered person list to show all people
-     */
-    void resetFilteredPersonList();
-
-    /**
-     * Gets all persons associated with a specific phone number.
-     * @param phone The phone number whose persons to retrieve.
-     * @return A list of persons associated with the phone number.
-     */
-    List<Person> getPersonsByPhone(Phone phone);
-
-    // =========== Filtered Job List Accessors
-    // =============================================================
-
-    /** Returns an unmodifiable view of the filtered job list */
-    ObservableList<Job> getFilteredJobList();
-
-    /**
-     * Updates the filter of the filtered job list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredJobList(Predicate<Job> predicate);
-
-    /**
-     * Resets the filter of the filtered job list to show all jobs
-     */
-    void resetFilteredJobList();
-
-    /**
-     * Returns a list of jobs associated with a specific title and company name.
-     * @param jobTitle The title whose jobs to retrieve.
-     * @return A list of jobs associated with the title and company name.
-     */
-    List<Job> getJobsByTitle(JobTitle jobTitle);
-
-    // =========== Filtered Application List Accessors
-    // ================================================================
-
-    /** Returns an unmodifiable view of the filtered application list */
-    ObservableList<Application> getFilteredApplicationList();
-
-    /**
-     * Updates the filter of the filtered application list to filter by the given
-     * {@code predicate}.
-     *
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredApplicationList(Predicate<Application> predicate);
 
     /**
      * Returns a list of applications associated with a specific person.
@@ -262,9 +227,14 @@ public interface Model {
      */
     List<Application> getApplicationsByJob(Job job);
 
+    /** Returns an unmodifiable view of the filtered application list */
+    ObservableList<Application> getFilteredApplicationList();
+
     /**
-     * Returns the unique application, or lack thereof, associated with a specific person and job.
-     * @return The unique application, or lack thereof, associated with the person and job.
+     * Updates the filter of the filtered application list to filter by the given
+     * {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
      */
-    List<Application> getApplicationsByPersonAndJob(Person person, Job job);
+    void updateFilteredApplicationList(Predicate<Application> predicate);
 }

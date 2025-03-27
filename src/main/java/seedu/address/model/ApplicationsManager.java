@@ -70,7 +70,8 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
     //// application-level operations
 
     /**
-     * Returns true if an application identical to {@code application} exists in the applications manager.
+     * Returns true if an application identical to {@code application} exists in the
+     * applications manager.
      */
     public boolean hasApplication(Application application) {
         requireNonNull(application);
@@ -106,28 +107,6 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
     }
 
     /**
-     * Advances an application by the specified number of rounds.
-     * @param application The application to advance
-     * @param round      The number of rounds to advance by
-     * @return The updated application
-     * @throws ApplicationNotFoundException      If the application does not exist.
-     * @throws InvalidApplicationStatusException If advancing would exceed job rounds.
-     */
-    public Application advanceApplication(Application application, int round) throws InvalidApplicationStatusException {
-        requireNonNull(application);
-        if (!hasApplication(application)) {
-            throw new ApplicationNotFoundException();
-        }
-        try {
-            Application advancedApplication = application.advance(round); // CRUX
-            this.setApplication(application, advancedApplication);
-            return advancedApplication;
-        } catch (InvalidApplicationStatusException ie) {
-            throw new InvalidApplicationStatusException();
-        }
-    }
-
-    /**
      * Updates all applications involving {@code person} after the person has been
      * modified.
      *
@@ -140,7 +119,7 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
 
         // Find all applications involving this person and update them
         getApplicationsByPerson(oldPerson).forEach(app -> {
-            Application newApp = new Application(newPerson, app.job(), app.applicationStatus());
+            Application newApp = new Application(newPerson, app.getJob(), app.getApplicationStatus());
             setApplication(app, newApp);
         });
     }
@@ -159,11 +138,11 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
         // Find all applications involving this job and update them
         getApplicationsByJob(oldJob).forEach(app -> {
             // Check if application status is still valid with new job
-            if (app.applicationStatus().applicationStatus > newJob.jobRounds().jobRounds) {
+            if (app.getApplicationStatus().applicationStatus > newJob.getJobRounds().jobRounds) {
                 throw new InvalidApplicationStatusException();
             }
 
-            Application newApp = new Application(app.applicant(), newJob, app.applicationStatus());
+            Application newApp = new Application(app.getApplicant(), newJob, app.getApplicationStatus());
             setApplication(app, newApp);
         });
     }
@@ -203,19 +182,43 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
     public List<Application> getApplicationsByPerson(Person person) {
         requireNonNull(person);
 
-        return applications.asUnmodifiableObservableList().stream().filter(app -> app.applicant().equals(person))
+        return applications.asUnmodifiableObservableList().stream().filter(app -> app.getApplicant().equals(person))
                 .collect(Collectors.toList());
     }
 
     /**
      * Gets all applications associated with a specific job.
+     *
      * @param job The job whose applications to retrieve
      * @return A list of applications associated with the job
      */
     public List<Application> getApplicationsByJob(Job job) {
         requireNonNull(job);
-        return applications.asUnmodifiableObservableList().stream().filter(app -> app.job().equals(job))
+
+        return applications.asUnmodifiableObservableList().stream().filter(app -> app.getJob().equals(job))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Advances an application by the specified number of rounds.
+     *
+     * @param application The application to advance
+     * @param rounds      The number of rounds to advance by
+     * @return The updated application
+     * @throws ApplicationNotFoundException      if the application does not exist
+     * @throws InvalidApplicationStatusException if advancing would exceed job
+     *                                           rounds
+     */
+    public Application advanceApplication(Application application, int rounds) {
+        requireNonNull(application);
+
+        if (!hasApplication(application)) {
+            throw new ApplicationNotFoundException();
+        }
+
+        Application advancedApplication = application.advance(rounds);
+        setApplication(application, advancedApplication);
+        return advancedApplication;
     }
 
     //// util methods
@@ -235,11 +238,13 @@ public class ApplicationsManager implements ReadOnlyApplicationsManager {
         if (other == this) {
             return true;
         }
-        // instanceof handles nulls.
-        if (!(other instanceof ApplicationsManager otherApplicationsManager)) {
+
+        if (!(other instanceof ApplicationsManager)) {
             return false;
         }
-        return this.applications.equals(otherApplicationsManager.applications);
+
+        ApplicationsManager otherApplicationsManager = (ApplicationsManager) other;
+        return applications.equals(otherApplicationsManager.applications);
     }
 
     @Override

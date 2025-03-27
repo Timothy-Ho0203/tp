@@ -25,9 +25,7 @@ import seedu.address.model.ReadOnlyApplicationsManager;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.application.Application;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.JobTitle;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -94,12 +92,12 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -180,6 +178,21 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         // =========== Job Operations
         // =============================================================
 
@@ -203,8 +216,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        // =========== Application Operations via ApplicationsManager's method invocations
-        // =================================================================
+        @Override
+        public ObservableList<Job> getFilteredJobList() {
+            return null;
+        }
 
         @Override
         public ReadOnlyApplicationsManager getApplicationsManager() {
@@ -212,12 +227,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setApplicationsManager(ReadOnlyApplicationsManager applicationsManager) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasApplication(Application application) {
+        public ObservableList<Application> getFilteredApplicationList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -237,64 +247,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setApplication(Application target, Application editedApplication) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        // =========== Filtered Person List Accessors
-        // =============================================================
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        public void resetFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getPersonsByPhone(Phone phone) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        // =========== Filtered Job List Accessors
-        // =============================================================
-
-        @Override
-        public ObservableList<Job> getFilteredJobList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredJobList(Predicate<Job> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        public void resetFilteredJobList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Job> getJobsByTitle(JobTitle jobTitle) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        // =========== Filtered Application List Accessors
-        // ================================================================
-
-        @Override
-        public ObservableList<Application> getFilteredApplicationList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredApplicationList(Predicate<Application> predicate) {
+        public ObservableList<Application> getApplicationsByJob(Job job) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -304,15 +257,36 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Application> getApplicationsByJob(Job job) {
+        public void updateFilteredJobList(Predicate<Job> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Application> getApplicationsByPersonAndJob(Person person, Job job) {
+        public void resetFilteredJobList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setApplicationsManager(ReadOnlyApplicationsManager applicationsManager) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasApplication(Application application) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setApplication(Application target, Application editedApplication) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredApplicationList(Predicate<Application> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
+
 
     /**
      * A Model stub that contains a single person.
@@ -355,4 +329,5 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
+
 }

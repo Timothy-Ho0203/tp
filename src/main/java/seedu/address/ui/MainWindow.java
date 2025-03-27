@@ -240,11 +240,33 @@ public class MainWindow extends UiPart<Stage> {
                 toggleJobView();
             }
 
+            if (commandResult.isRefreshApplications()) {
+                refreshApplicationsView();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Refreshes the application information displayed in the UI.
+     */
+    private void refreshApplicationsView() {
+        // Recreate panels with the latest data
+        if (isJobView) {
+            // Update the job list panel
+            jobListPanelPlaceholder.getChildren().clear();
+            jobListPanel = new JobListPanel(logic.getFilteredJobList(), logic);
+            jobListPanelPlaceholder.getChildren().add(jobListPanel.getRoot());
+        } else {
+            // Update the person list panel
+            personListPanelPlaceholder.getChildren().clear();
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic);
+            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         }
     }
 }

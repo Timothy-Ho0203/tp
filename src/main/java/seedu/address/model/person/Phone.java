@@ -8,6 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {
+
+
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
@@ -15,12 +17,13 @@ public class Phone {
 
     /**
      * Constructs a {@code Phone}.
+     *
      * @param phone A valid phone number.
      */
     public Phone(String phone) {
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        this.value = phone;
+        value = phone;
     }
 
     /**
@@ -32,7 +35,7 @@ public class Phone {
 
     @Override
     public String toString() {
-        return this.value;
+        return value;
     }
 
     @Override
@@ -40,15 +43,19 @@ public class Phone {
         if (other == this) {
             return true;
         }
+
         // instanceof handles nulls
-        if (!(other instanceof Phone otherPhone)) {
+        if (!(other instanceof Phone)) {
             return false;
         }
-        return this.value.equals(otherPhone.value);
+
+        Phone otherPhone = (Phone) other;
+        return value.equals(otherPhone.value);
     }
 
     @Override
     public int hashCode() {
-        return this.value.hashCode();
+        return value.hashCode();
     }
+
 }

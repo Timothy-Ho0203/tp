@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.application.ApplicationStatus;
 import seedu.address.model.job.JobRounds;
 import seedu.address.model.job.JobSkills;
 import seedu.address.model.job.JobTitle;
@@ -24,14 +23,17 @@ import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various Parser classes.
+ * Contains utility methods used for parsing strings in the various Parser
+ * classes.
  */
 public class ParserUtil {
+
     public static final String INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index}. Leading and trailing whitespaces will be trimmed.
-     * @param oneBasedIndex raw 1-based index String by user.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
+     * and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero
      *                        unsigned integer).
      */
@@ -45,8 +47,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be trimmed.
-     * @param name Raw name String by user.
+     * Parses a {@code String name} into a {@code Name}. Leading and trailing
+     * whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
@@ -59,8 +62,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}. Leading and trailing whitespaces will be trimmed.
-     * @param phone Raw phone String by user.
+     * Parses a {@code String phone} into a {@code Phone}. Leading and trailing
+     * whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
@@ -73,8 +77,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}. Leading and trailing whitespaces will be trimmed.
-     * @param email Raw email String by user.
+     * Parses a {@code String email} into an {@code Email}. Leading and trailing
+     * whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
@@ -87,8 +92,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}. Leading and trailing whitespaces will be trimmed.
-     * @param address Raw address String by user.
+     * Parses a {@code String address} into an {@code Address}. Leading and trailing
+     * whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
@@ -101,20 +107,20 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String school} into a {@code School}. Leading and trailing whitespaces will be trimmed.
-     * @param school Raw school String by user.
-     * @return trimmed remark without leading and trailing whitespaces for more efficient processing.
+     * @param remark Raw remark by user.
+     * @return trimmed remark without leading and trailing whitespaces for more
+     *         efficient processing.
      */
-    public static School parseSchool(String school) {
-        requireNonNull(school);
-        String trimmedSchool = school.trim(); // School yet has format constraints.
-        return new School(trimmedSchool);
+    public static School parseRemark(String remark) {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim(); // School yet has format constraints.
+        return new School(trimmedRemark);
     }
 
     /**
-     * Parses a {@code String degree} into a {@code Degree}. Leading and trailing whitespaces will be trimmed.
-     * @param degree Raw degree String by user.
-     * @return trimmed remark without leading and trailing whitespaces for more efficient processing.
+     * @param degree Raw degree by user.
+     * @return trimmed remark without leading and trailing whitespaces for more
+     *         efficient processing.
      */
     public static Degree parseDegree(String degree) {
         requireNonNull(degree);
@@ -123,9 +129,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String jobTitle} into a {@code JobTitle}. Leading and trailing whitespaces will be trimmed.
-     * @param jobTitle Raw jobTitle String by user.
-     * @return trimmed remark without leading and trailing whitespaces for more efficient processing.
+     * @param jobTitle Raw jobTitle by user.
+     * @return trimmed remark without leading and trailing whitespaces for more
+     *         efficient processing.
      * @throws ParseException if the given {@code jobTitle} is invalid.
      */
     public static JobTitle parseJobTitle(String jobTitle) throws ParseException {
@@ -136,6 +142,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String jobRounds} into a {@code JobRounds}. Leading and trailing whitespaces will be trimmed.
+     *
      * @param jobRounds Raw jobRounds String by user.
      * @return trimmed remark without leading and trailing whitespaces for more efficient processing.
      * @throws ParseException if the given {@code jobRounds} is invalid.
@@ -148,9 +155,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String jobSkills} into {@code JobSkills} list. Leading and trailing whitespaces will be trimmed.
-     * @param jobSkills Raw jobSkills String in the form of a single String input delimited by whitespace by user.
-     * @return {@code FXCollections.observableArrayList} collection of jobSkill Strings.
+     * @param jobSkills Raw jobSkills in the form of a single String input delimited
+     *                  by whitespace by user.
+     * @return {@code FXCollections.observableArrayList} collection of jobSkill
+     *         Strings.
      * @throws ParseException if any given {@code jobSkill} is invalid.
      */
     public static JobSkills parseJobSkills(String jobSkills) throws ParseException {
@@ -162,30 +170,15 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String jobType} into a {@code JobType} key. Leading and trailing whitespaces will be trimmed.
+     *
      * @param jobType Raw jobType String value by user.
      * @return trimmed jobType key.
-     * @throws ParseException if the given {@code jobType} value is invalid.
+     * @throws ParseException if the given {@code jobValue} is invalid.
      */
     public static JobType parseJobType(String jobType) throws ParseException {
         jobType = jobType.trim();
         requireNonNull(jobType);
         return JobType.fromDisplayType(jobType);
-    }
-
-    /**
-     * Parses an {@code String applicationStatus} into an {@code ApplicationStatus}.
-     * Leading and trailing whitespaces will be trimmed.
-     * @param applicationStatus Raw applicationStatus String value by user.
-     * @return trimmed applicationStatus key.
-     * @throws ParseException if the given {@code applicationStatus} is invalid.
-     */
-    public static ApplicationStatus parseApplicationStatus(String applicationStatus) throws ParseException {
-        applicationStatus = applicationStatus.trim();
-        requireNonNull(applicationStatus);
-        if (!ApplicationStatus.isValidApplicationStatus(applicationStatus)) {
-            throw new ParseException(ApplicationStatus.MESSAGE_CONSTRAINTS);
-        }
-        return new ApplicationStatus(applicationStatus);
     }
 
     /**

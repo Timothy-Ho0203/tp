@@ -28,58 +28,37 @@ import seedu.address.model.job.Job;
 import seedu.address.model.person.Person;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests, synchronised with JSON file in
- * {@code typicalPersonsAddressBook}.
- * Standardise Person and Job initialisation orders in {@code SampleDataUtil} for clarity even if order matters not.
- * Person Initialisation order: Name, Phone, Email, Address, School, Degree[, Tags]
- * Job Initialisation order: JobTitle, JobRounds, JobSkills, JobType
+ * A utility class containing a list of {@code Person} objects to be used in
+ * tests, synchronised with JSON file in {@code typicalPersonsAddressBook}.
+ * Standardise Person and Job initialisation orders in {@code SampleDataUtil}
+ * for clarity even if order matters not. Person Initialisation order: Name,
+ * Phone, Email, Address, School, Degree[, Tags] Job Initialisation order:
+ * JobTitle, JobRounds, JobSkills, JobType
  */
 public class TypicalPersons {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withPhone("94351253").withPhone("94351253").withPhone("94351253") // Duplicate Phones test robustness.
-            .withEmail("alice@example.com")
-            .withAddress("123, Jurong West Ave 6, #08-111")
-            .withSchool("NUS")
-            .withDegree("Computer Science")
-            .withTags("friends").build();
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withPhone("98765432")
-            .withEmail("johnd@example.com")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withSchool("NTU")
-            .withDegree("Business Analytics").withDegree("Business Analytics") // Duplicate Degrees test robustness.
+    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
+            .withPhone("94351253").withPhone("94351253") // Duplicate Phones test robustness.
+            .withEmail("alice@example.com").withAddress("123, Jurong West Ave 6, #08-111").withSchool("NUS")
+            .withDegree("Computer Science").withTags("friends").build();
+    public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withPhone("98765432")
+            .withEmail("johnd@example.com").withAddress("311, Clementi Ave 2, #02-25").withSchool("NTU")
+            .withDegree("Business Analytics").withDegree("Business Analytics") // Duplicate Degrees test
             .withTags("owesMoney", "friends").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
-            .withPhone("95352563")
-            .withEmail("heinz@example.com")
-            .withAddress("wall street")
-            .withSchool("SMU")
-            .withDegree("Mathematics").build(); // Absent optional Tags tests robustness.
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withPhone("87652533")
-            .withEmail("cornelia@example.com")
-            .withAddress("10th street")
-            .withSchool("SIM")
-            .withDegree("Physics")
+    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
+            .withEmail("heinz@example.com").withAddress("wall street").withSchool("SMU").withDegree("Mathematics")
+            .build(); // Absent optional Tags tests robustness.
+    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+            .withEmail("cornelia@example.com").withAddress("10th street").withSchool("SIM").withDegree("Physics")
             .withTags("friends").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withPhone("9482224")
-            .withEmail("werner@example.com")
-            .withAddress("michegan ave")
-            .withSchool("SIT")
-            .withDegree("Accounting").build(); // Absent optional Tags tests robustness.
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withPhone("9482427")
-            .withEmail("lydia@example.com")
-            .withAddress("little tokyo")
-            .withSchool("NTU")
+    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+            .withEmail("werner@example.com").withAddress("michegan ave").withSchool("SIT").withDegree("Accounting")
+            .build(); // Absent optional Tags tests robustness.
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+            .withEmail("lydia@example.com").withAddress("little tokyo").withSchool("NTU")
             .withDegree("Civil Engineering").build(); // Absent optional Tags tests robustness.
-    public static final Person GEORGE = new PersonBuilder().withName("George Best")
-            .withPhone("9482442")
-            .withEmail("anna@example.com")
-            .withAddress("4th street")
-            .withSchool("NUS")
+    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+            .withEmail("anna@example.com").withAddress("4th street").withSchool("NUS")
             .withDegree("Computer Engineering").build(); // Absent optional Tags tests robustness.
 
     // Manually added
@@ -91,21 +70,14 @@ public class TypicalPersons {
             .withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY)
-            .withAddress(VALID_ADDRESS_AMY)
-            .withSchool(VALID_SCHOOL_AMY).withSchool(VALID_SCHOOL_AMY) // Duplicate Schools test robustness.
-            .withDegree(VALID_DEGREE_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
-            .withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB)
-            .withAddress(VALID_ADDRESS_BOB)
-            .withSchool(VALID_SCHOOL_BOB).withSchool(VALID_SCHOOL_BOB) // Duplicate Schools test robustness.
-            .withDegree(VALID_DEGREE_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
+    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withSchool(VALID_SCHOOL_AMY)
+            .withSchool(VALID_SCHOOL_AMY) // Duplicate Schools test robustness.
+            .withDegree(VALID_DEGREE_AMY).withTags(VALID_TAG_FRIEND).build();
+    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withSchool(VALID_SCHOOL_BOB)
+            .withSchool(VALID_SCHOOL_BOB) // Duplicate Schools test robustness.
+            .withDegree(VALID_DEGREE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final Job SOFTWARE_ENGINEER_GOOGLE = new JobBuilder().withJobTitle("Software Engineer")
             .withJobRounds(5)
@@ -231,8 +203,8 @@ public class TypicalPersons {
      * Returns a list of typical applications.
      */
     public static List<Application> getTypicalApplications() {
-        return new ArrayList<>(Arrays.asList(ALICE_GOOGLE_APPLICATION, ALICE_MICROSOFT_APPLICATION,
-                BENSON_GOOGLE_APPLICATION, BENSON_MICROSOFT_APPLICATION, CARL_APPLE_APPLICATION,
-                DANIEL_META_APPLICATION, ELLE_AMAZON_APPLICATION, FIONA_NETFLIX_APPLICATION));
+        return new ArrayList<>(Arrays.asList(ALICE_GOOGLE_APPLICATION, BENSON_MICROSOFT_APPLICATION,
+                CARL_APPLE_APPLICATION, DANIEL_META_APPLICATION, ELLE_AMAZON_APPLICATION, FIONA_NETFLIX_APPLICATION,
+                ALICE_MICROSOFT_APPLICATION, BENSON_GOOGLE_APPLICATION));
     }
 }

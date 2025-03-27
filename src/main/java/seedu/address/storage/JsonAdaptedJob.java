@@ -41,17 +41,18 @@ class JsonAdaptedJob {
      * Converts a given {@code Job} into this class for Jackson use.
      */
     public JsonAdaptedJob(Job source) {
-        this.jobTitle = source.jobTitle().jobTitle(); // JobTitle record class has implicit accessor.
-        this.jobRounds = source.jobRounds().jobRounds;
-        this.jobSkills = source.jobSkills().value;
-        this.jobType = source.jobType().toString();
+        this.jobTitle = source.getJobTitle().jobTitle(); // JobTitle record class has implicit accessor.
+        this.jobRounds = source.getJobRounds().jobRounds;
+        this.jobSkills = source.getJobSkills().value;
+        this.jobType = source.getJobType().getDisplayType();
     }
 
     /**
      * Converts this Jackson-friendly adapted job object into the model's
      * {@code Job} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted job.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted job.
      */
     public Job toModelType() throws IllegalValueException {
         // Check valid job title below.
@@ -83,8 +84,7 @@ class JsonAdaptedJob {
         final JobSkills modelJobSkills = new JobSkills(this.jobSkills);
         // Check valid job type below.
         if (this.jobType == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, JobType.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, JobType.class.getSimpleName()));
         }
         if (!JobType.isValidDisplayType(this.jobType)) {
             throw new IllegalValueException(JobType.MESSAGE_CONSTRAINTS);

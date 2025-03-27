@@ -37,6 +37,7 @@ public class EditJobCommand extends Command {
             + "[" + PREFIX_JOB_SKILLS + "SKILLS] "
             + "[" + PREFIX_EMPLOYMENT_TYPE + "WORK_TYPE]";
 
+
     public static final String MESSAGE_EDIT_JOB_SUCCESS = "Edited Job: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the address book.";
@@ -45,7 +46,7 @@ public class EditJobCommand extends Command {
     private final EditJobDescriptor editJobDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param index             of the person in the filtered person list to edit
      * @param editJobDescriptor details to edit the person with
      */
     public EditJobCommand(Index index, EditJobDescriptor editJobDescriptor) {
@@ -83,11 +84,10 @@ public class EditJobCommand extends Command {
      */
     private static Job createEditedJob(Job jobToEdit, EditJobDescriptor editJobDescriptor) {
         assert jobToEdit != null;
-
-        JobTitle updatedJobTitle = editJobDescriptor.getJobTitle().orElse(jobToEdit.jobTitle());
-        JobRounds updatedJobRounds = editJobDescriptor.getJobRounds().orElse(jobToEdit.jobRounds());
-        JobSkills updatedJobSkills = editJobDescriptor.getJobSkills().orElse(jobToEdit.jobSkills());
-        JobType updatedJobType = editJobDescriptor.getJobType().orElse(jobToEdit.jobType());
+        JobTitle updatedJobTitle = editJobDescriptor.getJobTitle().orElse(jobToEdit.getJobTitle());
+        JobRounds updatedJobRounds = editJobDescriptor.getJobRounds().orElse(jobToEdit.getJobRounds());
+        JobSkills updatedJobSkills = editJobDescriptor.getJobSkills().orElse(jobToEdit.getJobSkills());
+        JobType updatedJobType = editJobDescriptor.getJobType().orElse(jobToEdit.getJobType());
 
         return new Job(updatedJobTitle, updatedJobRounds, updatedJobSkills, updatedJobType);
     }
@@ -103,8 +103,8 @@ public class EditJobCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("index", this.index)
-                .add("editPersonDescriptor", this.editJobDescriptor).toString();
+        return new ToStringBuilder(this).add("index", this.index).add("editPersonDescriptor", this.editJobDescriptor)
+                .toString();
     }
 
     /**
@@ -191,6 +191,7 @@ public class EditJobCommand extends Command {
                     .add("job rounds", this.jobRounds)
                     .add("job skills", this.jobSkills)
                     .add("job type", this.jobType).toString();
+
         }
     }
 }

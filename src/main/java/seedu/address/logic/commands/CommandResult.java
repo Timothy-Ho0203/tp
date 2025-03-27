@@ -22,14 +22,26 @@ public class CommandResult {
     /** Whether the job view should be shown. */
     private final boolean toggleJobView;
 
+    /** Whether applications have been updated and need to be refreshed. */
+    private final boolean refreshApplications;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean toggleJobView) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean toggleJobView,
+            boolean refreshApplications) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.toggleJobView = toggleJobView;
+        this.refreshApplications = refreshApplications;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields, without refreshing applications.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean toggleJobView) {
+        this(feedbackToUser, showHelp, exit, toggleJobView, false);
     }
 
     /**
@@ -37,23 +49,35 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * with refreshApplications set to true, and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean refreshApplications) {
+        this(feedbackToUser, false, false, false, refreshApplications);
     }
 
     public String getFeedbackToUser() {
-        return this.feedbackToUser;
+        return feedbackToUser;
     }
 
     public boolean isShowHelp() {
-        return this.showHelp;
+        return showHelp;
     }
 
     public boolean isExit() {
-        return this.exit;
+        return exit;
     }
 
     public boolean setToggleView() {
-        return this.toggleJobView;
+        return toggleJobView;
+    }
+
+    public boolean isRefreshApplications() {
+        return refreshApplications;
     }
 
     @Override
@@ -61,26 +85,33 @@ public class CommandResult {
         if (other == this) {
             return true;
         }
+
         // instanceof handles nulls
-        if (!(other instanceof CommandResult otherCommandResult)) {
+        if (!(other instanceof CommandResult)) {
             return false;
         }
-        return this.feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && this.showHelp == otherCommandResult.showHelp
-                && this.exit == otherCommandResult.exit;
+
+        CommandResult otherCommandResult = (CommandResult) other;
+        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                && showHelp == otherCommandResult.showHelp
+                && exit == otherCommandResult.exit
+                && toggleJobView == otherCommandResult.toggleJobView
+                && refreshApplications == otherCommandResult.refreshApplications;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.feedbackToUser, this.showHelp, this.exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, toggleJobView, refreshApplications);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("feedbackToUser", this.feedbackToUser)
-                .add("showHelp", this.showHelp)
-                .add("exit", this.exit)
+                .add("feedbackToUser", feedbackToUser)
+                .add("showHelp", showHelp)
+                .add("exit", exit)
+                .add("toggleJobView", toggleJobView)
+                .add("refreshApplications", refreshApplications)
                 .toString();
     }
 }

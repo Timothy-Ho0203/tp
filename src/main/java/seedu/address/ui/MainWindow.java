@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -16,7 +17,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -30,7 +30,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
-    private Model model;
+
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private JobListPanel jobListPanel;
@@ -146,6 +146,17 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        commandBox.getCommandTextField().requestFocus();
+        // Inject event listener to CommandBox to handle Arrow Key pressed events.
+        commandBox.getCommandTextField().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.UP) {
+                String res = logic.getPrevCommand();
+                commandBox.handleArrowKeyPress(res);
+            } else if (event.getCode() == KeyCode.DOWN) {
+                String res = logic.getNextCommand();
+                commandBox.handleArrowKeyPress(res);
+            }
+        });
     }
 
     /**

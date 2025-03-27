@@ -13,10 +13,8 @@ import seedu.address.model.job.JobType;
  */
 public class JobBuilderFX {
     public static final String DEFAULT_TITLE = "Software Engineer";
-    public static final String DEFAULT_COMPANY = "Tech Corp";
     public static final int DEFAULT_ROUNDS = 3;
     public static final ObservableList<String> DEFAULT_SKILLS = FXCollections.observableArrayList("Java", "Python");
-    public static final String DEFAULT_ADDRESS = "123 Tech Street";
     public static final JobType DEFAULT_TYPE = JobType.FULL_TIME;
 
     private JobTitle jobTitle;

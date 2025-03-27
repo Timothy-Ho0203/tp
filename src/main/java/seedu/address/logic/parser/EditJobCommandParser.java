@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_SKILLS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditJobCommand;
 import seedu.address.logic.commands.EditJobCommand.EditJobDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -56,7 +55,7 @@ public class EditJobCommandParser implements Parser<EditJobCommand> {
         }
 
         if (!editJobDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditJobCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditJobCommand(index, editJobDescriptor);

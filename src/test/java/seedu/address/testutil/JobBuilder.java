@@ -14,11 +14,9 @@ import seedu.address.model.job.JobType;
 public class JobBuilder {
 
     public static final String DEFAULT_JOB_TITLE = "Software Engineering";
-    public static final String DEFAULT_JOB_COMPANY = "Google";
     public static final int DEFAULT_JOB_ROUNDS = 5;
     public static final ObservableList<String> DEFAULT_JOB_SKILLS = FXCollections.observableArrayList("Python",
             "JavaScript", "React");
-    public static final String DEFAULT_JOB_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_JOB_TYPE = "Intern";
 
     private JobTitle jobTitle;
